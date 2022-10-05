@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
   mode: "development",
-  entry: "./index.js",
+  entry: "./index.jsx",
   output: {
     path: path.resolve(__dirname, "public"),
     filename: "main.js",
@@ -35,7 +35,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: ["style-loader", "css-loader", "postcss-loader"],
       },
     ],
   },
