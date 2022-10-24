@@ -9,3 +9,9 @@
     @apply font-secondary;
   }
 }
+
+@layer components {
+  .sidemenu--btn {
+    @apply transition-all py-2 pl-12 font-semibold text-white-100 text-lg flex items-center gap-2 w-full hover:bg-primary-tint-200 hover:underline hover:cursor-pointer active:bg-primary-main;
+  }
+}
