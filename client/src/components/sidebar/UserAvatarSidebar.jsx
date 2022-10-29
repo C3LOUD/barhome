@@ -8,7 +8,9 @@ const UserAvatarSidebar = (props) => {
         src={props.avatar}
         alt="user avatar"
       />
-      <p className="font-semibold text-lg text-white-100">{props.name}</p>
+      <p className="font-semibold paragraph-large text-white-100">
+        {props.name}
+      </p>
     </div>
   );
 };

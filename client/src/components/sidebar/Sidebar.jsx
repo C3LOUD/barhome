@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import BtnSidebar from './ui/BtnSidebar';
 
-import Logo from './ui/logo';
-import UserSidebar from './ui/UserAvatarSidebar';
+import Logo from '../ui/logo';
+import BtnSidebar from './BtnSidebar';
+import UserSidebar from './UserAvatarSidebar';
 
 const dummyUser = {
   name: 'Cindy',
@@ -70,14 +70,14 @@ const Sidebar = () => {
               <BtnSidebar
                 tag={item.tag}
                 icon={item.icon}
-                style={activated ? 'bg-primary-main' : ''}
+                style={activated && 'bg-primary-main'}
                 key={item.key}
               />
             );
           })}
         </div>
       </div>
-      <div className="text-xs text-accent-dark-tint-300">
+      <div className="paragraph-xsmall text-accent-dark-tint-300">
         <p>Copyright © 2022</p>
         <p>Designed By Chen Yu</p>
         <p>All right reserved</p>

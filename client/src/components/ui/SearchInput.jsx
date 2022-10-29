@@ -8,7 +8,7 @@ const SearchInput = () => {
       <Icon name="search-sharp" color="text-primary-main" />
       <input
         type="text"
-        className="w-full text-sm focus:outline-none placeholder:text-primary-tint-600 text-primary-main"
+        className="w-full paragraph-small focus:outline-none placeholder:text-primary-tint-600 text-primary-main"
         placeholder="Search..."
       />
     </div>

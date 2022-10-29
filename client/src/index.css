@@ -11,7 +11,51 @@
 }
 
 @layer components {
-  .sidemenu--btn {
-    @apply transition-all py-2 pl-12 font-semibold text-white-100 text-lg flex items-center gap-2 w-full hover:bg-primary-tint-200 hover:underline hover:cursor-pointer active:bg-primary-main;
+  .display-large {
+    @apply text-8xl leading-[3.5rem] tracking-[-0.02rem];
+  }
+
+  .display-small {
+    @apply text-7xl leading-[3rem] tracking-[-0.02rem];
+  }
+
+  .heading-h1 {
+    @apply text-6xl leading-[3rem] tracking-[-0.02rem];
+  }
+
+  .heading-h2 {
+    @apply text-5xl leading-[2.75rem] tracking-[-0.02rem];
+  }
+
+  .heading-h3 {
+    @apply text-4xl leading-10 tracking-[-0.02rem];
+  }
+
+  .heading-h4 {
+    @apply text-3xl leading-9 tracking-[-0.02rem];
+  }
+
+  .heading-h5 {
+    @apply text-2xl leading-8 tracking-[-0.02rem];
+  }
+
+  .heading-h6 {
+    @apply text-xl leading-7 tracking-[-0.02rem];
+  }
+
+  .paragraph-large {
+    @apply text-lg leading-7 tracking-normal;
+  }
+
+  .paragraph-medium {
+    @apply text-base leading-6 tracking-normal;
+  }
+
+  .paragraph-small {
+    @apply text-sm leading-5 tracking-normal;
+  }
+
+  .paragraph-xsmall {
+    @apply text-xs leading-5 tracking-normal;
   }
 }

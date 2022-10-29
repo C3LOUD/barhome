@@ -172,5 +172,5 @@ module.exports = {
     },
   },
   varients: {},
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')],
 };
