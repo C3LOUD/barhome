@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import Logo from '../ui/logo';
 import BtnSidebar from './BtnSidebar';
@@ -11,27 +12,22 @@ const dummyUser = {
 };
 
 const allSidebarBtn = [
-  { key: 1, tag: 'Recipes', icon: 'book-outline', style: '' },
-  { key: 2, tag: 'Spirits', icon: 'wine-outline', style: '' },
-  { key: 3, tag: 'Saved', icon: 'bookmark-outline', style: '' },
-  { key: 4, tag: 'Posts', icon: 'create-outline', style: '' },
+  { key: 1, tag: 'Recipes', icon: 'book-outline', activateIcon: 'book' },
+  { key: 2, tag: 'Spirits', icon: 'wine-outline', activateIcon: 'wine' },
+  { key: 3, tag: 'Saved', icon: 'bookmark-outline', activateIcon: 'bookmark' },
+  { key: 4, tag: 'Posts', icon: 'create-outline', activateIcon: 'create' },
 ];
 
 const Sidebar = () => {
   const [currentPage, setCurrentPage] = useState('');
   const [hovered, setHovered] = useState(false);
 
-  const sideMenuHandler = (e) => {
-    e.preventDefault();
-    if (!e.target.dataset.id) return;
-    const previousBtn = allSidebarBtn.find((item) => item.tag === currentPage);
-    if (previousBtn) {
-      previousBtn.icon = previousBtn.icon + '-outline';
-    }
+  const location = useLocation();
 
-    setCurrentPage(e.target.dataset.id);
+  useEffect(() => {
+    setCurrentPage(location.pathname.split('/')[2]);
     setHovered(false);
-  };
+  }, [location.pathname]);
 
   const sideMenuHoverHandler = (e) => {
     if (!e.target.dataset.id || e.target.dataset.id === currentPage) return;
@@ -58,19 +54,21 @@ const Sidebar = () => {
         <UserSidebar name={dummyUser.name} avatar={dummyUser.avatar} />
         <div
           className="flex flex-col gap-6 w-full"
-          onClick={sideMenuHandler}
           onMouseOver={sideMenuHoverHandler}
           onMouseOut={sideMenuHoverHandler}
         >
           {allSidebarBtn.map((item) => {
-            let activated = false;
-            if (currentPage === item.tag) activated = true;
-
             return (
               <BtnSidebar
                 tag={item.tag}
-                icon={item.icon}
-                style={activated && 'bg-primary-main'}
+                icon={
+                  currentPage === item.tag.toLowerCase()
+                    ? item.activateIcon
+                    : item.icon
+                }
+                style={
+                  currentPage === item.tag.toLowerCase() && 'bg-primary-main'
+                }
                 key={item.key}
               />
             );
