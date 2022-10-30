@@ -21,7 +21,9 @@ const RecipeCard = forwardRef((props, ref) => {
       ref={ref}
       onClick={(e) => {
         navigate(
-          `/dashboard/recipes/${e.target.closest('[data-id]').dataset.id}`
+          `/dashboard/recipes/${
+            e.target.closest('[data-id]').dataset.id
+          }?isEditing=false`
         );
       }}
       data-id={title}

@@ -1,24 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import InitialContext from '../store/initial-context';
 import Recipe from './Recipe';
+import NewPost from './NewPost';
 
 const Modal = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const onEdit = (isEditing) => {
-    return isEditing;
+
+  const onEditHandler = () => {
+    setSearchParams({ isEditing: true });
   };
 
   const ctx = useContext(InitialContext);
   const jsx = (
     <div
-      className="z-10 absolute flex justify-center items-center w-full h-full py-12 top-0 left-0 bg-accent-dark-shade-800/80 cursor-pointer"
-      onClick={() => navigate(-1)}
+      className="z-10 absolute flex justify-center items-center w-full h-full top-0 left-0 bg-accent-dark-shade-800/80 cursor-pointer"
+      onClick={() =>
+        searchParams.get('isEditing') === 'true' ? navigate(-2) : navigate(-1)
+      }
     >
-      <Recipe onEdit={onEdit} />
-      {onEdit && <p>isEditing</p>}
+      {searchParams.get('isEditing') === 'true' ? (
+        <NewPost />
+      ) : (
+        <Recipe onEdit={onEditHandler} />
+      )}
     </div>
   );
 

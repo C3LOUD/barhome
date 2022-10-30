@@ -18,9 +18,26 @@ exports.getAllRecipes = async (req, res, next) => {
       .skip((currentPage - 1) * perPage)
       .limit(perPage);
     res.status(200).json({
-      message: 'Fetching posts successfully.',
+      message: 'Fetching recipes successfully.',
       recipes,
       totalRecipes,
+    });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+exports.getRecipe = async (req, res, next) => {
+  try {
+    const recipes = await Recipe.findOne({ title: req.params.id });
+    if (!recipes) throw new Error({ message: 'find no recipe' });
+
+    res.status(200).json({
+      message: 'fetching recipe success',
+      recipes,
     });
   } catch (err) {
     if (!err.statusCode) {

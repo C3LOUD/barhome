@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Icon from './ui/Icon';
@@ -9,7 +9,6 @@ import NotFound from '../pages/NotFound';
 import Spirits from './Spirits';
 import Saved from './Saved';
 import InitialContext from '../store/initial-context';
-import { useState } from 'react';
 
 const Main = () => {
   const [mainNode, setMainNode] = useState(null);

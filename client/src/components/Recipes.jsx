@@ -13,6 +13,7 @@ const Recipes = () => {
 
   const { recievedData, isLoading, totalQuantity, hasError } = useFetchRecipes({
     currentPage,
+    method: 'POST',
   });
 
   const observer = useRef();
