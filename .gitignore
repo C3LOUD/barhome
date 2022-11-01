@@ -5,3 +5,4 @@
 # production
 **/public
 **/nodemon.json
+/server/fetch.mjs

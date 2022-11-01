@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import InitialContext from '../store/initial-context';
-import Recipe from './Recipe';
-import NewPost from './NewPost';
+import InitialContext from '../../store/initial-context';
+import Recipe from '../recipe/Recipe';
+import NewPost from '../posts/NewPost';
 
 const Modal = () => {
   const [searchParams, setSearchParams] = useSearchParams();

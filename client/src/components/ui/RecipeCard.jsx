@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Icon from './ui/Icon';
-import Tag from './ui/Tag';
+import Icon from './Icon';
+import Tag from './Tag';
 
 const RecipeCard = forwardRef((props, ref) => {
   const { title, thumbnail, alcoholic, category } = props.recipe;

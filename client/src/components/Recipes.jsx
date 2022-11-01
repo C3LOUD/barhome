@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import drinkWithFriends from '../assets/drink-with-friends.png';
-import RecipeCard from './RecipeCard';
+import RecipeCard from './ui/RecipeCard';
 import useFetchRecipes from '../hooks/useFetchRecipes';
-import Modal from './Modal';
+import Modal from './ui/Modal';
 
 const Recipes = () => {
   const [allRecipes, setAllRecipes] = useState([]);

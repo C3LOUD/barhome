@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Icon from './ui/Icon';
 import SearchInput from './ui/SearchInput';
 import Recipes from './Recipes';
-import Posts from './Posts';
+import Posts from './posts/Posts';
 import NotFound from '../pages/NotFound';
 import Spirits from './Spirits';
 import Saved from './Saved';

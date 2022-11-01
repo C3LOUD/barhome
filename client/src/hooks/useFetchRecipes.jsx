@@ -27,10 +27,10 @@ const useFetchRecipes = (props) => {
           ...option,
         }
       );
-      const data = await jsonData.json();
-      setRecievedData(data.recipes);
+      const { recipes, totalRecipes } = await jsonData.json();
+      setRecievedData(recipes);
       setIsLoading(false);
-      data.totalRecipes && setTotalQuantity(data.totalRecipes);
+      totalRecipes && setTotalQuantity(totalRecipes);
     };
 
     try {
