@@ -38,10 +38,11 @@ const Dropzone = (props) => {
     if (data.message) return setDataInappropriate(data.message);
     setDataInappropriate(true);
     props.onSrc(data.imageSrc);
+    props.onStatus(2);
   };
 
   return (
-    <div className="h-full w-full inline-block px-6">
+    <div className="h-full w-full inline-block px-6 flex-1">
       <div
         className={`transition-all h-full flex flex-col justify-center gap-2 border-2 border-dashed items-center rounded ${
           activated ? 'border-primary-main bg-black-100/20' : 'border-black-100'

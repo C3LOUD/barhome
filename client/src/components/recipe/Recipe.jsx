@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import useFetchRecipes from '../../hooks/useFetchRecipes';
+
 import Icon from '../ui/Icon';
 import ModalCard from '../ui/ModalCard';
 import Tag from '../ui/Tag';
 import CounterRecipe from './CounterRecipe';
 import IngredientRecipe from './IngredientRecipe';
 import InstructionRecipe from './InstructionRecipe';
+import { fetchRecipe } from '../../utils/api-list';
+import SavedBtn from '../ui/SavedBtn';
 
 const Recipe = (props) => {
   const [currentShow, setCurrentShow] = useState('Ingredients');
   const [counter, setCounter] = useState(1);
   const { id } = useParams();
 
-  const { recievedData } = useFetchRecipes({ method: 'GET', api: id });
+  const { isLoading, isError, error, data } = fetchRecipe(id);
+  if (!data) return <p>Loading</p>;
+
   const {
     title,
     category,
@@ -22,7 +26,7 @@ const Recipe = (props) => {
     ingredients,
     instructions,
     tags,
-  } = recievedData;
+  } = data.recipe;
 
   const switchHandler = (e) => {
     setCurrentShow(e.target.innerText);
@@ -41,20 +45,22 @@ const Recipe = (props) => {
 
   return (
     <ModalCard>
-      <div className="flex flex-col items-center w-full">
+      <div className="flex flex-col items-center w-full" data-id={title}>
         <p className="font-primary display-small font-bold pb-2">{title}</p>
         <div className="flex gap-2 pb-8">
-          {recievedData.length !== 0 &&
-            [alcoholic, category, ...tags].map((tag, i) => (
-              <Tag key={i}>{tag}</Tag>
-            ))}
+          {[alcoholic, category, ...tags].map((tag, i) => (
+            <Tag key={i}>{tag}</Tag>
+          ))}
         </div>
         <div className="w-full grid grid-cols-2 gap-6">
-          <img
-            className="inline-block aspect-square"
-            src={thumbnail}
-            alt={`${title} photo`}
-          />
+          <div className="relative">
+            <img
+              className="inline-block aspect-square"
+              src={thumbnail}
+              alt={`${title} photo`}
+            />
+            <SavedBtn size={2} />
+          </div>
           <div className="max-w-sm mr-6">
             <div className="flex" onClick={switchHandler}>
               {['Ingredients', 'Instructions'].map((label) => {
@@ -98,7 +104,7 @@ const Recipe = (props) => {
         className="flex flex-col gap-2 items-center group cursor-pointer"
         onClick={props.onEdit}
       >
-        <a className="transition-all font-secondary paragraph-small font-semibold text-primary-main group-hover:paragraph-medium">
+        <a className="transition-all font-secondary paragraph-small font-semibold text-primary-main group-hover:paragraph-medium pt-4">
           ADD A POST
         </a>
         <Icon

@@ -141,18 +141,8 @@ module.exports = {
         '8xl': '3.25rem',
       },
       fontFamily: {
-        primary: 'Cormorant Garamond',
-        secondary: 'Noto Serif',
-      },
-      boxShadow: {
-        'Elevation 10': '0px 10px 10px 0px rgba(0,0,0,0.25)',
-        'Elevation 8': '0px 8px 10px 0px rgba(0,0,0,0.2)',
-        'Elevation 6': '0px 6px 10px 0px rgba(0,0,0,0.15)',
-        'Elevation 4': '0px 4px 10px 0px rgba(0,0,0,0.15)',
-        'Elevation 2': '0px 2px 10px 0px rgba(0,0,0,0.1)',
-        'Elevation 1': '0px 1px 10px 0px rgba(0,0,0,0.05)',
-        Focused: '0px 0px 0px 4px rgba(0,0,0,0.2)',
-        Hover: '0px 0px 0px 2px rgba(0,0,0,0.2)',
+        primary: ['Cormorant Garamond', 'serif'],
+        secondary: ['Noto Serif', 'serif'],
       },
       borderRadius: {
         none: '0',

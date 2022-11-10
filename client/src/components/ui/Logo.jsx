@@ -1,12 +1,22 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import logo from '../../assets/LOGO.svg';
+import logoSvg from '../../assets/LOGO.svg';
 
 const Logo = () => {
+  const navigate = useNavigate();
+
+  const homeHandler = () => {
+    navigate('/');
+  };
+
   return (
-    <div>
-      <img src={logo} alt="logo" />
-    </div>
+    <img
+      src={logoSvg}
+      alt="logo"
+      onClick={homeHandler}
+      className="cursor-pointer"
+    />
   );
 };
 

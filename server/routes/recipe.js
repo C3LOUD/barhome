@@ -1,16 +1,32 @@
 const express = require('express');
+const router = express.Router();
+
+const isAuth = require('../middleware/is-auth');
 const {
   addNewRecipe,
   getAllRecipes,
   getRecipe,
+  findRecipeByIngredient,
+  searchRecipe,
+  getRandomRecipe,
+  savedRecipe,
+  getSavedRecipes,
 } = require('../controllers/recipe');
 
-const router = express.Router();
+router.get('/search', isAuth, searchRecipe);
 
-router.post('/', getAllRecipes);
+router.get('/random', isAuth, getRandomRecipe);
 
-router.get('/:id', getRecipe);
+router.get('/saved', isAuth, getSavedRecipes);
 
-router.post('/origin', addNewRecipe);
+router.put('/saved', isAuth, savedRecipe);
+
+router.get('/:id', isAuth, getRecipe);
+
+router.get('/ingredient/:ingredient', isAuth, findRecipeByIngredient);
+
+router.get('/', isAuth, getAllRecipes);
+
+router.post('/origin', isAuth, addNewRecipe);
 
 module.exports = router;

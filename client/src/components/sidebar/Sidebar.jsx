@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import Logo from '../ui/logo';
+import Logo from '../ui/Logo';
 import BtnSidebar from './BtnSidebar';
 import UserSidebar from './UserAvatarSidebar';
-
-const dummyUser = {
-  name: 'Cindy',
-  avatar:
-    'https://images.unsplash.com/photo-1597223557154-721c1cecc4b0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
-};
 
 const allSidebarBtn = [
   { key: 1, tag: 'Recipes', icon: 'book-outline', activateIcon: 'book' },
@@ -51,7 +45,7 @@ const Sidebar = () => {
     <div className="w-[13rem] bg-accent-dark-main flex flex-col items-center pt-12 pb-6 justify-between">
       <div className="flex flex-col items-center gap-[5.5rem] w-full">
         <Logo />
-        <UserSidebar name={dummyUser.name} avatar={dummyUser.avatar} />
+        <UserSidebar />
         <div
           className="flex flex-col gap-6 w-full"
           onMouseOver={sideMenuHoverHandler}

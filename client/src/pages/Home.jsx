@@ -1,12 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import SignUp from '../components/auth/SignUp';
+import Login from '../components/auth/Login';
+import NavBar from '../components/NavBar';
 
 const Home = () => {
   return (
-    <div className="flex justify-center items-center h-screen">
-      <Link className="display-large" to="/dashboard">
-        Dashboard
-      </Link>
+    <div className="h-screen flex flex-col">
+      <NavBar />
+      <div className="flex justify-center items-center flex-1 bg-accent-dark-main relative">
+        <Routes>
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<SignUp />} />
+        </Routes>
+      </div>
     </div>
   );
 };

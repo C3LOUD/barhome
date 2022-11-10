@@ -1,20 +1,20 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import drinkWithFriends from '../assets/drink-with-friends.png';
 import RecipeCard from './ui/RecipeCard';
-import useFetchRecipes from '../hooks/useFetchRecipes';
 import Modal from './ui/Modal';
+import { fetchAllRecipes, fetchRandomRecipe } from '../utils/api-list';
 
 const Recipes = () => {
   const [allRecipes, setAllRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
-  const { recievedData, isLoading, totalQuantity, hasError } = useFetchRecipes({
-    currentPage,
-    method: 'POST',
-  });
+  const { isLoading, isError, error, data } = fetchAllRecipes(currentPage);
+  const { data: randomData, refetch } = fetchRandomRecipe();
+
+  const navigate = useNavigate();
 
   const observer = useRef();
   const reloadElementRef = useCallback(
@@ -32,9 +32,22 @@ const Recipes = () => {
   );
 
   useEffect(() => {
-    setAllRecipes((prev) => [...prev, ...recievedData]);
-    if (allRecipes.length === totalQuantity) setHasMore(false);
-  }, [recievedData]);
+    if (!data) return;
+    setAllRecipes((prev) => [...prev, ...data.recipes]);
+    if (allRecipes.length === data.totalRecipes) setHasMore(false);
+  }, [data]);
+
+  const randomHandler = async (e) => {
+    e.preventDefault();
+    await refetch();
+    navigate(`/dashboard/recipes/${randomData.title}?isEditing=false`);
+  };
+
+  isLoading && (
+    <div className="text-center text-white-100 bg-warning">Loading</div>
+  );
+
+  isError && <div className="text-center text-white-100 bg-error">{error}</div>;
 
   return (
     <>
@@ -51,7 +64,10 @@ const Recipes = () => {
             <p className="font-primary heading-h3 font-bold text-white-100">
               Let us pick one for you
             </p>
-            <a className="transition-all px-4 py-2 bg-primary-main heading-h6 font-bold text-white-400 rounded cursor-pointer hover:bg-primary-tint-100">
+            <a
+              className="transition-all px-4 py-2 bg-primary-main heading-h6 font-bold text-white-400 rounded cursor-pointer hover:bg-primary-tint-100"
+              onClick={randomHandler}
+            >
               Random
             </a>
           </div>
@@ -66,12 +82,6 @@ const Recipes = () => {
           }
           return <RecipeCard recipe={recipe} key={i} />;
         })}
-      </div>
-      <div className="text-center text-white-100 bg-warning">
-        {isLoading && 'Loading'}
-      </div>
-      <div className="text-center text-white-100 bg-error">
-        {hasError && 'Error'}
       </div>
     </>
   );

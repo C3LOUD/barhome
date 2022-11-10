@@ -70,10 +70,24 @@ const ImageCropper = (props) => {
 
     if (clientX === mousePos.x && clientY === mousePos.y) return;
 
+    const boundaryCheckX = (moveX) =>
+      initialize.initialCanvasX + moveX < 0 ||
+      initialize.initialCanvasX + moveX + initialize.resizeRectSize >
+        initialize.canvasSize;
+
+    const boundaryCheckY = (moveY) =>
+      initialize.initialCanvasY + moveY < 0 ||
+      initialize.initialCanvasY + moveY + initialize.resizeRectSize >
+        initialize.canvasSize;
+
     if (isEditing === 'moving') {
       setMousePos((prev) => {
-        const moveX = clientX - prev.x + prev.moveX;
-        const moveY = clientY - prev.y + prev.moveY;
+        const moveX = boundaryCheckX(clientX - prev.x + prev.moveX)
+          ? prev.moveX
+          : clientX - prev.x + prev.moveX;
+        const moveY = boundaryCheckY(clientY - prev.y + prev.moveY)
+          ? prev.moveY
+          : clientY - prev.y + prev.moveY;
         return { x: clientX, y: clientY, moveX, moveY };
       });
     } else {
@@ -121,7 +135,7 @@ const ImageCropper = (props) => {
     const img = new Image();
     const ctx = canvas.current.getContext('2d');
     img.onload = () => {
-      const { moveX, moveY } = mousePos;
+      let { moveX, moveY } = mousePos;
       const {
         rectSize,
         initialX,
@@ -166,6 +180,26 @@ const ImageCropper = (props) => {
         initialize.resizeRectSize || resizeRectSize,
         initialize.resizeRectSize || resizeRectSize
       );
+
+      const tempCanvas = document.createElement('canvas');
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCtx.canvas.width = 600;
+      tempCtx.canvas.height = 600;
+      tempCtx.fillStyle = 'rgba(102, 91, 121, 0.5)';
+      tempCtx.fillRect(0, 0, tempCtx.canvas.width, tempCtx.canvas.height);
+      tempCtx.drawImage(
+        img,
+        initialX + moveX * scale,
+        initialY + moveY * scale,
+        rectSize + imageRectScale,
+        rectSize + imageRectScale,
+        0,
+        0,
+        tempCtx.canvas.width,
+        tempCtx.canvas.height
+      );
+      const tempImg = tempCanvas.toDataURL('image/png');
+      props.onCanvas(tempImg);
     };
     img.src = props.src;
   }, [mousePos]);

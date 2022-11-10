@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import InitialContext from '../../store/initial-context';
+import InitialModalContext from '../../store/initial-Modal-context';
 import Recipe from '../recipe/Recipe';
 import NewPost from '../posts/NewPost';
 
@@ -14,7 +14,7 @@ const Modal = () => {
     setSearchParams({ isEditing: true });
   };
 
-  const ctx = useContext(InitialContext);
+  const ctx = useContext(InitialModalContext);
   const jsx = (
     <div
       className="z-10 absolute flex justify-center items-center w-full h-full top-0 left-0 bg-accent-dark-shade-800/80 cursor-pointer"

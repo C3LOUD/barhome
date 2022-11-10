@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Icon from './Icon';
+import { useLocation, useNavigate } from 'react-router-dom';
+import SavedBtn from './SavedBtn';
 import Tag from './Tag';
 
 const RecipeCard = forwardRef((props, ref) => {
@@ -9,19 +9,15 @@ const RecipeCard = forwardRef((props, ref) => {
   const tagsContent = [alcoholic, category];
 
   const navigate = useNavigate();
-
-  const savedHandler = (e) => {
-    e.stopPropagation();
-    console.log('do something');
-  };
+  const location = useLocation();
 
   return (
     <div
-      className="bg-white-100 rounded flex flex-col items-center justify-between pt-4 gap-4 overflow-hidden hover:-translate-y-2 transition-all cursor-pointer hover:bg-white-200"
+      className="bg-white-100 rounded flex flex-col items-center justify-between pt-4 gap-4 overflow-hidden w-[15.5rem] hover:-translate-y-2 transition-all cursor-pointer hover:bg-white-200"
       ref={ref}
       onClick={(e) => {
         navigate(
-          `/dashboard/recipes/${
+          `${location.pathname}/${
             e.target.closest('[data-id]').dataset.id
           }?isEditing=false`
         );
@@ -34,12 +30,7 @@ const RecipeCard = forwardRef((props, ref) => {
           alt="cocktail thumbnail"
           className="inline-block w-44"
         />
-        <div
-          className="absolute top-1 left-1 bg-white-100/50 rounded-full px-1 py-1 shadow-md hover:bg-white-100"
-          onClick={savedHandler}
-        >
-          <Icon name="bookmark-outline" style="text-2xl text-primary-main" />
-        </div>
+        <SavedBtn size={1} />
       </div>
       <div className="flex gap-2">
         {tagsContent.map((tag, i) => (
