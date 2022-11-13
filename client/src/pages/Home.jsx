@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import SignUp from '../components/auth/SignUp';
+
 import Login from '../components/auth/Login';
+import SignUp from '../components/auth/SignUp';
 import NavBar from '../components/NavBar';
 
 const Home = () => {

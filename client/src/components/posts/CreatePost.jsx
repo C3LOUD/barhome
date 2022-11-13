@@ -1,38 +1,38 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import tempAvatar from '../../assets/7007892.jpg';
-import { editPost, fetchPost } from '../../utils/api-list';
-import Icon from '../ui/Icon';
+import { adminActions } from '../../store/admin-slice';
+import { createPost } from '../../utils/api-list';
 
 const CreatePost = (props) => {
   const { id } = useParams();
+  const { name, avatar } = useSelector((state) => state.admin);
   const [inputContent, setInputContent] = useState(null);
-
-  const { data } = fetchPost(id);
 
   const navigate = useNavigate();
 
-  const { mutate, isLoading } = editPost();
+  const { mutate, isLoading } = createPost();
+  const dispatch = useDispatch();
 
   const titleRef = useRef();
-  const contentRef = useRef();
 
   const inputContentHandler = (e) => {
     setInputContent(e.target.value);
   };
 
   const submitHandler = (e) => {
-    e.preventDefault();
     if (contentLength > 280) return;
     const formData = {
-      _id: id,
-      title: titleRef.current.value || data.post.cocktail.title,
-      image: props.canvas || data.post.imageUrl,
+      title: titleRef.current.value,
+      image: props.canvas,
       content: inputContent,
+      cocktail: id,
     };
     mutate(formData, {
-      onSuccess: () => {
+      onSuccess: (data) => {
+        dispatch(adminActions.updatePost(data.post));
         navigate('/dashboard/posts');
       },
     });
@@ -44,42 +44,31 @@ const CreatePost = (props) => {
   );
 
   useEffect(() => {
-    titleRef.current.value = data?.post.title;
-    contentRef.current.value = data?.post.content;
-    setInputContent(data?.post.content);
-  }, [data]);
+    titleRef.current.value = id;
+  }, []);
 
   if (isLoading)
     return <div className="w-full grid grid-cols-2 gap-6">Loading</div>;
 
   return (
     <div className="w-full grid grid-cols-2 gap-6">
-      <div className="relative">
-        <img
-          src={props.canvas || data?.post.imageUrl}
-          alt="cropped image"
-          className="inline-block aspect-square"
-        />
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-2">
-          <Icon
-            name="camera"
-            style="text-5xl text-primary-main bg-white-100/50 px-4 py-4 rounded-full hover:bg-white-100 cursor-pointer"
-            onClick={props.onEdit}
-          />
-        </div>
-      </div>
+      <img
+        src={props.canvas}
+        alt="cropped image"
+        className="inline-block aspect-square"
+      />
       <div className="flex flex-col max-w-sm mr-6 gap-4">
         <div
           className={`bg-white-400 rounded relative min-h-[20rem] flex flex-col`}
         >
           <div className="flex items-center gap-2 px-4 py-2">
             <img
-              src={data?.post.creator.avatarUrl || tempAvatar}
+              src={avatar || tempAvatar}
               alt="user avatar"
               className="rounded-full aspect-square w-8 "
             />
             <p className="font-secondary text-black-100 paragraph-small font-semibold">
-              {data?.post.creator.name}
+              {name}
             </p>
           </div>
           <textarea
@@ -87,7 +76,6 @@ const CreatePost = (props) => {
             placeholder="input some text"
             className="flex-1 font-secondary paragraph-small text-black-100 font-bold bg-transparent w-full h-full focus:outline-none resize-none border-t-2 py-2 px-2 placeholder:text-gray-200 inline-block"
             onChange={inputContentHandler}
-            ref={contentRef}
           />
           <span
             className={`font-secondary font-normal ${

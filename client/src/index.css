@@ -62,4 +62,8 @@
   .navLink {
     @apply px-4 py-2 rounded hover:text-white-400 transition-all min-w-[6rem] text-center;
   }
+
+  .tooltip-triangle {
+    @apply absolute -top-2 left-1/2 -translate-x-1/2 border-solid border-b-8 border-x-transparent border-x-8 border-t-0 border border-secondary-main;
+  }
 }

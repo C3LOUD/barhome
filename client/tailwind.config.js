@@ -159,6 +159,15 @@ module.exports = {
         '7xl': '3.75rem',
         full: '9999px',
       },
+      keyframes: {
+        dropdown: {
+          '0%': { transform: 'translateY(-24px)' },
+          '100%': { transform: 'translateY(0px)' },
+        },
+      },
+      animation: {
+        dropdown: 'dropdown 0.3s ease-out',
+      },
     },
   },
   varients: {},

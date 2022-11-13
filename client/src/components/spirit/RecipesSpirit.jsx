@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { fetchRecipeByIngredient } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 import RecipeCard from '../ui/RecipeCard';
-import { fetchRecipeByIngredient } from '../../utils/api-list';
 
 const RecipesSpirit = (props) => {
   const carousel = useRef();

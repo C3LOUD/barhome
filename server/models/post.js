@@ -6,6 +6,10 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
+    image: {
+      type: String,
+      required: true,
+    },
     imageUrl: {
       type: String,
       required: true,
@@ -24,6 +28,17 @@ const postSchema = new Schema(
       ref: 'Recipe',
       required: true,
     },
+    comments: [
+      {
+        type: new Schema(
+          {
+            user: { type: Schema.Types.ObjectId, ref: 'User' },
+            comment: String,
+          },
+          { timestamps: true }
+        ),
+      },
+    ],
   },
   { timestamps: true }
 );

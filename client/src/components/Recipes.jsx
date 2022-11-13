@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import drinkWithFriends from '../assets/drink-with-friends.png';
-import RecipeCard from './ui/RecipeCard';
-import Modal from './ui/Modal';
 import { fetchAllRecipes, fetchRandomRecipe } from '../utils/api-list';
+import Modal from './ui/Modal';
+import RecipeCard from './ui/RecipeCard';
 
 const Recipes = () => {
   const [allRecipes, setAllRecipes] = useState([]);
@@ -73,7 +73,7 @@ const Recipes = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-x-8 gap-y-16 py-2 pr-4 overflow-y-scroll scrollbar-thin scrollbar-thumb-primary-main scrollbar-track-primary-tint-300 auto-rows-min">
+      <div className="grid grid-cols-4 gap-x-8 gap-y-16 py-2 pr-4 overflow-x-hidden overflow-y-scroll scrollbar-thin scrollbar-thumb-primary-main scrollbar-track-primary-tint-300 auto-rows-min">
         {allRecipes.map((recipe, i) => {
           if (allRecipes.length === i + 4) {
             return (

@@ -1,17 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 
-import Icon from './ui/Icon';
-import SearchInput from './ui/SearchInput';
-import Recipes from './Recipes';
-import Posts from './posts/Posts';
 import NotFound from '../pages/NotFound';
-import Spirits from './Spirits';
+import { authActions } from '../store/auth-slice';
+import InitialModalContext from '../store/initial-Modal-context';
+import Admin from './auth/Admin';
+import Posts from './posts/Posts';
+import Recipes from './Recipes';
 import Saved from './Saved';
 import IngredientSpirit from './spirit/IngredientSpirit';
-import InitialModalContext from '../store/initial-Modal-context';
-import { authActions } from '../store/auth-slice';
+import Spirits from './Spirits';
+import Icon from './ui/Icon';
+import SearchInput from './ui/SearchInput';
 
 const Main = () => {
   const [mainNode, setMainNode] = useState(null);
@@ -55,6 +56,7 @@ const Main = () => {
               path="/"
               element={<Navigate replace to={'/dashboard/recipes'} />}
             />
+            <Route path="admin/*" element={<Admin />} />
             <Route path="recipes/*" element={<Recipes />} />
             <Route path="spirits/*" element={<Spirits />} />
             <Route
@@ -66,7 +68,7 @@ const Main = () => {
               element={<IngredientSpirit />}
             />
             <Route path="saved/*" element={<Saved />} />
-            <Route path="posts" element={<Posts />} />
+            <Route path="posts/*" element={<Posts />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </InitialModalContext.Provider>

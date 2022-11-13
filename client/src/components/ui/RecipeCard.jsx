@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+
 import SavedBtn from './SavedBtn';
 import Tag from './Tag';
 
@@ -30,7 +31,7 @@ const RecipeCard = forwardRef((props, ref) => {
           alt="cocktail thumbnail"
           className="inline-block w-44"
         />
-        <SavedBtn size={1} />
+        <SavedBtn size="small" />
       </div>
       <div className="flex gap-2">
         {tagsContent.map((tag, i) => (

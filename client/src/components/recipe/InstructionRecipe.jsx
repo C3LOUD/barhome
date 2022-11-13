@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Icon from '../ui/Icon';
 
 const InstructionRecipe = (props) => {

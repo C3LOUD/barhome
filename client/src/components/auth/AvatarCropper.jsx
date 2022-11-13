@@ -30,7 +30,7 @@ const AvatarCropper = (props) => {
     <div className="bg-white-100 rounded flex flex-col items-center px-6 py-6 cursor-default w-[60rem] h-[47rem] relative">
       <Icon
         name="close"
-        style="absolute top-2 right-2 text-4xl hover:scale-110 transition-all"
+        style="absolute top-2 right-2 text-4xl hover:scale-110 transition-all text-black-100"
         onClick={props.onEdit}
       />
       {status === 1 && (
@@ -40,7 +40,7 @@ const AvatarCropper = (props) => {
         <>
           <Icon
             name="arrow-back"
-            style="absolute top-2 left-2 text-4xl hover:scale-110 transition-all"
+            style="absolute top-2 left-2 text-4xl hover:scale-110 transition-all text-black-100"
             onClick={() => setStatus(1)}
           />
           <ImageCropper src={imageSrc} onCanvas={tempCropHandler} />

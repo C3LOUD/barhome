@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, Outlet } from 'react-router-dom';
 
-import { login, authActions } from '../store/auth-slice';
+import { adminActions } from '../store/admin-slice';
+import { login } from '../store/auth-slice';
 import { getUser } from '../utils/api-list';
 
 const ProtectedRoute = (props) => {
@@ -16,10 +17,13 @@ const ProtectedRoute = (props) => {
   useEffect(() => {
     data &&
       dispatch(
-        authActions.setUser({
+        adminActions.setUser({
+          id: data.id,
           name: data.name,
           imgUrl: data.imgUrl,
           saved: data.saved,
+          liked: data.liked,
+          posts: data.posts,
         })
       );
   }, [data]);

@@ -1,11 +1,11 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
-import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
-import NotFound from './pages/NotFound';
-import ProtectedRoute from './components/ProtectedRoute';
 import ErrorBoundary from './components/ErrorBoundary';
+import ProtectedRoute from './components/ProtectedRoute';
+import Dashboard from './pages/Dashboard';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
 
 const App = () => {
   return (

@@ -52,7 +52,7 @@ const Dropzone = (props) => {
         onDragLeave={dragAndDropHandler}
         onDrop={dragAndDropHandler}
       >
-        <Icon name="images-sharp" style="text-[6rem]" />
+        <Icon name="images-sharp" style="text-[6rem] text-black-100" />
         <p className="font-primary heading-h3 text-black-100 font-bold">
           Drop an Image Here
         </p>

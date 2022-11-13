@@ -66,10 +66,68 @@ exports.login = async (req, res, next) => {
 
 exports.getUser = async (req, res, next) => {
   try {
-    const imgUrl = req.imgUrl ? req.imgUrl : null;
-    res
-      .status(200)
-      .json({ imgUrl, name: req.user.name, saved: req.user.saved });
+    const user = await User.findById(req.userId).exec();
+    res.status(200).json({
+      id: user._id,
+      imgUrl: user.avatarUrl,
+      name: user.name,
+      saved: user.saved,
+      liked: user.liked,
+      posts: user.posts,
+      email: user.email,
+    });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+exports.updateUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.userId).exec();
+    if (req.img && req.imgUrl) {
+      user.avatar = req.img;
+      user.avatarUrl = req.imgUrl;
+    }
+
+    if (req.body.password) {
+      const isEqual = await bcrypt.compare(
+        req.body.currentPassword,
+        user.password
+      );
+      if (!isEqual) {
+        const error = new Error('Wrong password.');
+        error.statusCode = 401;
+        throw error;
+      }
+      user.password = await bcrypt.hash(req.body.password, 12);
+    }
+
+    if (req.body.name !== user.name && req.body.name.trim()) {
+      user.name = req.body.name.trim();
+    }
+
+    if (
+      req.body.email.trim() !== user.email &&
+      req.body.email.trim() &&
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+        req.body.email
+      )
+    ) {
+      const isExist = await User.findOne({ email: req.body.email }).exec();
+      if (isExist) {
+        const error = new Error('E-Mail address already exists!');
+        error.statusCode = 422;
+        throw error;
+      }
+      user.email = req.body.email.trim();
+    }
+
+    await user.save();
+
+    res.status(200).json({ message: 'update user success', body: user });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;

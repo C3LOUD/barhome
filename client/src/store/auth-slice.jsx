@@ -4,9 +4,6 @@ const initialUserData = {
   token: '',
   isLoggedIn: false,
   remainingTime: 0,
-  name: '',
-  avatar: null,
-  saved: [],
 };
 
 const calculateRemainingTime = (expirationTime) => {
@@ -54,25 +51,11 @@ const authSlice = createSlice({
     logoutFn(state, action) {
       state.isLoggedIn = false;
       state.token = null;
-      state.name = '';
-      state.avatar = null;
       localStorage.removeItem('token');
       localStorage.removeItem('expirationTime');
 
       if (logoutTimer) {
         clearTimeout(logoutTimer);
-      }
-    },
-    setUser(state, action) {
-      state.name = action.payload.name;
-      state.avatar = action.payload.imgUrl;
-      state.saved = action.payload.saved;
-    },
-    updateSaved(state, action) {
-      if (state.saved.some((el) => el === action.payload)) {
-        state.saved = state.saved.filter((el) => el !== action.payload);
-      } else {
-        state.saved = [...state.saved, action.payload];
       }
     },
   },

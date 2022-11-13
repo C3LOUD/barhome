@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, Route, Routes, useParams } from 'react-router-dom';
 
-import Icon from '../ui/Icon';
 import { fetchRecipeByIngredient } from '../../utils/api-list';
-import RecipeCard from '../ui/RecipeCard';
+import Icon from '../ui/Icon';
 import Modal from '../ui/Modal';
+import RecipeCard from '../ui/RecipeCard';
 
 const IngredientSpirit = () => {
   const { ingredient } = useParams();

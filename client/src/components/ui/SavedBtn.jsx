@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { adminActions } from '../../store/admin-slice';
 import { savedRecipe } from '../../utils/api-list';
-import { authActions } from '../../store/auth-slice';
 import Icon from './Icon';
 
 const SavedBtn = (props) => {
@@ -10,7 +10,7 @@ const SavedBtn = (props) => {
   const savedRef = useRef();
   const { mutateAsync } = savedRecipe();
 
-  const { saved } = useSelector((state) => state.auth);
+  const { saved } = useSelector((state) => state.admin);
   const dispatch = useDispatch();
 
   const savedHandler = async (e) => {
@@ -19,7 +19,9 @@ const SavedBtn = (props) => {
       title: savedRef.current.closest('[data-id]').dataset.id,
     });
     dispatch(
-      authActions.updateSaved(savedRef.current?.closest('[data-id]').dataset.id)
+      adminActions.updateSaved(
+        savedRef.current?.closest('[data-id]').dataset.id
+      )
     );
   };
 
@@ -33,13 +35,19 @@ const SavedBtn = (props) => {
 
   return (
     <div
-      className={`absolute top-${props.size} left-${props.size} bg-white-100/50 rounded-full px-${props.size} py-${props.size} shadow-md hover:bg-white-100`}
+      className={`absolute ${
+        props.size === 'small'
+          ? 'top-1 left-1 px-1 py-1'
+          : 'top-2 left-2 px-2 py-2'
+      } bg-white-100/50 rounded-full shadow-md hover:bg-white-100`}
       onClick={savedHandler}
       ref={savedRef}
     >
       <Icon
         name={checkSaved ? 'bookmark' : 'bookmark-outline'}
-        style={`text-${3 * props.size - 1}xl text-primary-main`}
+        style={`${
+          props.size === 'small' ? 'text-2xl' : 'text-5xl'
+        } text-primary-main`}
       />
     </div>
   );

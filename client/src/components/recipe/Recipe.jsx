@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { fetchRecipe } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 import ModalCard from '../ui/ModalCard';
+import SavedBtn from '../ui/SavedBtn';
 import Tag from '../ui/Tag';
 import CounterRecipe from './CounterRecipe';
 import IngredientRecipe from './IngredientRecipe';
 import InstructionRecipe from './InstructionRecipe';
-import { fetchRecipe } from '../../utils/api-list';
-import SavedBtn from '../ui/SavedBtn';
 
 const Recipe = (props) => {
   const [currentShow, setCurrentShow] = useState('Ingredients');
@@ -59,7 +59,7 @@ const Recipe = (props) => {
               src={thumbnail}
               alt={`${title} photo`}
             />
-            <SavedBtn size={2} />
+            <SavedBtn />
           </div>
           <div className="max-w-sm mr-6">
             <div className="flex" onClick={switchHandler}>

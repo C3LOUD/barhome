@@ -10,6 +10,8 @@ const inputStateReducer = (state, action) => {
     return { value: action.value, isTouched: state.isTouched };
   if (action.type === 'BLUR') return { isTouched: true, value: state.value };
   if (action.type === 'RESET') return { isTouched: false, value: '' };
+  if (action.type === 'INITIALIZE')
+    return { isTouched: state.isTouched, value: action.value };
   return inputStateReducer;
 };
 
@@ -21,6 +23,10 @@ const useInput = (validator) => {
 
   const validationResult = validator(inputState.value);
   const hasError = validationResult && inputState.isTouched;
+
+  const initialize = (value) => {
+    dispatch({ type: 'INITIALIZE', value: value });
+  };
 
   const valueChangeHandler = (event) => {
     dispatch({ type: 'INPUT', value: event.target.value });
@@ -38,6 +44,7 @@ const useInput = (validator) => {
     value: inputState.value,
     validationResult,
     hasError,
+    initialize,
     valueChangeHandler,
     inputBlurHandler,
     reset,

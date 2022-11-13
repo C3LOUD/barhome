@@ -14,6 +14,7 @@ const userSchema = new Schema({
     required: true,
   },
   avatar: String,
+  avatarUrl: String,
   saved: [
     {
       type: String,
@@ -21,6 +22,12 @@ const userSchema = new Schema({
     },
   ],
   posts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Post',
+    },
+  ],
+  liked: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Post',
