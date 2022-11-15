@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 
-import RecipesSpirit from './spirit/RecipesSpirit';
-import Modal from './ui/Modal';
+import Modal from '../ui/Modal';
+import RecipesSpirit from './RecipesSpirit';
 
 const spiritsList = [
   'Tequila',

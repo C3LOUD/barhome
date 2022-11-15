@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import tempAvatar from '../assets/7007892.jpg';
-import { adminActions } from '../store/admin-slice';
-import { authActions, login } from '../store/auth-slice';
-import { getUser } from '../utils/api-list';
-import Logo from './ui/Logo';
+import tempAvatar from '../../assets/7007892.jpg';
+import { adminActions } from '../../store/admin-slice';
+import { authActions, login } from '../../store/auth-slice';
+import { getUser } from '../../utils/api-list';
+import Logo from '../ui/Logo';
 
-const NavBar = () => {
+const NavBar = (props) => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const { name, avatar } = useSelector((state) => state.admin);
 
@@ -18,6 +18,13 @@ const NavBar = () => {
   const logoutHandler = (e) => {
     e.preventDefault();
     dispatch(authActions.logoutFn());
+  };
+
+  const smoothScrollHandler = (e) => {
+    e.preventDefault();
+    const el = document.getElementById(e.target.dataset.id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -40,17 +47,28 @@ const NavBar = () => {
   }, []);
 
   return (
-    <div className="h-16 flex bg-primary-main justify-between items-center px-12 text-white-100">
+    <div
+      className={`h-16 flex justify-between items-center px-12 text-white-100 shrink-0 ${
+        props.style
+          ? 'bg-primary-main fixed top-0 w-full z-50'
+          : 'bg-accent-dark-main'
+      }`}
+    >
       <Logo />
-      <div className="flex gap-4 items-center">
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? 'text-secondary-main navLink' : 'navLink'
-          }
-          to="/pricing"
+      <div className="flex gap-4 items-center" onClick={smoothScrollHandler}>
+        <a className="navLink" data-id="features" onClick={smoothScrollHandler}>
+          Features
+        </a>
+        <a
+          className="navLink"
+          data-id="testimonials"
+          onClick={smoothScrollHandler}
         >
+          Testimonials
+        </a>
+        <a className="navLink" data-id="pricing" onClick={smoothScrollHandler}>
           Pricing
-        </NavLink>
+        </a>
         {!isLoggedIn && (
           <>
             <NavLink
@@ -77,7 +95,7 @@ const NavBar = () => {
                 alt="user avatar"
                 className="h-12 rounded-full"
               />
-              <p className="relative">
+              <div className="relative">
                 {`Welcome ${name || 'User'}`}
                 <div className="pt-14 transition-all absolute top-0 left-0 z-50 w-full group-hover:block hidden text-center">
                   <a
@@ -87,7 +105,7 @@ const NavBar = () => {
                     Logout
                   </a>
                 </div>
-              </p>
+              </div>
             </div>
             <NavLink
               className="navLink bg-secondary-main hover:bg-secondary-tint-200"

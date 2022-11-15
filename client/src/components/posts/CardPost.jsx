@@ -119,7 +119,15 @@ const CardPost = (props) => {
           onClick={likedHandler}
         />
       </div>
-      <img src={imageUrl} alt={title + ' image'} />
+      <img
+        className="active:scale-[101%] transition-all"
+        src={imageUrl}
+        alt={title + ' image'}
+        onClick={(e) => {
+          if (e.detail !== 2) return;
+          likedHandler();
+        }}
+      />
       {comments && (
         <div className="py-2">
           {comments

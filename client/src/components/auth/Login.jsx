@@ -1,5 +1,5 @@
 import React, { useRef, useState, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import AuthInput from '../ui/AuthInput';
@@ -76,6 +76,12 @@ const Login = () => {
           >
             Submit
           </button>
+          <Link
+            className="font-secondary font-normal paragraph-xsmall text-gray-300 hover:text-gray-50"
+            to="/forget-password"
+          >
+            Forget password?
+          </Link>
         </div>
       </form>
     </>

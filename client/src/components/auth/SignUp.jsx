@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { signup } from '../../utils/api-list';
 import InputForm from '../ui/InputForm';
@@ -22,6 +22,12 @@ const SignUp = () => {
         {isError && <p className="text-error">{error.message}</p>}
         <p className="heading-h4">Sign up</p>
         <InputForm onSubmit={submitHandler} />
+        <Link
+          to="/login"
+          className="text-end transition-all paragraph-xsmall text-white-100/50 hover:text-white-100"
+        >
+          Already have account?
+        </Link>
       </div>
     </>
   );

@@ -52,24 +52,20 @@ export const fetchRecipeByIngredient = (ingredient) =>
   });
 
 export const fetchRandomRecipe = () =>
-  useQuery(
-    ['random'],
-    async () => {
-      const token = localStorage.getItem('token');
-      if (!token) return 'not autenticated.';
-      const res = await fetch(`http://localhost:8080/recipe/random`, {
-        headers: {
-          Authorization: 'Bearer ' + token,
-        },
-      });
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.message);
-      }
-      return await res.json();
-    },
-    { enabled: false }
-  );
+  useQuery(['random'], async () => {
+    const token = localStorage.getItem('token');
+    if (!token) return 'not autenticated.';
+    const res = await fetch(`http://localhost:8080/recipe/random`, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.message);
+    }
+    return await res.json();
+  });
 
 export const searchKeywords = (keyword) =>
   useQuery(['search', keyword], async () => {
@@ -185,6 +181,38 @@ export const updateUser = () =>
         Authorization: 'Bearer ' + token,
       },
       body: JSON.stringify(userData),
+    });
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.message);
+    }
+    return await res.json();
+  });
+
+export const forgetPassword = () =>
+  useMutation(['forgetPassword'], async (email) => {
+    const res = await fetch('http://localhost:8080/auth/forget', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(email),
+    });
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.message);
+    }
+    return await res.json();
+  });
+
+export const resetPassword = () =>
+  useMutation(['resetPassword'], async (newPassword) => {
+    const res = await fetch('http://localhost:8080/auth/reset', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newPassword),
     });
     if (!res.ok) {
       const error = await res.json();

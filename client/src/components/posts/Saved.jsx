@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, Route, Routes } from 'react-router-dom';
 
-import { fetchSavedRecipes } from '../utils/api-list';
-import Icon from './ui/Icon';
-import Modal from './ui/Modal';
-import RecipeCard from './ui/RecipeCard';
+import { fetchSavedRecipes } from '../../utils/api-list';
+import Icon from '../ui/Icon';
+import Modal from '../ui/Modal';
+import RecipeCard from '../ui/RecipeCard';
 
 const Saved = () => {
   const { data, isSuccess, refetch } = fetchSavedRecipes();

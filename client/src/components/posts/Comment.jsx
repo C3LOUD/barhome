@@ -30,7 +30,7 @@ const Comment = (props) => {
   const { id } = useSelector((state) => state.admin);
 
   return (
-    <div className="flex px-4 gap-2 items-start w-full">
+    <div className="flex px-4 gap-2 items-start w-full group">
       <div className="flex gap-1 items-center">
         <img
           src={props.comment.user.avatarUrl || tempAvatar}
@@ -45,7 +45,7 @@ const Comment = (props) => {
         {props.comment.comment}
       </p>
       {props.comment.user._id === id ? (
-        <div className="group cursor-pointer w-12">
+        <div className="cursor-pointer w-12">
           <p className="group-hover:hidden font-secondary paragraph-xsmall text-gray-400 w-full">
             {date}
           </p>
@@ -60,9 +60,7 @@ const Comment = (props) => {
           </div>
         </div>
       ) : (
-        <p className="group-hover:hidden font-secondary paragraph-xsmall text-gray-400">
-          {date}
-        </p>
+        <p className=" font-secondary paragraph-xsmall text-gray-400">{date}</p>
       )}
     </div>
   );

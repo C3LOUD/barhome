@@ -7,10 +7,10 @@ import { authActions } from '../store/auth-slice';
 import InitialModalContext from '../store/initial-Modal-context';
 import Admin from './auth/Admin';
 import Posts from './posts/Posts';
-import Recipes from './Recipes';
-import Saved from './Saved';
+import Recipes from './recipe/Recipes';
+import Saved from './posts/Saved';
 import IngredientSpirit from './spirit/IngredientSpirit';
-import Spirits from './Spirits';
+import Spirits from './spirit/Spirits';
 import Icon from './ui/Icon';
 import SearchInput from './ui/SearchInput';
 

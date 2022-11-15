@@ -25,12 +25,12 @@ const Posts = () => {
   const currentPostList = useMemo(() => {
     if (searchParams.get('filter') === 'liked')
       return data?.posts.filter((post) =>
-        liked.some((likedPost) => likedPost === post._id)
+        liked?.some((likedPost) => likedPost === post._id)
       );
 
     if (searchParams.get('filter') === 'myposts')
       return data?.posts.filter((post) =>
-        myposts.some((myPost) => myPost === post._id)
+        myposts?.some((myPost) => myPost === post._id)
       );
 
     return data?.posts;

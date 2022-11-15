@@ -79,7 +79,7 @@ const InputForm = (props) => {
     nameInvalid || emailInvalid || passwordInvalid || confirmPasswordInvalid;
 
   useEffect(() => {
-    if (!props.admin) return;
+    if (!props.admin?.imgUrl) return;
     setTempImageSrc(props.admin.imgUrl);
   }, [props.admin]);
 

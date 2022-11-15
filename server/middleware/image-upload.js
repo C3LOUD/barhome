@@ -19,7 +19,7 @@ module.exports.avatarUpload = async (req, res, next) => {
       folder: 'user_avatar',
     });
     req.publicId = imgRes.public_id;
-    req.url = imgRes.url;
+    req.imgUrl = imgRes.url;
     next();
   } catch (err) {
     if (!err.statusCode) err.statusCode = 500;
@@ -45,6 +45,7 @@ module.exports.avatarUpdate = async (req, res, next) => {
     });
     req.img = imgRes.public_id;
     req.imgUrl = imgRes.url;
+    if (!user.avatar) next();
     await cloudinary.uploader.destroy(user.avatar);
     next();
   } catch (err) {

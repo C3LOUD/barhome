@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
-import drinkWithFriends from '../assets/drink-with-friends.png';
-import { fetchAllRecipes, fetchRandomRecipe } from '../utils/api-list';
-import Modal from './ui/Modal';
-import RecipeCard from './ui/RecipeCard';
+import { fetchAllRecipes, fetchRandomRecipe } from '../../utils/api-list';
+import drinkWithFriends from '../../assets/drink-with-friends.png';
+import Modal from '../ui/Modal';
+import RecipeCard from '../ui/RecipeCard';
 
 const Recipes = () => {
   const [allRecipes, setAllRecipes] = useState([]);
