@@ -42,9 +42,9 @@ const Dropzone = (props) => {
   };
 
   return (
-    <div className="h-full w-full inline-block px-6 flex-1">
+    <div className="inline-block h-full w-full flex-1 px-6">
       <div
-        className={`transition-all h-full flex flex-col justify-center gap-2 border-2 border-dashed items-center rounded ${
+        className={`flex h-full flex-col items-center justify-center gap-2 rounded border-2 border-dashed transition-all ${
           activated ? 'border-primary-main bg-black-100/20' : 'border-black-100'
         }`}
         onDragEnter={dragAndDropHandler}
@@ -53,7 +53,7 @@ const Dropzone = (props) => {
         onDrop={dragAndDropHandler}
       >
         <Icon name="images-sharp" style="text-[6rem] text-black-100" />
-        <p className="font-primary heading-h3 text-black-100 font-bold">
+        <p className="heading-h3 font-primary font-bold text-black-100">
           Drop an Image Here
         </p>
         <div>
@@ -66,14 +66,14 @@ const Dropzone = (props) => {
             onChange={loadFileHandler}
           />
           <a
-            className="px-4 py-2 bg-primary-main font-primary paragraph-medium font-semibold text-white-100 self-center rounded hover:cursor-pointer hover:bg-primary-tint-200"
+            className="paragraph-medium self-center rounded bg-primary-main px-4 py-2 font-primary font-semibold text-white-100 hover:cursor-pointer hover:bg-primary-tint-200"
             onClick={fileUploadHandler}
           >
             Select an Image
           </a>
         </div>
         <p
-          className={`paragraph-small font-secondary font-bold inline-block mt-6 ${
+          className={`paragraph-small mt-6 inline-block font-secondary font-bold ${
             dataInappropriate ? 'text-error' : 'text-accent-dark-main'
           }`}
         >

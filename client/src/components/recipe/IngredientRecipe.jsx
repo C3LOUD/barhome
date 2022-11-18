@@ -2,14 +2,14 @@ import React from 'react';
 
 const IngredientRecipe = (props) => {
   return (
-    <div className="flex justify-between paragraph-large font-semibold">
+    <div className="paragraph-large flex justify-between font-semibold">
       <div className="flex gap-2">
         <p>
           {props.ingredient.quantity === 0
             ? props.ingredient.unit
             : Math.round(props.ingredient.quantity * props.counter * 100) / 100}
         </p>
-        <p className="paragraph-small text-accent-dark-main self-center">
+        <p className="paragraph-small self-center text-accent-dark-main">
           {props.ingredient.quantity !== 0 && props.ingredient.unit}
         </p>
       </div>

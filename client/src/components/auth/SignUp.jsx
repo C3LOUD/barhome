@@ -18,13 +18,13 @@ const SignUp = () => {
 
   return (
     <>
-      <div className="flex flex-col bg-primary-main px-4 py-4 rounded-2xl gap-2 text-white-100 w-[20rem]">
+      <div className="flex w-[20rem] flex-col gap-2 rounded-2xl bg-primary-main px-4 py-4 text-white-100">
         {isError && <p className="text-error">{error.message}</p>}
         <p className="heading-h4">Sign up</p>
         <InputForm onSubmit={submitHandler} />
         <Link
           to="/login"
-          className="text-end transition-all paragraph-xsmall text-white-100/50 hover:text-white-100"
+          className="paragraph-xsmall text-end text-white-100/50 transition-all hover:text-white-100"
         >
           Already have account?
         </Link>

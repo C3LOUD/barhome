@@ -11,11 +11,11 @@ const BtnSidebar = (props) => {
       to={link}
       data-id={props.tag}
       className={
-        `transition-all py-2 px-12 font-semibold text-white-100 paragraph-large flex items-center gap-2 w-full hover:bg-primary-tint-200 hover:underline hover:cursor-pointer active:bg-primary-main ` +
+        `sm:heading-h6 flex w-full items-center gap-2 py-2 px-12 font-semibold text-white-100 transition-all hover:cursor-pointer hover:bg-primary-tint-200 hover:underline active:bg-primary-main ` +
         props.style
       }
     >
-      <Icon name={props.icon} style="text-2xl" />
+      <Icon name={props.icon} style="text-2xl sm:text-5xl" />
       {props.tag}
     </Link>
   );

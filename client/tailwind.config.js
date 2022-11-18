@@ -1,13 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     screens: {
       '2xl': { max: '1440px' },
-      xl: { max: '1280px' },
-      lg: { max: '1024px' },
-      md: { max: '767px' },
-      sm: { max: '639px' },
+      xl: { max: '1300px' },
+      lg: { max: '1050px' },
+      md: { max: '980px' },
+      sm: { max: '780px' },
+      xs: { max: '680px' },
+      '2xs': { max: '480px' },
     },
     extend: {
       colors: {
@@ -164,9 +167,18 @@ module.exports = {
           '0%': { transform: 'translateY(-24px)' },
           '100%': { transform: 'translateY(0px)' },
         },
+        loader: {
+          '0%': {
+            transform: 'rotate(0deg)',
+          },
+          '100%': {
+            transform: 'rotate(360deg)',
+          },
+        },
       },
       animation: {
         dropdown: 'dropdown 0.3s ease-out',
+        loader: 'loader 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite',
       },
     },
   },

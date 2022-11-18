@@ -28,15 +28,15 @@ const AuthInput = forwardRef((props, ref) => {
   }, [props.initial]);
 
   return (
-    <div className="w-full inline-block h-20">
+    <div className="inline-block h-20 w-full">
       <label
         htmlFor={props.id}
-        className="font-secondary paragraph-small font-semibold w-full pb-1"
+        className="paragraph-small w-full pb-1 font-secondary font-semibold"
       >
         {props.id[0].toUpperCase() + props.id.slice(1) + ':'}
       </label>
       <input
-        className="w-full text-black-100 px-2 py-2 font-secondary paragraph-small font-normal bg-white-100 rounded"
+        className="paragraph-small w-full rounded bg-white-100 px-2 py-2 font-secondary font-normal text-black-100 dark:shadow-md"
         type={props.type}
         name={props.id}
         id={props.id}
@@ -45,12 +45,12 @@ const AuthInput = forwardRef((props, ref) => {
         onBlur={inputBlurHandler}
       />
       {props.mode && hasError && (
-        <p className="text-error font-secondary paragraph-xsmall font-semibold">
+        <p className="paragraph-xsmall font-secondary font-semibold text-error">
           {value ? validationResult : null}
         </p>
       )}
       {!props.mode && hasError && (
-        <p className="text-error font-secondary paragraph-xsmall font-semibold">
+        <p className="paragraph-xsmall font-secondary font-semibold text-error">
           {validationResult}
         </p>
       )}

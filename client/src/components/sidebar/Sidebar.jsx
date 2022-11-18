@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom';
 import Logo from '../ui/Logo';
 import BtnSidebar from './BtnSidebar';
 import UserSidebar from './UserAvatarSidebar';
+import DarkModeSwitcher from '../ui/DarkModeSwitcher';
+import LogoutBtn from '../ui/LogoutBtn';
 
 const allSidebarBtn = [
   { key: 1, tag: 'Recipes', icon: 'book-outline', activateIcon: 'book' },
@@ -12,7 +14,7 @@ const allSidebarBtn = [
   { key: 4, tag: 'Posts', icon: 'create-outline', activateIcon: 'create' },
 ];
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   const [currentPage, setCurrentPage] = useState('');
   const [hovered, setHovered] = useState(false);
 
@@ -42,12 +44,16 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-[13rem] bg-accent-dark-main flex flex-col items-center pt-12 pb-6 justify-between">
-      <div className="flex flex-col items-center gap-[5.5rem] w-full">
+    <div
+      className={`flex w-[13rem] flex-col items-center justify-between overflow-scroll bg-accent-dark-main pt-12 pb-6 transition-all scrollbar-none md:absolute md:top-0 md:z-30 md:h-full ${
+        props.hamburger ? 'md:left-0' : 'md:-left-full'
+      }`}
+    >
+      <div className="flex w-full flex-col items-center gap-[5.5rem] 2xs:gap-12">
         <Logo />
         <UserSidebar />
         <div
-          className="flex flex-col gap-6 w-full"
+          className="flex w-full flex-col gap-6 2xs:gap-4"
           onMouseOver={sideMenuHoverHandler}
           onMouseOut={sideMenuHoverHandler}
         >
@@ -69,10 +75,16 @@ const Sidebar = () => {
           })}
         </div>
       </div>
-      <div className="paragraph-xsmall text-accent-dark-tint-300">
-        <p>Copyright © 2022</p>
-        <p>Designed By Chen Yu</p>
-        <p>All right reserved</p>
+      <div className="flex w-full flex-col items-center gap-6 pt-6">
+        <div className="hidden flex-col gap-4 xs:flex">
+          <DarkModeSwitcher />
+          <LogoutBtn />
+        </div>
+        <div className="paragraph-xsmall text-accent-dark-tint-300">
+          <p>Copyright © 2022</p>
+          <p>Designed By Chen Yu</p>
+          <p>All right reserved</p>
+        </div>
       </div>
     </div>
   );

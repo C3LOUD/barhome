@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { getUser, updateUser } from '../../utils/api-list';
 import InputForm from '../ui/InputForm';
+import Loading from '../ui/Loading';
 import Modal from '../ui/Modal';
 
 const Admin = () => {
@@ -27,15 +28,15 @@ const Admin = () => {
         <Route path={':id/*'} element={<Navigate to="/dashboard/admin" />} />
       </Routes>
       {isLoading && (
-        <div className="absolute z-20 w-full h-full bg-accent-dark-shade-700/80">
-          Loading
+        <div className="absolute z-20 flex h-full w-full items-center justify-center bg-accent-dark-shade-700/80">
+          <Loading />
         </div>
       )}
-      <div className="mt-12 w-full h-full flex flex-col item-center gap-12 text-white-100">
-        <p className="font-primary text-white-100 display-small font-bold">
+      <div className="item-center mt-12 flex w-full shrink flex-col text-white-100 dark:text-black-100">
+        <p className="display-small font-primary font-bold text-white-100 dark:text-black-100">
           Profile
         </p>
-        <div className="w-[20rem] self-center relative">
+        <div className="w-[20rem] self-center pb-12 xs:w-full xs:max-w-[20rem] 2xs:pt-12">
           {isError && (
             <div className="absolute -top-12 left-0 text-error">
               {error.message}

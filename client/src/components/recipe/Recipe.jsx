@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { fetchRecipe } from '../../utils/api-list';
+import CloseBtn from '../ui/CloseBtn';
 import Icon from '../ui/Icon';
+import Loading from '../ui/Loading';
 import ModalCard from '../ui/ModalCard';
 import SavedBtn from '../ui/SavedBtn';
 import Tag from '../ui/Tag';
@@ -16,7 +18,7 @@ const Recipe = (props) => {
   const { id } = useParams();
 
   const { isLoading, isError, error, data } = fetchRecipe(id);
-  if (!data) return <p>Loading</p>;
+  if (!data) return <Loading />;
 
   const {
     title,
@@ -45,15 +47,16 @@ const Recipe = (props) => {
 
   return (
     <ModalCard>
-      <div className="flex flex-col items-center w-full" data-id={title}>
-        <p className="font-primary display-small font-bold pb-2">{title}</p>
-        <div className="flex gap-2 pb-8">
+      <CloseBtn />
+      <div className="flex w-full flex-col items-center" data-id={title}>
+        <p className="display-small pb-2 font-primary font-bold">{title}</p>
+        <div className="flex w-fit gap-2 overflow-x-scroll px-6 pb-8 scrollbar-none 2xs:w-full">
           {[alcoholic, category, ...tags].map((tag, i) => (
             <Tag key={i}>{tag}</Tag>
           ))}
         </div>
-        <div className="w-full grid grid-cols-2 gap-6">
-          <div className="relative">
+        <div className="grid w-full grid-cols-2 gap-6 2xs:grid-cols-1">
+          <div className="relative 2xs:mx-auto 2xs:w-2/3">
             <img
               className="inline-block aspect-square"
               src={thumbnail}
@@ -61,19 +64,19 @@ const Recipe = (props) => {
             />
             <SavedBtn />
           </div>
-          <div className="max-w-sm mr-6">
-            <div className="flex" onClick={switchHandler}>
+          <div className="max-w-sm pr-6 2xs:max-w-full 2xs:px-4">
+            <div className="flex w-full" onClick={switchHandler}>
               {['Ingredients', 'Instructions'].map((label) => {
                 return (
                   <div
                     key={label}
-                    className={`w-full rounded-t-2xl py-2 text-center cursor-pointer overflow-hidden heading-h5 font-bold font-primary ${
+                    className={`heading-h5 w-full cursor-pointer overflow-hidden rounded-t-2xl py-2 text-center font-primary font-bold ${
                       label === currentShow
                         ? 'bg-accent-dark-main text-white-100'
                         : 'text-accent-dark-main'
                     }`}
                   >
-                    <p className={`hover:scale-110 transition-all`}>{label}</p>
+                    <p className={`transition-all hover:scale-110`}>{label}</p>
                   </div>
                 );
               })}
@@ -101,10 +104,10 @@ const Recipe = (props) => {
         </div>
       </div>
       <div
-        className="flex flex-col gap-2 items-center group cursor-pointer"
+        className="group flex cursor-pointer flex-col items-center gap-2"
         onClick={props.onEdit}
       >
-        <a className="transition-all font-secondary paragraph-small font-semibold text-primary-main group-hover:paragraph-medium pt-4">
+        <a className="paragraph-small group-hover:paragraph-medium pt-4 font-secondary font-semibold text-primary-main transition-all">
           ADD A POST
         </a>
         <Icon

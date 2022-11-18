@@ -1,9 +1,10 @@
+import { useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { adminActions } from '../../store/admin-slice';
 import { deletePost } from '../../utils/api-list';
+import CloseBtn from '../ui/CloseBtn';
+import Loading from '../ui/Loading';
 import ModalCard from '../ui/ModalCard';
 import BtnPost from './BtnPost';
 import Dropzone from './Dropzone';
@@ -17,9 +18,9 @@ const PostEditor = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { mutate, isLoading } = deletePost();
-  const dispatch = useDispatch();
 
   const canvasHandler = (canvas) => {
     setTempImageSrc(canvas);
@@ -47,7 +48,7 @@ const PostEditor = () => {
       { _id: id },
       {
         onSuccess: () => {
-          dispatch(adminActions.removePost(id));
+          queryClient.invalidateQueries(['posts']);
           navigate('/dashboard/posts');
         },
       }
@@ -55,11 +56,15 @@ const PostEditor = () => {
   };
 
   if (isLoading)
-    return <div className="w-full grid grid-cols-2 gap-6">Loading</div>;
+    return (
+      <div className="absolute top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-accent-dark-shade-700/80">
+        <Loading />
+      </div>
+    );
 
   return (
     <ModalCard>
-      <p className="font-primary display-small font-bold text-black-100 pb-6">
+      <p className="display-small pb-6 font-primary font-bold text-black-100">
         Edit Post
       </p>
       {status !== 1 && imageSrc && (
@@ -83,14 +88,17 @@ const PostEditor = () => {
       )}
       {status === 2 && <ImageCropper src={imageSrc} onCanvas={canvasHandler} />}
       {status === 3 && (
-        <EditPost canvas={tempImageSrc} onEdit={() => setStatus(1)} />
+        <>
+          <CloseBtn />
+          <EditPost canvas={tempImageSrc} onEdit={() => setStatus(1)} />
+          <a
+            className="mt-6 cursor-pointer rounded bg-error/30 px-4 py-2 text-white-100 shadow-md transition-all hover:bg-error"
+            onClick={deleteHandler}
+          >
+            Delete Post
+          </a>
+        </>
       )}
-      <a
-        className="transition-all mt-6 bg-error/30 px-4 py-2 rounded text-white-100 cursor-pointer shadow-md hover:bg-error"
-        onClick={deleteHandler}
-      >
-        Delete Post
-      </a>
     </ModalCard>
   );
 };

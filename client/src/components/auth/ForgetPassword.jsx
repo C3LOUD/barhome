@@ -24,17 +24,17 @@ const ForgetPassword = () => {
   return (
     <>
       <form onSubmit={submitHandler}>
-        <div className="flex flex-col bg-primary-main px-4 py-4 rounded-2xl gap-2 text-white-100 w-[20rem] relative">
+        <div className="relative flex w-[20rem] flex-col gap-2 rounded-2xl bg-primary-main px-4 py-4 text-white-100">
           {isError && (
-            <div className="absolute -top-24 bg-error rounded px-2 py-4 w-full left-0">
-              <p className="font-secondary paragraph-small font-bold">
+            <div className="absolute -top-24 left-0 w-full rounded bg-error px-2 py-4">
+              <p className="paragraph-small font-secondary font-bold">
                 {error.message}
               </p>
             </div>
           )}
           {isSuccess && (
-            <div className="absolute -top-24 bg-success rounded px-2 py-4 w-full left-0">
-              <p className="font-secondary paragraph-small font-bold">
+            <div className="absolute -top-24 left-0 w-full rounded bg-success px-2 py-4">
+              <p className="paragraph-small font-secondary font-bold">
                 Reset Email has been sent to your address.
               </p>
             </div>
@@ -50,7 +50,7 @@ const ForgetPassword = () => {
           <button
             disabled={emailInvalid}
             type="submit"
-            className={` px-4 py-2 w-fit rounded ${
+            className={` w-fit rounded px-4 py-2 ${
               !emailInvalid ? 'bg-secondary-main' : 'bg-gray-100'
             }`}
           >

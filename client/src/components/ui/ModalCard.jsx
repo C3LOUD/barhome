@@ -3,7 +3,7 @@ import React from 'react';
 const ModalCard = (props) => {
   return (
     <div
-      className="bg-white-100 rounded flex flex-col items-center pt-10 pb-6 cursor-default max-w-[60rem] w-full h-full max-h-[47rem] relative object-contain"
+      className="relative flex h-full max-h-[47rem] w-full max-w-[60rem] cursor-default flex-col items-center overflow-y-scroll rounded bg-white-100 py-4 pt-10 pb-6 scrollbar-none"
       onClick={(e) => e.stopPropagation()}
     >
       {props.children}

@@ -14,7 +14,7 @@ const RecipeCard = forwardRef((props, ref) => {
 
   return (
     <div
-      className="bg-white-100 rounded flex flex-col items-center justify-between pt-4 gap-4 overflow-hidden w-[15.5rem] hover:-translate-y-2 transition-all cursor-pointer hover:bg-white-200"
+      className="flex w-full min-w-[15.5rem] cursor-pointer flex-col items-center justify-between gap-4 overflow-hidden rounded bg-white-100 pt-4 transition-all hover:-translate-y-2 hover:bg-white-200 dark:shadow-md xl:gap-3 2xs:mx-auto 2xs:max-w-[15.5rem]"
       ref={ref}
       onClick={(e) => {
         navigate(
@@ -38,8 +38,8 @@ const RecipeCard = forwardRef((props, ref) => {
           <Tag key={i}>{tag}</Tag>
         ))}
       </div>
-      <p className="heading-h3 font-primary font-bold text-center">{title}</p>
-      <a className="bg-primary-main w-full text-center py-2 text-white-400 font-secondary font-semibold cursor-pointer hover:bg-primary-tint-200">
+      <p className="heading-h3 text-center font-primary font-bold">{title}</p>
+      <a className="w-full cursor-pointer bg-primary-main py-2 text-center font-secondary font-semibold text-white-400 hover:bg-primary-tint-200 ">
         Start Mixing
       </a>
     </div>

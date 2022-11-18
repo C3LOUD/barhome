@@ -15,7 +15,7 @@ const Logo = () => {
       src={logoSvg}
       alt="logo"
       onClick={homeHandler}
-      className="cursor-pointer hover:scale-95 transition-all"
+      className="cursor-pointer transition-all hover:scale-95 sm:scale-90"
     />
   );
 };

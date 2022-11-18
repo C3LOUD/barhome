@@ -5,23 +5,23 @@ import Icon from '../ui/Icon';
 const PricingCard = (props) => {
   return (
     <div
-      className={`transition-all bg-white-100 rounded-2xl shadow-2xl h-fit overflow-hidden hover:-translate-y-1 relative ${
-        props.pricing.popular && 'h-[110%]'
+      className={`relative h-fit overflow-hidden rounded-2xl bg-white-100 shadow-2xl transition-all hover:-translate-y-1 xs:max-w-[25rem] 2xs:max-w-full ${
+        props.pricing.popular && 'h-[110%] xs:-order-1 xs:h-full'
       }`}
     >
       {props.pricing.popular && (
-        <p className="absolute bg-error z-10 top-8 -right-12 px-12 py-1 rotate-45 paragraph-small text-white-100">
+        <p className="paragraph-small absolute top-8 -right-12 z-10 rotate-45 bg-error px-12 py-1 text-white-100">
           Most Popular
         </p>
       )}
       <div
-        className={`h-24 px-8 pt-12 pb-20 flex justify-center items-center relative ${props.pricing.style}`}
+        className={`relative flex h-24 items-center justify-center pt-12 pb-20 sm:px-4 ${props.pricing.style}`}
       >
-        <p className="heading-h2 text-white inline-block text-white-100 font-bold">
+        <p className="heading-h2 text-white inline-block font-bold text-white-100">
           {props.pricing.title}
         </p>
         <p
-          className={`absolute rounded-full w-20 h-20 -bottom-10 left-1/2 -translate-x-1/2 text-white-100 flex justify-center items-center border-2 border-accent-dark-tint-800 heading-h6 font-bold ${props.pricing.secondaryStyle}`}
+          className={`heading-h6 absolute -bottom-10 left-1/2 flex h-20 w-20 -translate-x-1/2 items-center justify-center rounded-full border-2 border-accent-dark-tint-800 font-bold text-white-100 ${props.pricing.secondaryStyle}`}
         >
           {props.pricing.price}
           <span className="paragraph-xsmall">
@@ -29,7 +29,7 @@ const PricingCard = (props) => {
           </span>
         </p>
       </div>
-      <ul className="px-16 py-16 text-black-100 paragraph-medium flex flex-col gap-3">
+      <ul className="paragraph-medium flex flex-col gap-3 px-16 py-16 text-black-100 md:px-8 xs:px-6">
         <li className="flex gap-2">
           <Icon name="checkmark-sharp" style="text-2xl" /> 1000+ Pro Recipes
         </li>
@@ -71,7 +71,7 @@ const PricingCard = (props) => {
         </li>
       </ul>
       <a
-        className={`mb-8 w-fit mx-auto block text-center px-4 py-2  text-white-100 rounded cursor-pointer  ${props.pricing.btnStyle}`}
+        className={`mx-auto mb-8 block w-fit cursor-pointer rounded px-4  py-2 text-center text-white-100  ${props.pricing.btnStyle}`}
       >
         Order Now
       </a>

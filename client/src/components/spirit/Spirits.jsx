@@ -11,9 +11,9 @@ const spiritsList = [
   'Gin',
   'Bourbon',
   'Scotch',
-  'Rye Whiskey',
   'Cognac',
   'Brandy',
+  'Rye Whiskey',
 ];
 
 const Spirits = () => {
@@ -22,16 +22,16 @@ const Spirits = () => {
       <Routes>
         <Route path={':id'} element={<Modal />} />
       </Routes>
-      <div className="py-12">
-        <p className="font-primary text-white-100 display-small font-bold pb-4">
+      <div className="py-12 xs:py-8">
+        <p className="display-small pb-4 font-primary font-bold text-white-100 dark:text-black-100 ">
           Spirits
         </p>
-        <div className="flex gap-8">
+        <div className="flex gap-8 xs:mb-4 xs:grid xs:w-fit xs:grid-cols-5 xs:gap-y-2">
           {spiritsList.map((spirit) => {
             return (
               <Link
                 key={spirit}
-                className="font-primary heading-h6 text-white-100 underline"
+                className="heading-h6 font-primary text-white-100 underline hover:text-white-400 dark:text-black-100 dark:hover:text-gray-400 xs:last:col-span-2"
                 to={`/dashboard/ingredient/${spirit}`}
               >
                 {spirit}
@@ -40,7 +40,7 @@ const Spirits = () => {
           })}
         </div>
       </div>
-      <div className="overflow-y-scroll scrollbar-none flex flex-col gap-16 flex-1">
+      <div className="flex min-h-[20rem] flex-1 flex-col gap-16 overflow-x-hidden overflow-y-scroll scrollbar-none xl:gap-12 xs:gap-8">
         {spiritsList.map((spirit) => (
           <RecipesSpirit key={spirit} spirit={spirit} />
         ))}

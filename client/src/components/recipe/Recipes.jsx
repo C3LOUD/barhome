@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
-import { fetchAllRecipes, fetchRandomRecipe } from '../../utils/api-list';
 import drinkWithFriends from '../../assets/drink-with-friends.png';
+import { fetchAllRecipes, fetchRandomRecipe } from '../../utils/api-list';
+import Loading from '../ui/Loading';
+import MainGrid from '../ui/MainGrid';
 import Modal from '../ui/Modal';
 import RecipeCard from '../ui/RecipeCard';
 
@@ -44,28 +46,34 @@ const Recipes = () => {
   };
 
   isLoading && (
-    <div className="text-center text-white-100 bg-warning">Loading</div>
+    <div className="bg-warning text-center text-white-100">
+      <Loading />
+    </div>
   );
 
-  isError && <div className="text-center text-white-100 bg-error">{error}</div>;
+  isError && <div className="bg-error text-center text-white-100">{error}</div>;
 
   return (
     <>
       <Routes>
         <Route path={':id'} element={<Modal />} />
       </Routes>
-      <div className="flex items-center gap-6 px-6 py-12">
-        <img src={drinkWithFriends} alt="drink with friend" className="h-40" />
+      <div className="flex items-center gap-6 px-6 py-12 xl:py-8 xs:py-6">
+        <img
+          src={drinkWithFriends}
+          alt="drink with friend"
+          className="h-40 md:h-32 xs:hidden"
+        />
         <div className="flex flex-col gap-3">
-          <p className="font-primary display-small font-bold text-white-100">
+          <p className="display-small xl:heading-h1 2xs:heading-h3 font-primary font-bold text-white-100 dark:text-black-100">
             No Idea What to Drink Today?
           </p>
-          <div className="flex gap-9">
-            <p className="font-primary heading-h3 font-bold text-white-100">
+          <div className="flex gap-9 2xs:flex-col 2xs:gap-4">
+            <p className="heading-h3 xl:heading-h4 2xs:heading-h6 font-primary font-bold text-white-100 dark:text-black-100">
               Let us pick one for you
             </p>
             <a
-              className="transition-all px-4 py-2 bg-primary-main heading-h6 font-bold text-white-400 rounded cursor-pointer hover:bg-primary-tint-100"
+              className="heading-h6 xl:paragraph-large 2xs:paragraph-medium w-fit cursor-pointer rounded bg-primary-main px-4 py-2 font-bold text-white-400 transition-all hover:bg-primary-tint-200"
               onClick={randomHandler}
             >
               Random
@@ -73,7 +81,7 @@ const Recipes = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-x-8 gap-y-16 py-2 pr-4 overflow-x-hidden overflow-y-scroll scrollbar-thin scrollbar-thumb-primary-main scrollbar-track-primary-tint-300 auto-rows-min">
+      <MainGrid>
         {allRecipes.map((recipe, i) => {
           if (allRecipes.length === i + 4) {
             return (
@@ -82,7 +90,7 @@ const Recipes = () => {
           }
           return <RecipeCard recipe={recipe} key={i} />;
         })}
-      </div>
+      </MainGrid>
     </>
   );
 };

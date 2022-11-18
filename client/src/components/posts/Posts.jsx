@@ -6,6 +6,7 @@ import { fetchAllPosts } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 import Modal from '../ui/Modal';
 import CardPost from './CardPost';
+import TogglePosts from './TogglePosts';
 
 const Posts = () => {
   const [showToggle, setShowToggle] = useState(false);
@@ -20,6 +21,10 @@ const Posts = () => {
   const toggleHandler = (e) => {
     e.stopPropagation();
     setShowToggle((prev) => !prev);
+  };
+
+  const setFilter = (filter) => {
+    setSearchParams(filter);
   };
 
   const currentPostList = useMemo(() => {
@@ -46,77 +51,39 @@ const Posts = () => {
         <Route path={':id'} element={<Modal />} />
       </Routes>
       <div
-        className="relative mt-12 w-full flex overflow-hidden h-full"
+        className="relative mt-12 flex h-full w-full overflow-hidden xs:mt-6 2xs:mt-2"
         onClick={() => {
           setShowToggle((prev) => false);
         }}
       >
-        <div className="absolute top-0 left-0">
-          <p className="font-primary text-white-100 display-small font-bold">
-            Post
-          </p>
-          <div
-            className="flex mt-6 w-[7.5rem] text-white-100 relative cursor-pointer"
-            onClick={toggleHandler}
-          >
-            <p className="flex-1 font-secondary paragraph-small font-semibold">
-              {searchParams.get('filter') === 'myposts'
-                ? 'My Posts'
-                : searchParams.get('filter') === 'liked'
-                ? 'Liked Posts'
-                : 'All Posts'}
+        <div className="flex w-full flex-1 flex-col items-center gap-12 overflow-y-scroll pb-6 scrollbar-none 2xs:gap-6">
+          <div className="absolute top-0 left-0 xs:static xs:flex xs:gap-6 xs:self-start">
+            <p className="display-small font-primary font-bold text-white-100 dark:text-black-100">
+              Post
             </p>
-            {showToggle ? (
-              <>
-                <Icon name="chevron-down-sharp" style="text-2xl" />
-                <ul className="animate-dropdown transition-all absolute top-5 left-0 w-full py-2 flex flex-col gap-2">
-                  <a
-                    className={`transition-all font-secondary paragraph-small font-semibold hover:bg-primary-tint-200 ${
-                      (searchParams.get('filter') === 'all' ||
-                        !searchParams.get('filter')) &&
-                      'bg-primary-main'
-                    }`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSearchParams({ filter: 'all' });
-                    }}
-                  >
-                    All Posts
-                  </a>
-                  <a
-                    className={`transition-all font-secondary paragraph-small font-semibold hover:bg-primary-tint-200 ${
-                      searchParams.get('filter') === 'liked' &&
-                      'bg-primary-main'
-                    }`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSearchParams({ filter: 'liked' });
-                    }}
-                  >
-                    Liked Posts
-                  </a>
-                  <a
-                    className={`transition-all font-secondary paragraph-small font-semibold hover:bg-primary-tint-200 ${
-                      searchParams.get('filter') === 'myposts' &&
-                      'bg-primary-main'
-                    }`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSearchParams({ filter: 'myposts' });
-                    }}
-                  >
-                    My Posts
-                  </a>
-                </ul>
-              </>
-            ) : (
-              <Icon name="chevron-up-sharp" style="text-2xl" />
-            )}
+            <div
+              className="relative mt-6 flex w-[7.5rem] cursor-pointer text-white-100 dark:text-black-100 xs:w-fit"
+              onClick={toggleHandler}
+            >
+              <p className="paragraph-small flex-1 font-secondary font-semibold xs:px-2">
+                {searchParams.get('filter') === 'myposts'
+                  ? 'My Posts'
+                  : searchParams.get('filter') === 'liked'
+                  ? 'Liked Posts'
+                  : 'All Posts'}
+              </p>
+              {showToggle ? (
+                <TogglePosts
+                  onClick={setFilter}
+                  filter={searchParams.get('filter')}
+                />
+              ) : (
+                <Icon name="chevron-up-sharp" style="text-2xl" />
+              )}
+            </div>
           </div>
-        </div>
-        <div className="overflow-y-scroll scrollbar-none flex flex-col gap-12 flex-1 pb-6 w-full items-center">
           {currentPostList?.length === 0 && (
-            <p className="my-12 heading-h2 text-white-100 font-primary font-bold">
+            <p className="heading-h2 my-12 font-primary font-bold text-white-100">
               No Posts
             </p>
           )}

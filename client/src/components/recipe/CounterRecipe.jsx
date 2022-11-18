@@ -4,7 +4,7 @@ import Icon from '../ui/Icon';
 
 const CounterRecipe = (props) => {
   return (
-    <div className="flex justify-between py-2">
+    <div className="flex w-full justify-between py-2">
       <Icon
         name="remove"
         style={`transition-all text-2xl text-error md hydrated ${

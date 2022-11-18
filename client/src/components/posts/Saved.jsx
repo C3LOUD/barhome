@@ -1,38 +1,33 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 
 import { fetchSavedRecipes } from '../../utils/api-list';
 import Icon from '../ui/Icon';
+import MainGrid from '../ui/MainGrid';
 import Modal from '../ui/Modal';
 import RecipeCard from '../ui/RecipeCard';
 
 const Saved = () => {
-  const { data, isSuccess, refetch } = fetchSavedRecipes();
-  const { saved } = useSelector((state) => state.admin);
-
-  useEffect(() => {
-    refetch();
-  }, [saved]);
+  const { data, isSuccess } = fetchSavedRecipes();
 
   return (
     <>
       <Routes>
         <Route path={':id'} element={<Modal />} />
       </Routes>
-      <p className="font-primary display-small font-bold text-white-100 my-12">
+      <p className="display-small my-12 font-primary font-bold text-white-100 dark:text-black-100 xl:my-8 2xs:my-6">
         Saved
       </p>
       {isSuccess && data.recipes.length === 0 && (
-        <div className="flex flex-col justify-center items-center gap-12">
-          <p className="font-primary display-large font-bold text-white-400">
+        <div className="flex flex-col items-center justify-center gap-12">
+          <p className="display-large font-primary font-bold text-white-400">
             No Saved Recipe Found
           </p>
           <Link
-            className="flex gap-6 items-center group"
+            className="group flex items-center gap-6"
             to="/dashboard/recipes"
           >
-            <p className="transition-all font-primary heading-h2 font-bold text-white-100 group-hover:text-white-400 group-hover:underline underline-offset-4 decoration-1">
+            <p className="heading-h2 font-primary font-bold text-white-100 decoration-1 underline-offset-4 transition-all group-hover:text-white-400 group-hover:underline">
               Explore new recipe
             </p>
             <Icon
@@ -43,11 +38,11 @@ const Saved = () => {
         </div>
       )}
       {isSuccess && (
-        <div className="flex-1 grid grid-cols-4 gap-x-8 gap-y-16 py-2 pr-4 overflow-x-hidden overflow-y-scroll scrollbar-thin scrollbar-thumb-primary-main scrollbar-track-primary-tint-300 auto-rows-min">
-          {data.recipes.map((recipe, i) => (
-            <RecipeCard recipe={recipe} key={i} />
+        <MainGrid>
+          {data.recipes.map((recipe) => (
+            <RecipeCard recipe={recipe} key={recipe._id} />
           ))}
-        </div>
+        </MainGrid>
       )}
     </>
   );

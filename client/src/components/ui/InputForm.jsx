@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import tempAvatar from '../../assets/7007892.jpg';
+import tempAvatar from '../../assets/7007892.png';
 import {
   confirmPasswordValidator,
   emailValidator,
@@ -66,8 +66,7 @@ const InputForm = (props) => {
     setConfirmPasswordValid(validationResult);
   });
 
-  const editHandler = (e) => {
-    e && e.stopPropagation();
+  const editHandler = () => {
     setAvatarEditing((prev) => !prev);
   };
 
@@ -85,20 +84,23 @@ const InputForm = (props) => {
 
   return (
     <>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-        {avatarEditing && (
+      {avatarEditing && (
+        <div
+          className="absolute top-0 left-0 z-10 flex h-full w-full cursor-pointer items-center justify-center bg-accent-dark-shade-800/80"
+          onClick={editHandler}
+        >
           <AvatarCropper onEdit={editHandler} onCanvas={canvasHandler} />
-        )}
-      </div>
+        </div>
+      )}
       <form onSubmit={submitHandler}>
         <div
-          className="m-auto relative group rounded-full h-40 w-40 overflow-hidden cursor-pointer mb-6"
+          className="group relative mx-auto mb-6 h-40 w-40 cursor-pointer overflow-hidden rounded-full dark:shadow-md"
           onClick={editHandler}
         >
           <img
             src={tempImageSrc}
             alt="user avatar"
-            className="group-hover:scale-110 transition-all"
+            className="transition-all group-hover:scale-110"
           />
           <Icon
             name="camera"
@@ -153,10 +155,10 @@ const InputForm = (props) => {
         <button
           disabled={props.admin ? false : formInValid}
           type="submit"
-          className={`mt-4 px-4 py-2 w-fit rounded ${
+          className={`paragraph-large mt-4 w-fit rounded px-4 py-2 font-secondary transition-all  dark:text-white-100 ${
             !formInValid || props.admin
-              ? 'bg-secondary-main cursor-pointer'
-              : 'bg-gray-100 cursor-not-allowed'
+              ? 'cursor-pointer bg-secondary-main hover:bg-secondary-tint-200'
+              : 'cursor-not-allowed bg-gray-100'
           }`}
         >
           Submit

@@ -6,7 +6,7 @@ const InstructionRecipe = (props) => {
   const instructionArr = props.instructions.split('.');
 
   return (
-    <div className="flex flex-col py-2 gap-4">
+    <div className="flex w-full flex-col gap-4 py-2">
       {instructionArr.map((instruction, i) => {
         if (!instruction) return;
 
@@ -14,7 +14,7 @@ const InstructionRecipe = (props) => {
           <div className="flex gap-2" key={i}>
             <Icon name="pin" style="text-xl text-accent-dark-main" />
             <p
-              className="paragraph-medium font-normal font-secondary"
+              className="paragraph-medium font-secondary font-normal"
               key={instruction}
             >
               {`${instruction}.`}

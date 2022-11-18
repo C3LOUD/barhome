@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import tempAvatar from '../../assets/7007892.jpg';
+import tempAvatar from '../../assets/7007892.png';
 import { adminActions } from '../../store/admin-slice';
 import { addComment, likedPost } from '../../utils/api-list';
 import Icon from '../ui/Icon';
@@ -29,7 +29,7 @@ const CardPost = (props) => {
   const { mutate: addCommentMutate, isLoading: addCommentIsLoading } =
     addComment();
 
-  const { liked, posts: myposts } = useSelector((state) => state.admin);
+  const { liked, posts: myPosts } = useSelector((state) => state.admin);
   const dispatch = useDispatch();
 
   const date = new Intl.DateTimeFormat(navigator.language).format(
@@ -69,46 +69,46 @@ const CardPost = (props) => {
   }, [liked]);
 
   return (
-    <div className="w-[28.5rem] bg-white-100 rounded overflow-hidden shrink-0">
-      <div className="flex px-4 pt-4 justify-between">
+    <div className="w-[28.5rem] shrink-0 overflow-hidden rounded bg-white-100 dark:shadow-md 2xs:w-full">
+      <div className="flex justify-between px-4 pt-4">
         <div className="flex h-full items-center gap-2">
           <img
             src={creator.avatarUrl || tempAvatar}
             alt="creator avatar"
-            className="h-6 rounded-full inline-block"
+            className="inline-block h-6 rounded-full"
           />
-          <p className="font-secondary paragraph-small font-semibold text-black-100">
+          <p className="paragraph-small font-secondary font-semibold text-black-100">
             {creator.name}
           </p>
         </div>
-        {myposts.some((post) => post === _id) && (
+        {myPosts.some((post) => post === _id) && (
           <Link
-            className="flex text-primary-main items-center"
+            className="flex items-center text-primary-main"
             to={`/dashboard/posts/${_id}?mode=post`}
           >
             <Icon name="pencil-sharp" />
-            <p className="font-secondary paragraph-small font-semibold">Edit</p>
+            <p className="paragraph-small font-secondary font-semibold">Edit</p>
           </Link>
         )}
       </div>
-      <div className="px-4 py-2 flex flex-col justify-between min-h-[8rem]">
+      <div className="flex min-h-[8rem] flex-col justify-between px-4 py-2 2xs:min-h-[6rem]">
         <div>
           {content.split(/\n/g).map((content, i) => (
             <p
               key={i}
-              className="font-secondary paragraph-medium text-black-100 font-medium"
+              className="paragraph-medium font-secondary font-medium text-black-100"
             >
               {content}
             </p>
           ))}
         </div>
-        <p className="self-end font-secondary paragraph-xsmall text-gray-400">
+        <p className="paragraph-xsmall self-end font-secondary text-gray-400">
           {date}
         </p>
       </div>
       <div className="flex justify-between px-4 pb-2 text-primary-main">
         <Link
-          className="font-primary heading-h6 font-bold"
+          className="heading-h6 font-primary font-bold"
           to={`/dashboard/posts/${cocktail.title}?isEditing=false`}
         >
           {title}
@@ -120,7 +120,7 @@ const CardPost = (props) => {
         />
       </div>
       <img
-        className="active:scale-[101%] transition-all"
+        className="transition-all active:scale-[101%]"
         src={imageUrl}
         alt={title + ' image'}
         onClick={(e) => {
@@ -128,7 +128,7 @@ const CardPost = (props) => {
           likedHandler();
         }}
       />
-      {comments && (
+      {comments.length !== 0 && (
         <div className="py-2">
           {comments
             .sort((a, b) => a.createdAt.localeCompare(b.createdAt))
@@ -138,12 +138,12 @@ const CardPost = (props) => {
         </div>
       )}
       <div
-        className={`flex justify-between px-4 py-4 gap-4 bg-white-400 ${
+        className={`flex justify-between gap-4 bg-white-400 px-4 py-4 ${
           addCommentIsLoading ? 'bg-gray-300' : 'bg-white-400'
         }`}
       >
         <input
-          className="bg-transparent focus:outline-none font-secondary font-semibold text-black-100 placeholder:text-gray-300 flex-1"
+          className="flex-1 bg-transparent font-secondary font-semibold text-black-100 placeholder:text-gray-300 focus:outline-none"
           placeholder="Leave a comment"
           maxLength="72"
           ref={commentRef}

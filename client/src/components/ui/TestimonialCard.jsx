@@ -6,12 +6,12 @@ const TestimonialCard = (props) => {
       <img
         src={props.data.imgSrc}
         alt="customer avatar"
-        className="rounded-full w-16"
+        className="w-16 rounded-full"
       />
-      <p className="text-white-100 font-secondary paragraph-large mb-4 mt-3">
+      <p className="paragraph-large mb-4 mt-3 font-secondary text-white-100">
         {props.data.text}
       </p>
-      <p className="text-gray-100 font-primary paragraph-large">
+      <p className="paragraph-large font-primary text-gray-100">
         &mdash; {props.data.name}
       </p>
     </div>

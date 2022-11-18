@@ -2,24 +2,24 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import tempAvatar from '../../assets/7007892.jpg';
+import tempAvatar from '../../assets/7007892.png';
 
 const UserAvatarSidebar = () => {
   const { name, avatar } = useSelector((state) => state.admin);
 
   return (
     <Link
-      className="flex flex-col justify-center items-center gap-1 mx-auto group"
+      className="group mx-auto flex flex-col items-center justify-center gap-1"
       to="/dashboard/admin"
     >
-      <div className="rounded-full w-20 aspect-square overflow-hidden shadow-2xl">
+      <div className="aspect-square w-20 overflow-hidden rounded-full shadow-2xl">
         <img
-          className="group-hover:scale-110 transition-all"
+          className="transition-all group-hover:scale-110"
           src={avatar || tempAvatar}
           alt="user avatar"
         />
       </div>
-      <p className="font-semibold paragraph-large text-white-100 group-hover:text-white-400 transition-all">
+      <p className="paragraph-large font-semibold text-white-100 transition-all group-hover:text-white-400">
         {name || 'User'}
       </p>
     </Link>

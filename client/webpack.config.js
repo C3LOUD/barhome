@@ -1,11 +1,11 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development',
-  entry: './index.jsx',
+  mode: 'production',
+  entry: { index: './index.jsx', dashboard: './pages/Dashboard.jsx' },
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'main.js',
+    filename: '[name].bundle.js',
     publicPath: '/',
   },
 
@@ -25,6 +25,23 @@ module.exports = {
       '@': path.resolve(__dirname, 'src'),
     },
   },
+
+  performance: {
+    maxAssetSize: 500000,
+    maxEntrypointSize: 500000,
+  },
+
+  // optimization: {
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       vendors: {
+  //         name: 'vendor',
+  //         test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+  //         chunks: 'all',
+  //       },
+  //     },
+  //   },
+  // },
 
   module: {
     rules: [

@@ -27,12 +27,12 @@ const Home = (props) => {
   return (
     <>
       <Hero ref={heroRef} />
-      <div className="bg-white-100 w-full">
+      <div className="w-full bg-white-100">
         <FeatureIn />
         <Features />
       </div>
       <Testimonials />
-      <div className="bg-white-100 w-full">
+      <div className="w-full bg-white-100">
         <Pricing />
       </div>
       <Footer />

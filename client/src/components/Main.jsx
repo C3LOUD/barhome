@@ -1,28 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import NotFound from '../pages/NotFound';
-import { authActions } from '../store/auth-slice';
 import InitialModalContext from '../store/initial-Modal-context';
 import Admin from './auth/Admin';
 import Posts from './posts/Posts';
-import Recipes from './recipe/Recipes';
 import Saved from './posts/Saved';
+import Recipes from './recipe/Recipes';
 import IngredientSpirit from './spirit/IngredientSpirit';
 import Spirits from './spirit/Spirits';
+import DarkModeSwitcher from './ui/DarkModeSwitcher';
 import Icon from './ui/Icon';
+import LogoutBtn from './ui/LogoutBtn';
 import SearchInput from './ui/SearchInput';
 
-const Main = () => {
+const Main = (props) => {
   const [mainNode, setMainNode] = useState(null);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const logoutHandler = () => {
-    dispatch(authActions.logoutFn());
-    navigate('/');
-  };
 
   const mainElement = useRef();
   useEffect(() => {
@@ -31,25 +24,24 @@ const Main = () => {
 
   return (
     <div
-      className="relative flex-1 bg-gradient-to-r from-accent-dark-shade-700 to-accent-dark-shade-400 px-16 pt-8 flex flex-col"
+      className="relative flex flex-1 flex-col overflow-hidden bg-gradient-to-r from-accent-dark-shade-700 to-accent-dark-shade-400 px-16 pt-8 dark:from-accent-dark-tint-500 dark:to-accent-dark-tint-700 lg:px-12 sm:px-8"
       ref={mainElement}
     >
-      <div className="flex justify-between w-full gap-24">
-        <SearchInput />
-        <div className="flex gap-6">
+      <div className="flex w-full justify-between gap-24 md:gap-12 2xs:mb-4">
+        <div className="flex w-full gap-4">
           <Icon
-            name="moon"
-            style="text-secondary-main text-5xl cursor-pointer hover:text-secondary-tint-100"
+            name="menu-sharp"
+            style="transition-all text-5xl text-white-100 hover:text-white-400 dark:text-black-100 dark:hover:text-gray-400 hidden md:block"
+            onClick={props.onHamburger}
           />
-          <a
-            className="text-white-100 heading-h6 font-bold rounded py-2 px-4 cursor-pointer bg-secondary-main hover:bg-secondary-tint-100"
-            onClick={logoutHandler}
-          >
-            Logout
-          </a>
+          <SearchInput />
+        </div>
+        <div className="flex gap-6 xs:hidden">
+          <DarkModeSwitcher />
+          <LogoutBtn />
         </div>
       </div>
-      <div className="overflow-hidden h-full flex flex-col w-[69rem] 2xl:w-[60rem]">
+      <div className="flex w-[69rem] flex-1 flex-col overflow-scroll scrollbar-none 2xl:w-full 2xs:block">
         <InitialModalContext.Provider value={mainNode}>
           <Routes>
             <Route

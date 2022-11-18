@@ -6,7 +6,7 @@ const GalleryImage = (props) => {
       <img
         src={props.imgSrc}
         alt="gallery image"
-        className="hover:scale-110 transition-all"
+        className="transition-all hover:scale-110"
       />
     </div>
   );

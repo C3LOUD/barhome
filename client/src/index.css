@@ -6,7 +6,7 @@
 
 @layer base {
   html {
-    @apply font-secondary;
+    @apply font-secondary 2xl:text-[15px] lg:text-[14px] sm:text-[13px];
   }
 }
 
@@ -60,10 +60,24 @@
   }
 
   .navLink {
-    @apply px-4 py-2 rounded hover:text-white-400 transition-all min-w-[6rem] text-center cursor-pointer;
+    @apply w-[6rem] min-w-fit cursor-pointer rounded px-4 py-2 text-center transition-all hover:text-white-400;
   }
 
   .tooltip-triangle {
-    @apply absolute -top-2 left-1/2 -translate-x-1/2 border-solid border-b-8 border-x-transparent border-x-8 border-t-0 border border-secondary-main;
+    @apply absolute -top-2 left-1/2 -translate-x-1/2 border border-x-8 border-b-8 border-t-0 border-solid border-secondary-main border-x-transparent;
   }
+
+  .toggle-btn {
+    @apply absolute top-0 left-0 h-11 w-11 rounded-full bg-primary-main transition-all;
+  }
+}
+
+.delay45 {
+  animation-delay: -0.45s;
+}
+.delay30 {
+  animation-delay: -0.3s;
+}
+.delay15 {
+  animation-delay: -0.15s;
 }

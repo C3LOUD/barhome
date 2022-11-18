@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CloseBtn from '../ui/CloseBtn';
 
 import ModalCard from '../ui/ModalCard';
 import BtnPost from './BtnPost';
@@ -33,9 +34,10 @@ const NewPost = () => {
 
   return (
     <ModalCard>
-      <p className="font-primary display-small font-bold text-black-100 pb-6">
+      <p className="display-small pb-6 font-primary font-bold text-black-100">
         Add New Post
       </p>
+      {status === 1 && !imageSrc && <CloseBtn />}
       {status !== 1 && (
         <BtnPost
           onClick={backHandler}

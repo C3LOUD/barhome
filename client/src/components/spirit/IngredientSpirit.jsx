@@ -3,6 +3,7 @@ import { Link, Route, Routes, useParams } from 'react-router-dom';
 
 import { fetchRecipeByIngredient } from '../../utils/api-list';
 import Icon from '../ui/Icon';
+import MainGrid from '../ui/MainGrid';
 import Modal from '../ui/Modal';
 import RecipeCard from '../ui/RecipeCard';
 
@@ -16,26 +17,26 @@ const IngredientSpirit = () => {
       <Routes>
         <Route path={':id'} element={<Modal />} />
       </Routes>
-      <div className="pt-10 pb-12">
-        <Link to="/dashboard/spirits" className="flex items-center group w-fit">
+      <div className="pt-10 pb-12 xs:pt-6 xs:pb-8">
+        <Link to="/dashboard/spirits" className="group flex w-fit items-center">
           <Icon
             name="chevron-back-sharp"
-            style="text-white-100/50 text-2xl group-hover:text-white-100 "
+            style="text-white-100/50 text-2xl group-hover:text-white-100 dark:text-gray-400 dark:group-hover:text-primary-main"
           />
-          <p className="font-secondary paragraph-xsmall font-semibold text-white-100/50 group-hover:text-white-100 ">
+          <p className="paragraph-xsmall font-secondary font-semibold text-white-100/50 group-hover:text-white-100 dark:text-gray-400 dark:group-hover:text-primary-main">
             Spirits
           </p>
         </Link>
-        <p className="font-primary display-small font-bold text-white-100">
+        <p className="display-small font-primary font-bold text-white-100 dark:text-black-100">
           {ingredient}
         </p>
       </div>
-      <div className="flex-1 grid grid-cols-4 gap-x-8 gap-y-16 py-2 pr-4 overflow-y-scroll scrollbar-thin scrollbar-thumb-primary-main scrollbar-track-primary-tint-300 auto-rows-min">
+      <MainGrid>
         {isSuccess &&
           data.recipes.map((recipe, i) => (
             <RecipeCard recipe={recipe} key={i} />
           ))}
-      </div>
+      </MainGrid>
     </>
   );
 };

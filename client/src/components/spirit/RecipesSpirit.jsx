@@ -35,13 +35,16 @@ const RecipesSpirit = (props) => {
         className="flex gap-2 pb-4"
         to={`/dashboard/ingredient/${props.spirit}`}
       >
-        <p className="font-primary heading-h3 text-white-100 font-bold">
+        <p className="heading-h3 font-primary font-bold text-white-100 dark:text-black-100">
           {props.spirit}
         </p>
-        <Icon name="chevron-forward-sharp" style="text-white-100 text-3xl" />
+        <Icon
+          name="chevron-forward-sharp"
+          style="text-white-100 text-3xl dark:text-black-100"
+        />
       </Link>
       <div
-        className="overflow-x-scroll scrollbar-none grid grid-row-1 grid-flow-col gap-8 py-2"
+        className="grid-row-1 grid grid-flow-col gap-8 overflow-x-scroll py-2 scrollbar-none"
         ref={carousel}
         onScroll={scrollHandler}
       >

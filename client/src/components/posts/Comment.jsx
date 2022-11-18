@@ -2,7 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import tempAvatar from '../../assets/7007892.jpg';
+import tempAvatar from '../../assets/7007892.png';
 import { removeComment } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 
@@ -30,37 +30,37 @@ const Comment = (props) => {
   const { id } = useSelector((state) => state.admin);
 
   return (
-    <div className="flex px-4 gap-2 items-start w-full group">
-      <div className="flex gap-1 items-center">
+    <div className="group flex w-full items-start gap-2 px-4">
+      <div className="flex items-center gap-1">
         <img
           src={props.comment.user.avatarUrl || tempAvatar}
           alt="commenter avatar"
-          className="rounded-full h-4 w-4"
+          className="h-4 w-4 rounded-full"
         />
-        <p className="font-secondary paragraph-xsmall font-bold text-black-100">
+        <p className="paragraph-xsmall font-secondary font-bold text-black-100">
           {props.comment.user.name}
         </p>
       </div>
-      <p className="font-secondary paragraph-xsmall text-black-100 flex-1">
+      <p className="paragraph-xsmall flex-1 font-secondary text-black-100">
         {props.comment.comment}
       </p>
       {props.comment.user._id === id ? (
-        <div className="cursor-pointer w-12">
-          <p className="group-hover:hidden font-secondary paragraph-xsmall text-gray-400 w-full">
+        <div className="w-12 cursor-pointer">
+          <p className="paragraph-xsmall w-full font-secondary text-gray-400 group-hover:hidden">
             {date}
           </p>
           <div
-            className="hidden group-hover:flex text-error"
+            className="hidden text-error group-hover:flex"
             onClick={removeCommentHandler}
           >
-            <p className="font-secondary paragraph-xsmall text-error">
+            <p className="paragraph-xsmall font-secondary text-error">
               delete?
             </p>
             <Icon name="close-sharp" />
           </div>
         </div>
       ) : (
-        <p className=" font-secondary paragraph-xsmall text-gray-400">{date}</p>
+        <p className=" paragraph-xsmall font-secondary text-gray-400">{date}</p>
       )}
     </div>
   );

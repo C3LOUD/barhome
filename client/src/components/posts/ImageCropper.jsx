@@ -213,18 +213,20 @@ const ImageCropper = (props) => {
     : 'cursor-nesw-resize';
 
   return (
-    <canvas
-      className={`min-h-0 min-w-0 ${cursorStyle}`}
-      width="1200px"
-      height="1200px"
-      ref={canvas}
-      onMouseDown={startEditingHandler}
-      onMouseUp={finishEditingHandler}
-      onMouseMove={editHandler}
-      onTouchStart={startEditingHandler}
-      onTouchEnd={finishEditingHandler}
-      onTouchMove={editHandler}
-    />
+    <div className="my-auto aspect-square min-h-0 min-w-0 px-4">
+      <canvas
+        className={`h-full w-full ${cursorStyle}`}
+        width="1200px"
+        height="1200px"
+        ref={canvas}
+        onMouseDown={startEditingHandler}
+        onMouseUp={finishEditingHandler}
+        onMouseMove={editHandler}
+        onTouchStart={startEditingHandler}
+        onTouchEnd={finishEditingHandler}
+        onTouchMove={editHandler}
+      />
+    </div>
   );
 };
 

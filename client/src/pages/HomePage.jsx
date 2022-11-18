@@ -9,13 +9,13 @@ import Home from '../components/landing/Home';
 import NavBar from '../components/landing/NavBar';
 
 const HomePage = () => {
-  const [navStyle, setNavStyle] = useState(null);
+  const [navStyle, setNavStyle] = useState(true);
   const navStyleHandler = (style) => setNavStyle(style);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <NavBar style={navStyle} />
-      <div className="flex flex-col justify-center items-center flex-1 bg-accent-dark-main relative">
+      <div className="relative flex flex-1 flex-col items-center justify-center bg-accent-dark-main">
         <Routes>
           <Route path="/" element={<Home onNav={navStyleHandler} />} />
           <Route path="login" element={<Login />} />
