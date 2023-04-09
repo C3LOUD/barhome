@@ -26,7 +26,7 @@ const Spirits = () => {
         <p className="display-small pb-4 font-primary font-bold text-white-100 dark:text-black-100 ">
           Spirits
         </p>
-        <div className="flex gap-8 xs:mb-4 xs:grid xs:w-fit xs:grid-cols-5 xs:gap-y-2">
+        <div className="flex gap-8 xs:mb-4 xs:grid xs:w-fit xs:grid-cols-5 xs:gap-y-2 2xs:gap-x-2">
           {spiritsList.map((spirit) => {
             return (
               <Link

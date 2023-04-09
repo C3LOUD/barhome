@@ -37,8 +37,6 @@ const SavedBtn = (props) => {
     );
   }, [saved]);
 
-  console.log(checkSaved);
-
   return (
     <div
       className={`absolute ${

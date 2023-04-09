@@ -99,7 +99,7 @@ const NavBar = (props) => {
       </div>
 
       <div
-        className={`flex origin-top-right items-center gap-4 transition-all md:gap-2 sm:absolute sm:top-10 sm:right-12 sm:z-30 sm:flex-col sm:bg-accent-dark-shade-500 sm:py-4 sm:px-4 ${
+        className={`flex origin-top-right items-center gap-4 transition-all md:gap-2 sm:absolute sm:top-10 sm:right-12 sm:z-30 sm:flex-col sm:bg-accent-dark-shade-500 sm:py-4 sm:px-4 2xs:right-2 ${
           hamburger ? 'sm:scale-100' : 'sm:scale-0'
         }`}
         onClick={smoothScrollHandler}

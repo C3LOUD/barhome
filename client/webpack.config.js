@@ -1,4 +1,5 @@
 const path = require('path');
+const dotEnv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'production',
@@ -19,6 +20,8 @@ module.exports = {
     historyApiFallback: true,
   },
 
+  plugins: [new dotEnv()],
+
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     alias: {
@@ -31,17 +34,17 @@ module.exports = {
     maxEntrypointSize: 500000,
   },
 
-  // optimization: {
-  //   splitChunks: {
-  //     cacheGroups: {
-  //       vendors: {
-  //         name: 'vendor',
-  //         test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-  //         chunks: 'all',
-  //       },
-  //     },
-  //   },
-  // },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          name: 'vendor',
+          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+          chunks: 'all',
+        },
+      },
+    },
+  },
 
   module: {
     rules: [

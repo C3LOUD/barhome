@@ -4,7 +4,7 @@ export const fetchAllRecipes = (currentPage) =>
   useQuery(['recipes', currentPage], async () => {
     const token = localStorage.getItem('token');
     const res = await fetch(
-      `http://localhost:8080/recipe/?page=${currentPage}`,
+      `${process.env.SERVER}/recipe/?page=${currentPage}`,
       {
         headers: {
           Authorization: 'Bearer ' + token,
@@ -21,7 +21,7 @@ export const fetchAllRecipes = (currentPage) =>
 export const fetchRecipe = (id) =>
   useQuery(['recipe', id], async () => {
     const token = localStorage.getItem('token');
-    const res = await fetch(`http://localhost:8080/recipe/${id}`, {
+    const res = await fetch(`/api/recipe/${id}`, {
       headers: {
         Authorization: 'Bearer ' + token,
       },
@@ -37,7 +37,7 @@ export const fetchRecipeByIngredient = (ingredient) =>
   useQuery(['recipe', ingredient], async () => {
     const token = localStorage.getItem('token');
     const res = await fetch(
-      `http://localhost:8080/recipe/ingredient/${ingredient}`,
+      `${process.env.SERVER}/recipe/ingredient/${ingredient}`,
       {
         headers: {
           Authorization: 'Bearer ' + token,
@@ -55,7 +55,7 @@ export const fetchRandomRecipe = () =>
   useQuery(['random'], async () => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
-    const res = await fetch(`http://localhost:8080/recipe/random`, {
+    const res = await fetch(`${process.env.SERVER}/recipe/random`, {
       headers: {
         Authorization: 'Bearer ' + token,
       },
@@ -73,7 +73,7 @@ export const searchKeywords = (keyword) =>
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
     const res = await fetch(
-      `http://localhost:8080/recipe/search?q=${keyword}`,
+      `${process.env.SERVER}/recipe/search?q=${keyword}`,
       {
         headers: {
           Authorization: 'Bearer ' + token,
@@ -91,7 +91,7 @@ export const fetchSavedRecipes = () =>
   useQuery(['saved'], async () => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
-    const res = await fetch(`http://localhost:8080/recipe/saved`, {
+    const res = await fetch(`${process.env.SERVER}/recipe/saved`, {
       headers: {
         Authorization: 'Bearer ' + token,
       },
@@ -107,7 +107,7 @@ export const savedRecipe = () =>
   useMutation(['saved'], async (title) => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
-    const res = await fetch(`http://localhost:8080/recipe/saved`, {
+    const res = await fetch(`${process.env.SERVER}/recipe/saved`, {
       method: 'PUT',
       headers: {
         Authorization: 'Bearer ' + token,
@@ -124,7 +124,7 @@ export const savedRecipe = () =>
 
 export const signup = () =>
   useMutation(['signup'], async (userData) => {
-    const res = await fetch('http://localhost:8080/auth/signup', {
+    const res = await fetch(`${process.env.SERVER}/auth/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -140,7 +140,7 @@ export const signup = () =>
 
 export const login = () =>
   useMutation(['login'], async (userData) => {
-    const res = await fetch('http://localhost:8080/auth/login', {
+    const res = await fetch(`${process.env.SERVER}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ export const getUser = () =>
   useQuery(['user'], async () => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
-    const res = await fetch('http://localhost:8080/auth', {
+    const res = await fetch(`${process.env.SERVER}/auth`, {
       headers: {
         Authorization: 'Bearer ' + token,
       },
@@ -174,7 +174,7 @@ export const updateUser = () =>
   useMutation(['updateUser'], async (userData) => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
-    const res = await fetch('http://localhost:8080/auth/update', {
+    const res = await fetch(`${process.env.SERVER}/auth/update`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -191,7 +191,7 @@ export const updateUser = () =>
 
 export const forgetPassword = () =>
   useMutation(['forgetPassword'], async (email) => {
-    const res = await fetch('http://localhost:8080/auth/forget', {
+    const res = await fetch(`${process.env.SERVER}/auth/forget`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -207,7 +207,7 @@ export const forgetPassword = () =>
 
 export const resetPassword = () =>
   useMutation(['resetPassword'], async (newPassword) => {
-    const res = await fetch('http://localhost:8080/auth/reset', {
+    const res = await fetch(`${process.env.SERVER}/auth/reset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -226,7 +226,7 @@ export const fetchAllPosts = () =>
     ['posts'],
     async () => {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:8080/post/`, {
+      const res = await fetch(`${process.env.SERVER}/post/`, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -245,7 +245,7 @@ export const fetchPost = (postId) =>
     if (!postId) return 'empty';
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
-    const res = await fetch(`http://localhost:8080/post/${postId}`, {
+    const res = await fetch(`${process.env.SERVER}/post/${postId}`, {
       headers: {
         Authorization: 'Bearer ' + token,
       },
@@ -261,7 +261,7 @@ export const createPost = () =>
   useMutation(['createPost'], async (formData) => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
-    const res = await fetch('http://localhost:8080/post/create', {
+    const res = await fetch(`${process.env.SERVER}/post/create`, {
       method: 'POST',
       headers: {
         Authorization: 'Bearer ' + token,
@@ -280,7 +280,7 @@ export const editPost = () =>
   useMutation(['editPost'], async (formData) => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
-    const res = await fetch(`http://localhost:8080/post/`, {
+    const res = await fetch(`${process.env.SERVER}/post/`, {
       method: 'PUT',
       headers: {
         Authorization: 'Bearer ' + token,
@@ -299,7 +299,7 @@ export const deletePost = () =>
   useMutation(['editPost'], async (id) => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
-    const res = await fetch(`http://localhost:8080/post/`, {
+    const res = await fetch(`${process.env.SERVER}/post/`, {
       method: 'DELETE',
       headers: {
         Authorization: 'Bearer ' + token,
@@ -318,7 +318,7 @@ export const likedPost = () =>
   useMutation(['liked'], async (id) => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
-    const res = await fetch(`http://localhost:8080/post/liked`, {
+    const res = await fetch(`${process.env.SERVER}/post/liked`, {
       method: 'PUT',
       headers: {
         Authorization: 'Bearer ' + token,
@@ -337,7 +337,7 @@ export const addComment = () =>
   useMutation(['addComment'], async (commentData) => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
-    const res = await fetch(`http://localhost:8080/post/comment`, {
+    const res = await fetch(`${process.env.SERVER}/post/comment`, {
       method: 'POST',
       headers: {
         Authorization: 'Bearer ' + token,
@@ -356,7 +356,7 @@ export const removeComment = () =>
   useMutation(['removeComment'], async (commentData) => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
-    const res = await fetch(`http://localhost:8080/post/comment`, {
+    const res = await fetch(`${process.env.SERVER}/post/comment`, {
       method: 'DELETE',
       headers: {
         Authorization: 'Bearer ' + token,
