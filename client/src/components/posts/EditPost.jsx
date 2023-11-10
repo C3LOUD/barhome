@@ -1,15 +1,21 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
+import PropTypes from 'prop-types';
 
 import tempAvatar from '../../assets/7007892.png';
 import { editPost, fetchPost } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 import Loading from '../ui/Loading';
 
-export default function CreatePost({ canvas, onEdit }) {
+export default function EditPost({ canvas, onEdit }) {
   const { id } = useParams();
   const [inputContent, setInputContent] = useState(null);
+
+  const contentLength = useMemo(
+    () => inputContent?.trim().split(' ').join('').length,
+    [inputContent],
+  );
 
   const { data } = fetchPost(id);
 
@@ -40,23 +46,19 @@ export default function CreatePost({ canvas, onEdit }) {
     });
   };
 
-  const contentLength = useMemo(
-    () => inputContent?.trim().split(' ').join('').length,
-    [inputContent],
-  );
-
   useEffect(() => {
     titleRef.current.value = data?.post.title;
     contentRef.current.value = data?.post.content;
     setInputContent(data?.post.content);
   }, [data]);
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <div className="absolute top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-accent-dark-shade-700/80">
         <Loading />
       </div>
     );
+  }
 
   return (
     <div className="grid w-full grid-cols-2 gap-6 2xs:grid-cols-1 2xs:gap-4 2xs:px-4">
@@ -98,7 +100,9 @@ export default function CreatePost({ canvas, onEdit }) {
               'absolute bottom-2 right-2 z-20 font-secondary font-normal',
               contentLength > 280 ? 'text-error' : 'text-gray-200',
             )}
-          >{`${contentLength || 0}/280`}</span>
+          >
+            {`${contentLength || 0}/280`}
+          </span>
         </div>
         <div className="flex flex-col">
           <label
@@ -132,3 +136,8 @@ export default function CreatePost({ canvas, onEdit }) {
     </div>
   );
 }
+
+EditPost.propTypes = {
+  canvas: PropTypes.string.isRequired,
+  onEdit: PropTypes.func.isRequired,
+};

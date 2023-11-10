@@ -17,12 +17,14 @@ export default function Features() {
     {
       num: '02',
       heading: 'Mix your own with instruction',
-      description: `We offer the recipes in detial, you can do it your own with the instruction and chill at home. No need to go out and pay expensive outside.`,
+      description:
+        'We offer the recipes in detial, you can do it your own with the instruction and chill at home. No need to go out and pay expensive outside.',
     },
     {
       num: '03',
       heading: 'Share your masterpiece with your friends',
-      description: `Take a nice picture and share to all your friends, Invite them to your party and show the mixing skill.`,
+      description:
+        'Take a nice picture and share to all your friends, Invite them to your party and show the mixing skill.',
     },
   ];
 

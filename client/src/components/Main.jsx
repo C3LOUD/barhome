@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import NotFound from '../pages/NotFound';
 import InitialModalContext from '../store/initial-Modal-context';
@@ -14,7 +15,7 @@ import Icon from './ui/Icon';
 import LogoutBtn from './ui/LogoutBtn';
 import SearchInput from './ui/SearchInput';
 
-export default function Main(props) {
+export default function Main({ onHamburger }) {
   const [mainNode, setMainNode] = useState(null);
 
   const mainElement = useRef();
@@ -32,7 +33,7 @@ export default function Main(props) {
           <Icon
             name="menu-sharp"
             style="transition-all text-5xl text-white-100 hover:text-white-400 dark:text-black-100 dark:hover:text-gray-400 hidden md:block"
-            onClick={props.onHamburger}
+            onClick={onHamburger}
           />
           <SearchInput />
         </div>
@@ -68,3 +69,7 @@ export default function Main(props) {
     </div>
   );
 }
+
+Main.propTypes = {
+  onHamburger: PropTypes.func.isRequired,
+};

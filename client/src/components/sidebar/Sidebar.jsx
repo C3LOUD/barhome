@@ -1,12 +1,13 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
 
+import DarkModeSwitcher from '../ui/DarkModeSwitcher';
 import Logo from '../ui/Logo';
+import LogoutBtn from '../ui/LogoutBtn';
 import BtnSidebar from './BtnSidebar';
 import UserSidebar from './UserAvatarSidebar';
-import DarkModeSwitcher from '../ui/DarkModeSwitcher';
-import LogoutBtn from '../ui/LogoutBtn';
 
 const allSidebarBtn = [
   { key: 1, tag: 'Recipes', icon: 'book-outline', activateIcon: 'book' },
@@ -87,3 +88,7 @@ export default function Sidebar({ hamburger }) {
     </div>
   );
 }
+
+Sidebar.propTypes = {
+  hamburger: PropTypes.bool.isRequired,
+};

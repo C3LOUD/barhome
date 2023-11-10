@@ -23,22 +23,22 @@ export default function Testimonials() {
   const testimonialData = [
     {
       imgSrc: customer9,
-      text: `You won't regret it. Barhome is worth much more than I paid. It's just amazing.`,
+      text: "You won't regret it. Barhome is worth much more than I paid. It's just amazing.",
       name: 'Joe Johnson',
     },
     {
       imgSrc: customer3,
-      text: `I like barhome more and more each day because it makes my life a lot easier. I have gotten at least 50 times the value from barhome.`,
+      text: 'I like barhome more and more each day because it makes my life a lot easier. I have gotten at least 50 times the value from barhome.',
       name: 'Jazmine Winkler',
     },
     {
       imgSrc: customer8,
-      text: `I am completely blown away. Needless to say we are extremely satisfied with the results. It's really wonderful.`,
+      text: "I am completely blown away. Needless to say we are extremely satisfied with the results. It's really wonderful.",
       name: 'Karen Harder',
     },
     {
       imgSrc: customer11,
-      text: `No matter where you go, barhome is the coolest, most happening thing around! I could probably go into sales for you. I will refer everyone I know. Very easy to use.`,
+      text: 'No matter where you go, barhome is the coolest, most happening thing around! I could probably go into sales for you. I will refer everyone I know. Very easy to use.',
       name: 'Albert Watson',
     },
   ];

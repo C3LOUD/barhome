@@ -1,4 +1,5 @@
 import React, { useRef, useCallback } from 'react';
+import PropTypes from 'prop-types';
 
 import FeatureIn from './FeatureIn';
 import Features from './Features';
@@ -7,14 +8,18 @@ import Hero from './Hero';
 import Pricing from './Pricing';
 import Testimonials from './Testimonials';
 
-export default function Home(props) {
+export default function Home({ onNav }) {
   const observer = useRef();
 
   const heroRef = useCallback(
     (hero) => {
       observer.current = new IntersectionObserver(
         (entries) => {
-          !entries[0].isIntersecting ? props.onNav(true) : props.onNav(null);
+          if (!entries[0].isIntersecting) {
+            onNav(true);
+          } else {
+            onNav(null);
+          }
         },
         { root: null, threshold: 0, rootMargin: '-96px' },
       );
@@ -39,3 +44,7 @@ export default function Home(props) {
     </>
   );
 }
+
+Home.propTypes = {
+  onNav: PropTypes.func.isRequired,
+};

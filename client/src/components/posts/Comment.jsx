@@ -1,12 +1,13 @@
 import { useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import tempAvatar from '../../assets/7007892.png';
 import { removeComment } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 
-export default function Comment(props) {
+export default function Comment({ comment, post }) {
   const { mutate } = removeComment();
   const queryClient = useQueryClient();
 
@@ -14,11 +15,11 @@ export default function Comment(props) {
     year: '2-digit',
     month: '2-digit',
     day: 'numeric',
-  }).format(new Date(props.comment.createdAt));
+  }).format(new Date(comment.createdAt));
 
   const removeCommentHandler = () => {
     mutate(
-      { post: props.post, comment: props.comment._id },
+      { post, comment: comment._id },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(['posts']);
@@ -33,18 +34,18 @@ export default function Comment(props) {
     <div className="group flex w-full items-start gap-2 px-4">
       <div className="flex items-center gap-1">
         <img
-          src={props.comment.user.avatarUrl || tempAvatar}
+          src={comment.user.avatarUrl || tempAvatar}
           alt="commenter avatar"
           className="h-4 w-4 rounded-full"
         />
         <p className="paragraph-xsmall font-secondary font-bold text-black-100">
-          {props.comment.user.name}
+          {comment.user.name}
         </p>
       </div>
       <p className="paragraph-xsmall flex-1 font-secondary text-black-100">
-        {props.comment.comment}
+        {comment.comment}
       </p>
-      {props.comment.user._id === id ? (
+      {comment.user._id === id ? (
         <div className="w-12 cursor-pointer">
           <p className="paragraph-xsmall w-full font-secondary text-gray-400 group-hover:hidden">
             {date}
@@ -65,3 +66,17 @@ export default function Comment(props) {
     </div>
   );
 }
+
+Comment.propTypes = {
+  comment: PropTypes.shape({
+    createdAt: PropTypes.string,
+    _id: PropTypes.string,
+    comment: PropTypes.string,
+    user: PropTypes.shape({
+      _id: PropTypes.string,
+      avatarUrl: PropTypes.string,
+      name: PropTypes.string,
+    }),
+  }).isRequired,
+  post: PropTypes.string.isRequired,
+};

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import Icon from '../ui/Icon';
 import Dropzone from '../posts/Dropzone';
 import ImageCropper from '../posts/ImageCropper';
 
-export default function AvatarCropper(props) {
+export default function AvatarCropper({ onCanvas, onEdit }) {
   const [imageSrc, setImageSrc] = useState(null);
   const [status, setStatus] = useState(1);
   const [croppedImg, setCroppedImg] = useState(null);
@@ -13,17 +14,17 @@ export default function AvatarCropper(props) {
     setImageSrc(src);
   };
 
-  const changeStatus = (status) => {
-    setStatus(status);
+  const changeStatus = (stat) => {
+    setStatus(stat);
   };
 
   const tempCropHandler = (canvas) => {
     setCroppedImg(canvas);
   };
 
-  const cropHandler = (e) => {
-    props.onCanvas(croppedImg);
-    props.onEdit();
+  const cropHandler = () => {
+    onCanvas(croppedImg);
+    onEdit();
   };
 
   return (
@@ -34,7 +35,7 @@ export default function AvatarCropper(props) {
       <Icon
         name="close"
         style="absolute top-2 right-2 text-4xl hover:scale-110 transition-all text-black-100"
-        onClick={props.onEdit}
+        onClick={onEdit}
       />
       {status === 1 && (
         <Dropzone onSrc={getImageHandler} onStatus={changeStatus} />
@@ -58,3 +59,8 @@ export default function AvatarCropper(props) {
     </div>
   );
 }
+
+AvatarCropper.propTypes = {
+  onCanvas: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+};

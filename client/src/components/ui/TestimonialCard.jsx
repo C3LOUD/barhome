@@ -1,19 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function TestimonialCard(props) {
+export default function TestimonialCard({ data }) {
   return (
     <div>
       <img
-        src={props.data.imgSrc}
+        src={data.imgSrc}
         alt="customer avatar"
         className="w-16 rounded-full"
       />
       <p className="paragraph-large mb-4 mt-3 font-secondary text-white-100">
-        {props.data.text}
+        {data.text}
       </p>
       <p className="paragraph-large font-primary text-gray-100">
-        &mdash; {props.data.name}
+        {`&mdash; ${data.name}`}
       </p>
     </div>
   );
 }
+
+TestimonialCard.propTypes = {
+  data: PropTypes.shape({
+    imgSrc: PropTypes.string,
+    text: PropTypes.string,
+    name: PropTypes.string,
+  }).isRequired,
+};

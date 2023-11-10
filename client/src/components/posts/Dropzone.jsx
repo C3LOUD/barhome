@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
+import PropTypes from 'prop-types';
 
 import Icon from '../ui/Icon';
 import fileValidator from '../../utils/file-validator';
@@ -90,3 +91,8 @@ export default function Dropzone({ onSrc, onStatus }) {
     </div>
   );
 }
+
+Dropzone.propTypes = {
+  onSrc: PropTypes.func.isRequired,
+  onStatus: PropTypes.func.isRequired,
+};

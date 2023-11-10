@@ -1,5 +1,6 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
+import PropTypes from 'prop-types';
 
 import Icon from '../ui/Icon';
 
@@ -49,3 +50,8 @@ export default function TogglePosts({ filter, onClick }) {
     </>
   );
 }
+
+TogglePosts.propTypes = {
+  filter: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};

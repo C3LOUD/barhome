@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
+import PropTypes from 'prop-types';
 
 import tempAvatar from '../../assets/7007892.png';
 import { createPost } from '../../utils/api-list';
@@ -29,7 +30,7 @@ export default function CreatePost({ canvas }) {
     [inputContent],
   );
 
-  const submitHandler = (e) => {
+  const submitHandler = () => {
     if (contentLength > 280) return;
     const formData = {
       title: titleRef.current.value,
@@ -119,3 +120,7 @@ export default function CreatePost({ canvas }) {
     </div>
   );
 }
+
+CreatePost.propTypes = {
+  canvas: PropTypes.string.isRequired,
+};

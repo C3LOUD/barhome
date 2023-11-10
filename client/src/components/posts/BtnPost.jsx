@@ -1,9 +1,10 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
+import PropTypes from 'prop-types';
 
 import Icon from '../ui/Icon';
 
-export default function BtnPost(absPosition, onClick, text, type) {
+export default function BtnPost({ absPosition, onClick, text, type }) {
   return (
     <div
       className={twMerge(
@@ -29,3 +30,10 @@ export default function BtnPost(absPosition, onClick, text, type) {
     </div>
   );
 }
+
+BtnPost.propTypes = {
+  absPosition: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+};

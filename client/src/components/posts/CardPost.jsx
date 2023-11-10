@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
+import PropTypes from 'prop-types';
 
 import tempAvatar from '../../assets/7007892.png';
 import { adminActions } from '../../store/admin-slice';
@@ -160,3 +161,23 @@ export default function CardPost({ posts }) {
     </div>
   );
 }
+
+CardPost.propTypes = {
+  posts: PropTypes.shape({
+    creator: PropTypes.shape({
+      avatarUrl: PropTypes.string,
+      name: PropTypes.string,
+    }),
+    imageUrl: PropTypes.string,
+    title: PropTypes.string,
+    cocktail: PropTypes.shape({
+      title: PropTypes.string,
+    }),
+    content: PropTypes.string,
+    createdAt: PropTypes.arrayOf({
+      _id: PropTypes.string,
+    }),
+    comments: PropTypes.string,
+    _id: PropTypes.string,
+  }).isRequired,
+};

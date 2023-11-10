@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
+import PropTypes from 'prop-types';
 
 import { fetchRecipe } from '../../utils/api-list';
 import CloseBtn from '../ui/CloseBtn';
@@ -118,3 +119,7 @@ export default function Recipe({ onEdit }) {
     </ModalCard>
   );
 }
+
+Recipe.propTypes = {
+  onEdit: PropTypes.func.isRequired,
+};

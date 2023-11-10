@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
+import PropTypes from 'prop-types';
 
 import tempAvatar from '../../assets/7007892.png';
 import { adminActions } from '../../store/admin-slice';
@@ -176,3 +177,7 @@ export default function NavBar({ style }) {
     </div>
   );
 }
+
+NavBar.propTypes = {
+  style: PropTypes.string.isRequired,
+};

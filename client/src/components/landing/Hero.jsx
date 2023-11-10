@@ -11,7 +11,7 @@ import customer5 from '../../assets/customers/customer-5.jpg';
 import customer6 from '../../assets/customers/customer-6.jpg';
 import heroImage from '../../assets/hero.png';
 
-const Hero = React.forwardRef((props, ref) => {
+const Hero = React.forwardRef((_, ref) => {
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   const smoothScrollHandler = (e) => {

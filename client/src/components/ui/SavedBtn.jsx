@@ -2,6 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { twMerge } from 'tailwind-merge';
+import PropTypes from 'prop-types';
 
 import { savedRecipe } from '../../utils/api-list';
 import Icon from './Icon';
@@ -60,3 +61,7 @@ export default function SavedBtn({ size }) {
     </div>
   );
 }
+
+SavedBtn.propTypes = {
+  size: PropTypes.string.isRequired,
+};

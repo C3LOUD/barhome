@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
+import PropTypes from 'prop-types';
 
 import baseRender from '../../utils/base-render';
 
@@ -224,3 +225,8 @@ export default function ImageCropper({ onCanvas, src }) {
     </div>
   );
 }
+
+ImageCropper.propTypes = {
+  onCanvas: PropTypes.func.isRequired,
+  src: PropTypes.string.isRequired,
+};

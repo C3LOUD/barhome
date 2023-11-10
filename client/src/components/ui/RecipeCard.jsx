@@ -1,11 +1,12 @@
 import React, { forwardRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import SavedBtn from './SavedBtn';
 import Tag from './Tag';
 
-const RecipeCard = forwardRef((props, ref) => {
-  const { title, thumbnail, alcoholic, category } = props.recipe;
+const RecipeCard = forwardRef(({ recipe }, ref) => {
+  const { title, thumbnail, alcoholic, category } = recipe;
 
   const tagsContent = [alcoholic, category];
 
@@ -20,7 +21,7 @@ const RecipeCard = forwardRef((props, ref) => {
         navigate(
           `${location.pathname}/${
             e.target.closest('[data-id]').dataset.id
-          }?isEditing=false`
+          }?isEditing=false`,
         );
       }}
       data-id={title}
@@ -45,5 +46,14 @@ const RecipeCard = forwardRef((props, ref) => {
     </div>
   );
 });
+
+RecipeCard.propTypes = {
+  recipe: PropTypes.shape({
+    title: PropTypes.string,
+    thumbnail: PropTypes.string,
+    alcoholic: PropTypes.string,
+    category: PropTypes.string,
+  }).isRequired,
+};
 
 export default RecipeCard;

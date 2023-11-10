@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
+import PropTypes from 'prop-types';
 
 import tempAvatar from '../../assets/7007892.png';
 import {
@@ -168,3 +169,16 @@ export default function InputForm({ admin, onSubmit }) {
     </>
   );
 }
+
+InputForm.propTypes = {
+  admin: PropTypes.shape({
+    imgUrl: PropTypes.string,
+    name: PropTypes.string,
+    email: PropTypes.string,
+  }),
+  onSubmit: PropTypes.func.isRequired,
+};
+
+InputForm.defaultProps = {
+  admin: undefined,
+};

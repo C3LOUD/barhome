@@ -1,5 +1,6 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
+import PropTypes from 'prop-types';
 
 import Icon from './Icon';
 
@@ -91,3 +92,13 @@ export default function PricingCard({ pricing }) {
     </div>
   );
 }
+
+PricingCard.propTypes = {
+  pricing: PropTypes.shape({
+    btnStyle: PropTypes.string,
+    popular: PropTypes.bool,
+    style: PropTypes.string,
+    secondaryStyle: PropTypes.string,
+    price: PropTypes.string,
+  }).isRequired,
+};

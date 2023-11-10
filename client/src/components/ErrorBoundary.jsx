@@ -10,7 +10,7 @@ class ErrorBoundary extends Component {
     console.log(error);
     console.log(errorInfo);
     this.setState({ hasError: true });
-    this.setState({ error: error });
+    this.setState({ error });
   }
 
   render() {

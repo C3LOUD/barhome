@@ -1,15 +1,16 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { fetchRecipeByIngredient } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 import RecipeCard from '../ui/RecipeCard';
 
-export default function RecipesSpirit(props) {
+export default function RecipesSpirit({ spirit }) {
   const carousel = useRef();
   const [clientX, setClientX] = useState(0);
 
-  const { data, isSuccess } = fetchRecipeByIngredient(props.spirit);
+  const { data, isSuccess } = fetchRecipeByIngredient(spirit);
 
   const scrollHandler = () => {
     setClientX(carousel.current.scrollLeft);
@@ -31,12 +32,9 @@ export default function RecipesSpirit(props) {
 
   return (
     <div className="relative">
-      <Link
-        className="flex gap-2 pb-4"
-        to={`/dashboard/ingredient/${props.spirit}`}
-      >
+      <Link className="flex gap-2 pb-4" to={`/dashboard/ingredient/${spirit}`}>
         <p className="heading-h3 font-primary font-bold text-white-100 dark:text-black-100">
-          {props.spirit}
+          {spirit}
         </p>
         <Icon
           name="chevron-forward-sharp"
@@ -78,3 +76,7 @@ export default function RecipesSpirit(props) {
     </div>
   );
 }
+
+RecipesSpirit.propTypes = {
+  spirit: PropTypes.string.isRequired,
+};

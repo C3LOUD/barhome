@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Icon from '../ui/Icon';
 
-export default function InstructionRecipe(props) {
-  const instructionArr = props.instructions.split('.');
+export default function InstructionRecipe({ instructions }) {
+  const instructionArr = instructions.split('.');
 
   return (
     <div className="flex w-full flex-col gap-4 py-2">
@@ -25,3 +26,7 @@ export default function InstructionRecipe(props) {
     </div>
   );
 }
+
+InstructionRecipe.propTypes = {
+  instructions: PropTypes.string.isRequired,
+};

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
+import PropTypes from 'prop-types';
 
 import Icon from '../ui/Icon';
 
@@ -21,3 +22,9 @@ export default function BtnSidebar({ tag, style, icon }) {
     </Link>
   );
 }
+
+BtnSidebar.propTypes = {
+  tag: PropTypes.string.isRequired,
+  style: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
+};
