@@ -6,7 +6,7 @@ import { adminActions } from '../store/admin-slice';
 import { login } from '../store/auth-slice';
 import { getUser } from '../utils/api-list';
 
-const ProtectedRoute = (props) => {
+export default function ProtectedRoute(props) {
   const [initialize, setInitialize] = useState(false);
 
   const { isLoggedIn } = useSelector((state) => state.auth);
@@ -15,17 +15,17 @@ const ProtectedRoute = (props) => {
   const { data } = getUser();
 
   useEffect(() => {
-    data &&
-      dispatch(
-        adminActions.setUser({
-          id: data.id,
-          name: data.name,
-          imgUrl: data.imgUrl,
-          saved: data.saved,
-          liked: data.liked,
-          posts: data.posts,
-        })
-      );
+    if (!data) return;
+    dispatch(
+      adminActions.setUser({
+        id: data.id,
+        name: data.name,
+        imgUrl: data.imgUrl,
+        saved: data.saved,
+        liked: data.liked,
+        posts: data.posts,
+      }),
+    );
   }, [data]);
 
   useEffect(() => {
@@ -36,6 +36,4 @@ const ProtectedRoute = (props) => {
   if (!initialize) return null;
   if (!isLoggedIn) return <Navigate to="/login" replace />;
   return <>{props.children ? props.children : <Outlet />}</>;
-};
-
-export default ProtectedRoute;
+}

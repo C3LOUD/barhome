@@ -8,7 +8,7 @@ import SignUp from '../components/auth/SignUp';
 import Home from '../components/landing/Home';
 import NavBar from '../components/landing/NavBar';
 
-const HomePage = () => {
+export default function HomePage() {
   const [navStyle, setNavStyle] = useState(true);
   const navStyleHandler = (style) => setNavStyle(style);
 
@@ -26,6 +26,4 @@ const HomePage = () => {
       </div>
     </div>
   );
-};
-
-export default HomePage;
+}

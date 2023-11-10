@@ -11,7 +11,7 @@ import Dropzone from './Dropzone';
 import EditPost from './EditPost';
 import ImageCropper from './ImageCropper';
 
-const PostEditor = () => {
+export default function PostEditor() {
   const [status, setStatus] = useState(3);
   const [imageSrc, setImageSrc] = useState(null);
   const [tempImageSrc, setTempImageSrc] = useState(null);
@@ -51,7 +51,7 @@ const PostEditor = () => {
           queryClient.invalidateQueries(['posts']);
           navigate('/dashboard/posts');
         },
-      }
+      },
     );
   };
 
@@ -101,6 +101,4 @@ const PostEditor = () => {
       )}
     </ModalCard>
   );
-};
-
-export default PostEditor;
+}

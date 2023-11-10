@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { searchKeywords } from '../../utils/api-list';
 import Icon from './Icon';
 
-const SearchInput = () => {
+export default function SearchInput() {
   const [input, setInput] = useState('');
   const [prevPathname, setPrevPathname] = useState('');
 
@@ -59,6 +59,4 @@ const SearchInput = () => {
       )}
     </div>
   );
-};
-
-export default SearchInput;
+}

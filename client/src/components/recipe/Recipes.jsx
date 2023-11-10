@@ -8,7 +8,7 @@ import MainGrid from '../ui/MainGrid';
 import Modal from '../ui/Modal';
 import RecipeCard from '../ui/RecipeCard';
 
-const Recipes = () => {
+export default function Recipes() {
   const [allRecipes, setAllRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -30,7 +30,7 @@ const Recipes = () => {
       });
       if (recipe) observer.current.observe(recipe);
     },
-    [hasMore, isLoading]
+    [hasMore, isLoading],
   );
 
   useEffect(() => {
@@ -93,6 +93,4 @@ const Recipes = () => {
       </MainGrid>
     </>
   );
-};
-
-export default Recipes;
+}

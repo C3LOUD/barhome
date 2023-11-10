@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import logoSvg from '../../assets/LOGO.svg';
 
-const Logo = () => {
+export default function Logo() {
   const navigate = useNavigate();
 
   const homeHandler = () => {
@@ -18,6 +18,4 @@ const Logo = () => {
       className="cursor-pointer transition-all hover:scale-95 sm:scale-90"
     />
   );
-};
-
-export default Logo;
+}

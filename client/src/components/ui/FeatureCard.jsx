@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FeatureCard = (props) => {
+export default function FeatureCard(props) {
   return (
     <div>
       <p className="display-large 2xs:display-small mb-3 font-secondary font-bold text-accent-dark-shade-200/50 2xs:mb-2">
@@ -14,6 +14,4 @@ const FeatureCard = (props) => {
       </p>
     </div>
   );
-};
-
-export default FeatureCard;
+}

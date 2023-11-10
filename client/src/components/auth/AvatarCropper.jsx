@@ -4,7 +4,7 @@ import Icon from '../ui/Icon';
 import Dropzone from '../posts/Dropzone';
 import ImageCropper from '../posts/ImageCropper';
 
-const AvatarCropper = (props) => {
+export default function AvatarCropper(props) {
   const [imageSrc, setImageSrc] = useState(null);
   const [status, setStatus] = useState(1);
   const [croppedImg, setCroppedImg] = useState(null);
@@ -57,6 +57,4 @@ const AvatarCropper = (props) => {
       )}
     </div>
   );
-};
-
-export default AvatarCropper;
+}

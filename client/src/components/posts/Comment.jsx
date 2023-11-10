@@ -6,7 +6,7 @@ import tempAvatar from '../../assets/7007892.png';
 import { removeComment } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 
-const Comment = (props) => {
+export default function Comment(props) {
   const { mutate } = removeComment();
   const queryClient = useQueryClient();
 
@@ -23,7 +23,7 @@ const Comment = (props) => {
         onSuccess: () => {
           queryClient.invalidateQueries(['posts']);
         },
-      }
+      },
     );
   };
 
@@ -64,6 +64,4 @@ const Comment = (props) => {
       )}
     </div>
   );
-};
-
-export default Comment;
+}

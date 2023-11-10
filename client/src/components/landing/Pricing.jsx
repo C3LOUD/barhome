@@ -1,7 +1,7 @@
 import React from 'react';
 import PricingCard from '../ui/PricingCard';
 
-const Pricing = () => {
+export default function Pricing() {
   const pricingTag = [
     {
       title: 'Starter',
@@ -45,6 +45,4 @@ const Pricing = () => {
       </div>
     </div>
   );
-};
-
-export default Pricing;
+}

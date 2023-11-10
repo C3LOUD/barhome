@@ -1,7 +1,7 @@
 import React from 'react';
 import Icon from './Icon';
 
-const SavedIcon = (props) => {
+export default function SavedIcon(props) {
   return (
     <Icon
       name="bookmark"
@@ -10,6 +10,4 @@ const SavedIcon = (props) => {
       } text-primary-main`}
     />
   );
-};
-
-export default SavedIcon;
+}

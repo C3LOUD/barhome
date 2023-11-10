@@ -5,7 +5,7 @@ import app2 from '../../assets/app/app-2.png';
 import app3 from '../../assets/app/app-3.png';
 import FeatureCard from '../ui/FeatureCard';
 
-const Features = () => {
+export default function Features() {
   const innerText = [
     {
       num: '01',
@@ -51,6 +51,4 @@ const Features = () => {
       </div>
     </div>
   );
-};
-
-export default Features;
+}

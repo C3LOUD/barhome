@@ -1,9 +1,9 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import Icon from '../ui/Icon';
+import Icon from './Icon';
 
-const CloseBtn = () => {
+export default function CloseBtn() {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -16,6 +16,4 @@ const CloseBtn = () => {
       }
     />
   );
-};
-
-export default CloseBtn;
+}

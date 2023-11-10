@@ -19,7 +19,7 @@ import customer8 from '../../assets/customers/customer-8.jpg';
 import GalleryImage from '../ui/GalleryImage';
 import TestimonialCard from '../ui/TestimonialCard';
 
-const Testimonials = () => {
+export default function Testimonials() {
   const testimonialData = [
     {
       imgSrc: customer9,
@@ -78,6 +78,4 @@ const Testimonials = () => {
       </div>
     </div>
   );
-};
-
-export default Testimonials;
+}

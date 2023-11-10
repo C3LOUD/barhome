@@ -14,7 +14,7 @@ import Icon from './ui/Icon';
 import LogoutBtn from './ui/LogoutBtn';
 import SearchInput from './ui/SearchInput';
 
-const Main = (props) => {
+export default function Main(props) {
   const [mainNode, setMainNode] = useState(null);
 
   const mainElement = useRef();
@@ -46,7 +46,7 @@ const Main = (props) => {
           <Routes>
             <Route
               path="/"
-              element={<Navigate replace to={'/dashboard/recipes'} />}
+              element={<Navigate replace to="/dashboard/recipes" />}
             />
             <Route path="admin/*" element={<Admin />} />
             <Route path="recipes/*" element={<Recipes />} />
@@ -67,6 +67,4 @@ const Main = (props) => {
       </div>
     </div>
   );
-};
-
-export default Main;
+}

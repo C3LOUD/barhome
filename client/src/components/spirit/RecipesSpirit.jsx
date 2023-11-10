@@ -5,7 +5,7 @@ import { fetchRecipeByIngredient } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 import RecipeCard from '../ui/RecipeCard';
 
-const RecipesSpirit = (props) => {
+export default function RecipesSpirit(props) {
   const carousel = useRef();
   const [clientX, setClientX] = useState(0);
 
@@ -77,6 +77,4 @@ const RecipesSpirit = (props) => {
       )}
     </div>
   );
-};
-
-export default RecipesSpirit;
+}

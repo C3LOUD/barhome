@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TestimonialCard = (props) => {
+export default function TestimonialCard(props) {
   return (
     <div>
       <img
@@ -16,6 +16,4 @@ const TestimonialCard = (props) => {
       </p>
     </div>
   );
-};
-
-export default TestimonialCard;
+}

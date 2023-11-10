@@ -2,7 +2,7 @@ import React from 'react';
 
 import Icon from '../ui/Icon';
 
-const InstructionRecipe = (props) => {
+export default function InstructionRecipe(props) {
   const instructionArr = props.instructions.split('.');
 
   return (
@@ -24,6 +24,4 @@ const InstructionRecipe = (props) => {
       })}
     </div>
   );
-};
-
-export default InstructionRecipe;
+}

@@ -7,7 +7,7 @@ import Hero from './Hero';
 import Pricing from './Pricing';
 import Testimonials from './Testimonials';
 
-const Home = (props) => {
+export default function Home(props) {
   const observer = useRef();
 
   const heroRef = useCallback(
@@ -16,12 +16,12 @@ const Home = (props) => {
         (entries) => {
           !entries[0].isIntersecting ? props.onNav(true) : props.onNav(null);
         },
-        { root: null, threshold: 0, rootMargin: '-96px' }
+        { root: null, threshold: 0, rootMargin: '-96px' },
       );
       if (!hero) return;
       observer.current.observe(hero);
     },
-    [heroRef]
+    [heroRef],
   );
 
   return (
@@ -38,6 +38,4 @@ const Home = (props) => {
       <Footer />
     </>
   );
-};
-
-export default Home;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const IngredientRecipe = (props) => {
+export default function IngredientRecipe(props) {
   return (
     <div className="paragraph-large flex justify-between font-semibold">
       <div className="flex gap-2">
@@ -16,6 +16,4 @@ const IngredientRecipe = (props) => {
       <p>{props.ingredient.ingredient}</p>
     </div>
   );
-};
-
-export default IngredientRecipe;
+}

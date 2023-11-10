@@ -8,7 +8,7 @@ import Modal from '../ui/Modal';
 import CardPost from './CardPost';
 import TogglePosts from './TogglePosts';
 
-const Posts = () => {
+export default function Posts() {
   const [showToggle, setShowToggle] = useState(false);
   const { data, isSuccess, refetch } = fetchAllPosts();
 
@@ -30,12 +30,12 @@ const Posts = () => {
   const currentPostList = useMemo(() => {
     if (searchParams.get('filter') === 'liked')
       return data?.posts.filter((post) =>
-        liked?.some((likedPost) => likedPost === post._id)
+        liked?.some((likedPost) => likedPost === post._id),
       );
 
     if (searchParams.get('filter') === 'myposts')
       return data?.posts.filter((post) =>
-        myposts?.some((myPost) => myPost === post._id)
+        myposts?.some((myPost) => myPost === post._id),
       );
 
     return data?.posts;
@@ -96,6 +96,4 @@ const Posts = () => {
       </div>
     </>
   );
-};
-
-export default Posts;
+}

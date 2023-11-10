@@ -5,10 +5,11 @@ import ErrorBoundary from './components/ErrorBoundary';
 import ProtectedRoute from './components/ProtectedRoute';
 import Loading from './components/ui/Loading';
 import NotFound from './pages/NotFound';
+
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 const HomePage = React.lazy(() => import('./pages/HomePage'));
 
-const App = () => {
+export default function App() {
   return (
     <Suspense fallback={<Loading />}>
       <ErrorBoundary>
@@ -22,6 +23,4 @@ const App = () => {
       </ErrorBoundary>
     </Suspense>
   );
-};
-
-export default App;
+}

@@ -20,5 +20,5 @@ root.render(
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </Provider>
-  </BrowserRouter>
+  </BrowserRouter>,
 );

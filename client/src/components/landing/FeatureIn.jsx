@@ -6,7 +6,7 @@ import theNewYorkTimes from '../../assets/logos/the-new-york-times.png';
 import forbes from '../../assets/logos/forbes.png';
 import usaToday from '../../assets/logos/usa-today.png';
 
-const FeatureIn = () => {
+export default function FeatureIn() {
   return (
     <div className="mx-auto mt-12 mb-8 max-w-[75rem] px-8">
       <p className="text-primary paragraph-small mb-6 text-center font-bold text-primary-main/60">
@@ -41,6 +41,4 @@ const FeatureIn = () => {
       </div>
     </div>
   );
-};
-
-export default FeatureIn;
+}

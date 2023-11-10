@@ -7,7 +7,7 @@ import CreatePost from './CreatePost';
 import Dropzone from './Dropzone';
 import ImageCropper from './ImageCropper';
 
-const NewPost = () => {
+export default function NewPost() {
   const [status, setStatus] = useState(1);
   const [imageSrc, setImageSrc] = useState(null);
   const [tempImageSrc, setTempImageSrc] = useState(null);
@@ -61,6 +61,4 @@ const NewPost = () => {
       {status === 3 && <CreatePost canvas={tempImageSrc} />}
     </ModalCard>
   );
-};
-
-export default NewPost;
+}

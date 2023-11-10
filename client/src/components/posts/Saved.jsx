@@ -7,13 +7,13 @@ import MainGrid from '../ui/MainGrid';
 import Modal from '../ui/Modal';
 import RecipeCard from '../ui/RecipeCard';
 
-const Saved = () => {
+export default function Saved() {
   const { data, isSuccess } = fetchSavedRecipes();
 
   return (
     <>
       <Routes>
-        <Route path={':id'} element={<Modal />} />
+        <Route path=":id" element={<Modal />} />
       </Routes>
       <p className="display-small my-12 font-primary font-bold text-white-100 dark:text-black-100 xl:my-8 2xs:my-6">
         Saved
@@ -46,6 +46,4 @@ const Saved = () => {
       )}
     </>
   );
-};
-
-export default Saved;
+}

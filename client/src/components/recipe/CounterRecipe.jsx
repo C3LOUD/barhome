@@ -2,7 +2,7 @@ import React from 'react';
 
 import Icon from '../ui/Icon';
 
-const CounterRecipe = (props) => {
+export default function CounterRecipe(props) {
   return (
     <div className="flex w-full justify-between py-2">
       <Icon
@@ -22,6 +22,4 @@ const CounterRecipe = (props) => {
       />
     </div>
   );
-};
-
-export default CounterRecipe;
+}

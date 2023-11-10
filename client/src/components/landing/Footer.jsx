@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Logo from '../ui/Logo';
 
-const Footer = () => {
+export default function Footer() {
   return (
     <div className="mx-auto grid max-w-[75rem] grid-cols-9 gap-6 px-8 py-16 lg:py-12 2xs:grid-cols-2 2xs:px-4">
       <div className="paragraph-xsmall col-span-2 text-accent-dark-tint-300 2xs:col-span-1">
@@ -70,6 +70,4 @@ const Footer = () => {
       </div>
     </div>
   );
-};
-
-export default Footer;
+}

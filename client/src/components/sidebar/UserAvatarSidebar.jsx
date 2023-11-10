@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import tempAvatar from '../../assets/7007892.png';
 
-const UserAvatarSidebar = () => {
+export default function UserAvatarSidebar() {
   const { name, avatar } = useSelector((state) => state.admin);
 
   return (
@@ -24,6 +24,4 @@ const UserAvatarSidebar = () => {
       </p>
     </Link>
   );
-};
-
-export default UserAvatarSidebar;
+}

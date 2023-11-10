@@ -7,7 +7,7 @@ import MainGrid from '../ui/MainGrid';
 import Modal from '../ui/Modal';
 import RecipeCard from '../ui/RecipeCard';
 
-const IngredientSpirit = () => {
+export default function IngredientSpirit() {
   const { ingredient } = useParams();
 
   const { data, isSuccess } = fetchRecipeByIngredient(ingredient);
@@ -15,7 +15,7 @@ const IngredientSpirit = () => {
   return (
     <>
       <Routes>
-        <Route path={':id'} element={<Modal />} />
+        <Route path=":id" element={<Modal />} />
       </Routes>
       <div className="pt-10 pb-12 xs:pt-6 xs:pb-8">
         <Link to="/dashboard/spirits" className="group flex w-fit items-center">
@@ -39,6 +39,4 @@ const IngredientSpirit = () => {
       </MainGrid>
     </>
   );
-};
-
-export default IngredientSpirit;
+}

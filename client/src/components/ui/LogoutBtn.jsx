@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { authActions } from '../../store/auth-slice';
 
-const LogoutBtn = () => {
+export default function LogoutBtn() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -21,6 +21,4 @@ const LogoutBtn = () => {
       Logout
     </a>
   );
-};
-
-export default LogoutBtn;
+}

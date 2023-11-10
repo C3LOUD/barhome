@@ -7,7 +7,7 @@ import NewPost from '../posts/NewPost';
 import PostEditor from '../posts/PostEditor';
 import Recipe from '../recipe/Recipe';
 
-const Modal = (props) => {
+export default function Modal() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,6 +35,4 @@ const Modal = (props) => {
   );
 
   return <>{ctx ? createPortal(jsx, ctx) : null}</>;
-};
-
-export default Modal;
+}
