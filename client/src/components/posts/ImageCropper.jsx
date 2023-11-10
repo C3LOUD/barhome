@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import baseRender from '../../utils/base-render';
 
-const ImageCropper = (props) => {
+export default function ImageCropper({ onCanvas, src }) {
   const canvas = useRef();
   const [isEditing, setIsEditing] = useState('');
   const [mousePos, setMousePos] = useState({ x: 0, y: 0, moveX: 0, moveY: 0 });
@@ -21,11 +22,11 @@ const ImageCropper = (props) => {
 
     const leftCheck = Math.abs(initialize.initialCanvasX + moveX - relativeX);
     const rightCheck = Math.abs(
-      initialize.initialCanvasX + initialize.resizeRectSize + moveX - relativeX
+      initialize.initialCanvasX + initialize.resizeRectSize + moveX - relativeX,
     );
     const topCheck = Math.abs(initialize.initialCanvasY + moveY - relativeY);
     const bottomCheck = Math.abs(
-      initialize.initialCanvasY + initialize.resizeRectSize + moveY - relativeY
+      initialize.initialCanvasY + initialize.resizeRectSize + moveY - relativeY,
     );
 
     if (topCheck <= 30 && leftCheck <= 30) setIsEditing('lt');
@@ -47,14 +48,12 @@ const ImageCropper = (props) => {
       setIsEditing('moving');
     }
 
-    setMousePos((prev) => {
-      return {
-        x: clientX,
-        y: clientY,
-        moveX: prev.moveX || 0,
-        moveY: prev.moveY || 0,
-      };
-    });
+    setMousePos((prev) => ({
+      x: clientX,
+      y: clientY,
+      moveX: prev.moveX || 0,
+      moveY: prev.moveY || 0,
+    }));
   };
 
   const finishEditingHandler = () => {
@@ -99,34 +98,29 @@ const ImageCropper = (props) => {
         if (Math.abs(deltaX) - Math.abs(deltaY) > 0) {
           const moveX = prev.moveX + deltaY;
           const moveY = prev.moveY + deltaY;
-          setInitialize((prev) => {
-            return {
-              ...prev,
-              resizeRectSize: prev.resizeRectSize - deltaY,
-            };
-          });
+          setInitialize((p) => ({
+            ...p,
+            resizeRectSize: p.resizeRectSize - deltaY,
+          }));
           return {
             x: prev.x - deltaY,
             y: clientY,
             moveX: lr === 'l' ? moveX : prev.moveX,
             moveY: tb === 't' ? moveY : prev.moveY,
           };
-        } else {
-          const moveX = prev.moveX + deltaX;
-          const moveY = prev.moveY + deltaX;
-          setInitialize((prev) => {
-            return {
-              ...prev,
-              resizeRectSize: prev.resizeRectSize - deltaX,
-            };
-          });
-          return {
-            x: clientX,
-            y: prev.y - deltaX,
-            moveX: lr === 'l' ? moveX : prev.moveX,
-            moveY: tb === 't' ? moveY : prev.moveY,
-          };
         }
+        const moveX = prev.moveX + deltaX;
+        const moveY = prev.moveY + deltaX;
+        setInitialize((p) => ({
+          ...p,
+          resizeRectSize: p.resizeRectSize - deltaX,
+        }));
+        return {
+          x: clientX,
+          y: prev.y - deltaX,
+          moveX: lr === 'l' ? moveX : prev.moveX,
+          moveY: tb === 't' ? moveY : prev.moveY,
+        };
       });
     }
   };
@@ -135,7 +129,7 @@ const ImageCropper = (props) => {
     const img = new Image();
     const ctx = canvas.current.getContext('2d');
     img.onload = () => {
-      let { moveX, moveY } = mousePos;
+      const { moveX, moveY } = mousePos;
       const {
         rectSize,
         initialX,
@@ -169,7 +163,7 @@ const ImageCropper = (props) => {
         initialCanvasX + moveX,
         initialCanvasY + moveY,
         initialize.resizeRectSize || resizeRectSize,
-        initialize.resizeRectSize || resizeRectSize
+        initialize.resizeRectSize || resizeRectSize,
       );
 
       ctx.strokeStyle = 'purple';
@@ -178,7 +172,7 @@ const ImageCropper = (props) => {
         initialCanvasX + moveX,
         initialCanvasY + moveY,
         initialize.resizeRectSize || resizeRectSize,
-        initialize.resizeRectSize || resizeRectSize
+        initialize.resizeRectSize || resizeRectSize,
       );
 
       const tempCanvas = document.createElement('canvas');
@@ -196,26 +190,27 @@ const ImageCropper = (props) => {
         0,
         0,
         tempCtx.canvas.width,
-        tempCtx.canvas.height
+        tempCtx.canvas.height,
       );
       const tempImg = tempCanvas.toDataURL('image/png');
-      props.onCanvas(tempImg);
+      onCanvas(tempImg);
     };
-    img.src = props.src;
+    img.src = src;
   }, [mousePos]);
-
-  const cursorStyle = !isEditing
-    ? 'cursor-pointer'
-    : isEditing === 'moving'
-    ? 'cursor-all-scroll'
-    : ['lt', 'rb'].some((text) => text === isEditing)
-    ? 'cursor-nwse-resize'
-    : 'cursor-nesw-resize';
 
   return (
     <div className="my-auto aspect-square min-h-0 min-w-0 px-4">
       <canvas
-        className={`h-full w-full ${cursorStyle}`}
+        className={twMerge(
+          'h-full w-full',
+          !isEditing
+            ? 'cursor-pointer'
+            : isEditing === 'moving'
+            ? 'cursor-all-scroll'
+            : ['lt', 'rb'].some((text) => text === isEditing)
+            ? 'cursor-nwse-resize'
+            : 'cursor-nesw-resize',
+        )}
         width="1200px"
         height="1200px"
         ref={canvas}
@@ -228,6 +223,4 @@ const ImageCropper = (props) => {
       />
     </div>
   );
-};
-
-export default ImageCropper;
+}

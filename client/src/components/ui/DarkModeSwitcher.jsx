@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { twMerge } from 'tailwind-merge';
+
 import Icon from './Icon';
 
-const DarkModeSwitcher = () => {
+export default function DarkModeSwitcher() {
   const [darkMode, setDarkMode] = useState(true);
 
   const htmlClassList = document.documentElement.classList;
@@ -9,16 +11,19 @@ const DarkModeSwitcher = () => {
   const darkModeSwitcher = (e) => {
     e.preventDefault();
     setDarkMode((prev) => !prev);
-    [...htmlClassList].some((el) => el === 'dark')
-      ? htmlClassList.remove('dark')
-      : htmlClassList.add('dark');
+    if ([...htmlClassList].some((el) => el === 'dark')) {
+      htmlClassList.remove('dark');
+    } else {
+      htmlClassList.add('dark');
+    }
   };
 
   return (
     <div
-      className={`after:toggle-btn relative flex h-11 w-24 items-center justify-between rounded-full bg-accent-dark-shade-700 px-1 transition-all hover:after:bg-primary-tint-200 active:after:w-14 dark:bg-accent-dark-shade-400 sm:px-2 ${
-        !darkMode && 'after:left-24 after:-translate-x-full'
-      }`}
+      className={twMerge(
+        'after:toggle-btn relative flex h-11 w-24 items-center justify-between rounded-full bg-accent-dark-shade-700 px-1 transition-all hover:after:bg-primary-tint-200 active:after:w-14 dark:bg-accent-dark-shade-400 sm:px-2',
+        !darkMode && 'after:left-24 after:-translate-x-full',
+      )}
       onClick={darkModeSwitcher}
     >
       <Icon
@@ -31,6 +36,4 @@ const DarkModeSwitcher = () => {
       />
     </div>
   );
-};
-
-export default DarkModeSwitcher;
+}

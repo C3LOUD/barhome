@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
 
 import ErrorBoundary from '../components/ErrorBoundary';
 import Main from '../components/Main';
 import Sidebar from '../components/sidebar/Sidebar';
 
-const Dashboard = () => {
+export default function Dashboard() {
   const [hamburger, setHamburger] = useState(false);
   const location = useLocation();
 
@@ -23,16 +24,15 @@ const Dashboard = () => {
         <ErrorBoundary>
           <Sidebar hamburger={hamburger} />
           <div
-            className={`absolute z-20 hidden h-full w-full bg-accent-dark-shade-800/80 ${
-              hamburger && 'md:block'
-            }`}
+            className={twMerge(
+              'absolute z-20 hidden h-full w-full bg-accent-dark-shade-800/80',
+              hamburger && 'md:block',
+            )}
             onClick={hamburgerHandler}
-          ></div>
+          />
           <Main onHamburger={hamburgerHandler} />
         </ErrorBoundary>
       </div>
     </div>
   );
-};
-
-export default Dashboard;
+}

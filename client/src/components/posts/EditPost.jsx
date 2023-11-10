@@ -1,12 +1,13 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
 
 import tempAvatar from '../../assets/7007892.png';
 import { editPost, fetchPost } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 import Loading from '../ui/Loading';
 
-const CreatePost = (props) => {
+export default function CreatePost({ canvas, onEdit }) {
   const { id } = useParams();
   const [inputContent, setInputContent] = useState(null);
 
@@ -29,7 +30,7 @@ const CreatePost = (props) => {
     const formData = {
       _id: id,
       title: titleRef.current.value || data.post.cocktail.title,
-      image: props.canvas || data.post.imageUrl,
+      image: canvas || data.post.imageUrl,
       content: inputContent,
     };
     mutate(formData, {
@@ -41,7 +42,7 @@ const CreatePost = (props) => {
 
   const contentLength = useMemo(
     () => inputContent?.trim().split(' ').join('').length,
-    [inputContent]
+    [inputContent],
   );
 
   useEffect(() => {
@@ -61,22 +62,20 @@ const CreatePost = (props) => {
     <div className="grid w-full grid-cols-2 gap-6 2xs:grid-cols-1 2xs:gap-4 2xs:px-4">
       <div className="relative aspect-square">
         <img
-          src={props.canvas || data?.post.imageUrl}
-          alt="cropped image"
+          src={canvas || data?.post.imageUrl}
+          alt="cropped"
           className="h-full w-full"
         />
         <div className="absolute left-1/2 bottom-2 -translate-x-1/2">
           <Icon
             name="camera"
             style="text-5xl text-primary-main bg-white-100/50 px-4 py-4 rounded-full hover:bg-white-100 cursor-pointer"
-            onClick={props.onEdit}
+            onClick={onEdit}
           />
         </div>
       </div>
       <div className="mr-6 flex max-w-sm flex-col gap-4 2xs:mr-0 2xs:max-w-full">
-        <div
-          className={`relative flex min-h-[20rem] flex-col rounded bg-white-400`}
-        >
+        <div className="relative flex min-h-[20rem] flex-col rounded bg-white-400">
           <div className="flex items-center gap-2 px-4 py-2">
             <img
               src={data?.post.creator.avatarUrl || tempAvatar}
@@ -95,9 +94,10 @@ const CreatePost = (props) => {
             ref={contentRef}
           />
           <span
-            className={`font-secondary font-normal ${
-              contentLength > 280 ? 'text-error' : 'text-gray-200'
-            } absolute bottom-2 right-2 z-20`}
+            className={twMerge(
+              'absolute bottom-2 right-2 z-20 font-secondary font-normal',
+              contentLength > 280 ? 'text-error' : 'text-gray-200',
+            )}
           >{`${contentLength || 0}/280`}</span>
         </div>
         <div className="flex flex-col">
@@ -118,11 +118,12 @@ const CreatePost = (props) => {
           />
         </div>
         <a
-          className={`paragraph-xsmall w-fit rounded px-4 py-2 font-bold text-white-100 2xs:w-full 2xs:text-center ${
+          className={twMerge(
+            'paragraph-xsmall w-fit rounded px-4 py-2 font-bold text-white-100 2xs:w-full 2xs:text-center',
             contentLength > 280
               ? 'cursor-not-allowed bg-gray-400'
-              : 'cursor-pointer bg-primary-main hover:bg-primary-tint-200'
-          }`}
+              : 'cursor-pointer bg-primary-main hover:bg-primary-tint-200',
+          )}
           onClick={submitHandler}
         >
           SUBMIT
@@ -130,6 +131,4 @@ const CreatePost = (props) => {
       </div>
     </div>
   );
-};
-
-export default CreatePost;
+}

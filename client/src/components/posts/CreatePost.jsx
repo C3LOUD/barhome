@@ -2,12 +2,13 @@ import { useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
 
 import tempAvatar from '../../assets/7007892.png';
 import { createPost } from '../../utils/api-list';
 import Loading from '../ui/Loading';
 
-const CreatePost = (props) => {
+export default function CreatePost({ canvas }) {
   const { id } = useParams();
   const { name, avatar } = useSelector((state) => state.admin);
   const [inputContent, setInputContent] = useState(null);
@@ -23,49 +24,44 @@ const CreatePost = (props) => {
     setInputContent(e.target.value);
   };
 
+  const contentLength = useMemo(
+    () => inputContent?.trim().split(' ').join('').length,
+    [inputContent],
+  );
+
   const submitHandler = (e) => {
     if (contentLength > 280) return;
     const formData = {
       title: titleRef.current.value,
-      image: props.canvas,
+      image: canvas,
       content: inputContent,
       cocktail: id,
     };
     mutate(formData, {
-      onSuccess: (data) => {
+      onSuccess: () => {
         queryClient.invalidateQueries(['posts']);
         navigate('/dashboard/posts');
       },
     });
   };
 
-  const contentLength = useMemo(
-    () => inputContent?.trim().split(' ').join('').length,
-    [inputContent]
-  );
-
   useEffect(() => {
     titleRef.current.value = id;
   }, []);
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <div className="absolute top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-accent-dark-shade-700/80">
         <Loading />
       </div>
     );
+  }
 
   return (
     <div className="grid w-full grid-cols-2 gap-6 2xs:grid-cols-1 2xs:gap-4 2xs:px-4">
-      <img
-        src={props.canvas}
-        alt="cropped image"
-        className="inline-block aspect-square"
-      />
+      <img src={canvas} alt="cropped" className="inline-block aspect-square" />
       <div className="mr-6 flex max-w-sm flex-col gap-4 2xs:mr-0 2xs:max-w-full">
-        <div
-          className={`relative flex min-h-[20rem] flex-col rounded bg-white-400 2xs:rounded-t-none`}
-        >
+        <div className="relative flex min-h-[20rem] flex-col rounded bg-white-400 2xs:rounded-t-none">
           <div className="flex items-center gap-2 px-4 py-2">
             <img
               src={avatar || tempAvatar}
@@ -83,10 +79,13 @@ const CreatePost = (props) => {
             onChange={inputContentHandler}
           />
           <span
-            className={`font-secondary font-normal ${
-              contentLength > 280 ? 'text-error' : 'text-gray-200'
-            } absolute bottom-2 right-2 z-20`}
-          >{`${contentLength || 0}/280`}</span>
+            className={twMerge(
+              'absolute bottom-2 right-2 z-20 font-secondary font-normal',
+              contentLength > 280 ? 'text-error' : 'text-gray-200',
+            )}
+          >
+            {`${contentLength || 0}/280`}
+          </span>
         </div>
         <div className="flex flex-col">
           <label
@@ -106,11 +105,12 @@ const CreatePost = (props) => {
           />
         </div>
         <a
-          className={`paragraph-xsmall w-fit rounded px-4 py-2 font-bold text-white-100 ${
+          className={twMerge(
+            'paragraph-xsmall w-fit rounded px-4 py-2 font-bold text-white-100',
             contentLength > 280
               ? 'cursor-not-allowed bg-gray-400'
-              : 'cursor-pointer bg-primary-main hover:bg-primary-tint-200'
-          }`}
+              : 'cursor-pointer bg-primary-main hover:bg-primary-tint-200',
+          )}
           onClick={submitHandler}
         >
           SUBMIT
@@ -118,6 +118,4 @@ const CreatePost = (props) => {
       </div>
     </div>
   );
-};
-
-export default CreatePost;
+}

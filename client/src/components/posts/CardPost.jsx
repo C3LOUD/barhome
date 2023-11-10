@@ -2,6 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
 
 import tempAvatar from '../../assets/7007892.png';
 import { adminActions } from '../../store/admin-slice';
@@ -9,7 +10,7 @@ import { addComment, likedPost } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 import Comment from './Comment';
 
-const CardPost = (props) => {
+export default function CardPost({ posts }) {
   const [checkLiked, setCheckLiked] = useState(false);
 
   const commentRef = useRef();
@@ -23,7 +24,7 @@ const CardPost = (props) => {
     createdAt,
     comments,
     _id,
-  } = props.posts;
+  } = posts;
 
   const { mutate: likedPostMutate } = likedPost();
   const { mutate: addCommentMutate, isLoading: addCommentIsLoading } =
@@ -33,7 +34,7 @@ const CardPost = (props) => {
   const dispatch = useDispatch();
 
   const date = new Intl.DateTimeFormat(navigator.language).format(
-    new Date(createdAt)
+    new Date(createdAt),
   );
 
   const queryClient = useQueryClient();
@@ -60,7 +61,7 @@ const CardPost = (props) => {
         onSuccess: () => {
           dispatch(adminActions.updateLiked(_id.toString()));
         },
-      }
+      },
     );
   };
 
@@ -93,12 +94,12 @@ const CardPost = (props) => {
       </div>
       <div className="flex min-h-[8rem] flex-col justify-between px-4 py-2 2xs:min-h-[6rem]">
         <div>
-          {content.split(/\n/g).map((content, i) => (
+          {content.split(/\n/g).map((contentEl, i) => (
             <p
               key={i}
               className="paragraph-medium font-secondary font-medium text-black-100"
             >
-              {content}
+              {contentEl}
             </p>
           ))}
         </div>
@@ -122,7 +123,7 @@ const CardPost = (props) => {
       <img
         className="transition-all active:scale-[101%]"
         src={imageUrl}
-        alt={title + ' image'}
+        alt={title}
         onClick={(e) => {
           if (e.detail !== 2) return;
           likedHandler();
@@ -138,9 +139,10 @@ const CardPost = (props) => {
         </div>
       )}
       <div
-        className={`flex justify-between gap-4 bg-white-400 px-4 py-4 ${
-          addCommentIsLoading ? 'bg-gray-300' : 'bg-white-400'
-        }`}
+        className={twMerge(
+          'flex justify-between gap-4 bg-white-400 px-4 py-4',
+          addCommentIsLoading ? 'bg-gray-300' : 'bg-white-400',
+        )}
       >
         <input
           className="flex-1 bg-transparent font-secondary font-semibold text-black-100 placeholder:text-gray-300 focus:outline-none"
@@ -157,6 +159,4 @@ const CardPost = (props) => {
       </div>
     </div>
   );
-};
-
-export default CardPost;
+}

@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import Icon from '../ui/Icon';
 import fileValidator from '../../utils/file-validator';
 
-const Dropzone = (props) => {
+export default function Dropzone({ onSrc, onStatus }) {
   const [dataInappropriate, setDataInappropriate] = useState(null);
   const [activated, setActivated] = useState(false);
   const fileUpload = useRef();
@@ -11,6 +12,15 @@ const Dropzone = (props) => {
   const fileUploadHandler = (e) => {
     e.preventDefault();
     fileUpload.current.click();
+  };
+
+  const dataReceivedHelper = (data) => {
+    if (data.message) setDataInappropriate(data.message);
+    else {
+      setDataInappropriate(true);
+      onSrc(data.imageSrc);
+      onStatus(2);
+    }
   };
 
   const dragAndDropHandler = (e) => {
@@ -24,29 +34,25 @@ const Dropzone = (props) => {
     if (e.type === 'drop') {
       setActivated(false);
       const recived = fileValidator(e.dataTransfer.files);
-      dataRecievedHelper(recived);
+      dataReceivedHelper(recived);
     }
   };
 
   const loadFileHandler = (e) => {
     if (e.target.files.length === 0) return;
     const recived = fileValidator(e.target.files);
-    dataRecievedHelper(recived);
-  };
-
-  const dataRecievedHelper = (data) => {
-    if (data.message) return setDataInappropriate(data.message);
-    setDataInappropriate(true);
-    props.onSrc(data.imageSrc);
-    props.onStatus(2);
+    dataReceivedHelper(recived);
   };
 
   return (
     <div className="inline-block h-full w-full flex-1 px-6">
       <div
-        className={`flex h-full flex-col items-center justify-center gap-2 rounded border-2 border-dashed transition-all ${
-          activated ? 'border-primary-main bg-black-100/20' : 'border-black-100'
-        }`}
+        className={twMerge(
+          'flex h-full flex-col items-center justify-center gap-2 rounded border-2 border-dashed transition-all',
+          activated
+            ? 'border-primary-main bg-black-100/20'
+            : 'border-black-100',
+        )}
         onDragEnter={dragAndDropHandler}
         onDragOver={dragAndDropHandler}
         onDragLeave={dragAndDropHandler}
@@ -73,15 +79,14 @@ const Dropzone = (props) => {
           </a>
         </div>
         <p
-          className={`paragraph-small mt-6 inline-block font-secondary font-bold ${
-            dataInappropriate ? 'text-error' : 'text-accent-dark-main'
-          }`}
+          className={twMerge(
+            'paragraph-small mt-6 inline-block font-secondary font-bold',
+            dataInappropriate ? 'text-error' : 'text-accent-dark-main',
+          )}
         >
           {dataInappropriate || 'Maximum upload image size: 2 MB'}
         </p>
       </div>
     </div>
   );
-};
-
-export default Dropzone;
+}

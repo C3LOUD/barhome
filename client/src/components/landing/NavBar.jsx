@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
 
 import tempAvatar from '../../assets/7007892.png';
 import { adminActions } from '../../store/admin-slice';
@@ -9,7 +10,7 @@ import { getUser } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 import Logo from '../ui/Logo';
 
-const NavBar = (props) => {
+export default function NavBar({ style }) {
   const [hamburger, setHamburger] = useState(false);
 
   const { isLoggedIn } = useSelector((state) => state.auth);
@@ -39,17 +40,17 @@ const NavBar = (props) => {
 
   useEffect(() => {
     refetch();
-    data &&
-      dispatch(
-        adminActions.setUser({
-          id: data.id,
-          name: data.name,
-          imgUrl: data.imgUrl,
-          saved: data.saved,
-          liked: data.liked,
-          posts: data.posts,
-        })
-      );
+    if (!data) return;
+    dispatch(
+      adminActions.setUser({
+        id: data.id,
+        name: data.name,
+        imgUrl: data.imgUrl,
+        saved: data.saved,
+        liked: data.liked,
+        posts: data.posts,
+      }),
+    );
   }, [data, isLoggedIn]);
 
   useEffect(() => {
@@ -62,11 +63,12 @@ const NavBar = (props) => {
 
   return (
     <div
-      className={`flex h-16 shrink-0 items-center justify-between px-12 text-white-100 2xs:px-2 ${
-        props.style
+      className={twMerge(
+        'flex h-16 shrink-0 items-center justify-between px-12 text-white-100 2xs:px-2',
+        style
           ? 'fixed top-0 z-50 w-full bg-primary-main'
-          : 'bg-accent-dark-main'
-      }`}
+          : 'bg-accent-dark-main',
+      )}
     >
       <Logo />
       <div className="hidden items-center gap-4 sm:flex">
@@ -86,9 +88,10 @@ const NavBar = (props) => {
           </NavLink>
         )}
         <div
-          className={`z-30 hidden origin-bottom-right rounded-t-full px-2 py-2 transition-all sm:block ${
-            hamburger && 'bg-accent-dark-shade-500'
-          }`}
+          className={twMerge(
+            'z-30 hidden origin-bottom-right rounded-t-full px-2 py-2 transition-all sm:block',
+            hamburger && 'bg-accent-dark-shade-500',
+          )}
         >
           <Icon
             name="menu-sharp"
@@ -99,9 +102,10 @@ const NavBar = (props) => {
       </div>
 
       <div
-        className={`flex origin-top-right items-center gap-4 transition-all md:gap-2 sm:absolute sm:top-10 sm:right-12 sm:z-30 sm:flex-col sm:bg-accent-dark-shade-500 sm:py-4 sm:px-4 2xs:right-2 ${
-          hamburger ? 'sm:scale-100' : 'sm:scale-0'
-        }`}
+        className={twMerge(
+          'flex origin-top-right items-center gap-4 transition-all md:gap-2 sm:absolute sm:top-10 sm:right-12 sm:z-30 sm:flex-col sm:bg-accent-dark-shade-500 sm:py-4 sm:px-4 2xs:right-2',
+          hamburger ? 'sm:scale-100' : 'sm:scale-0',
+        )}
         onClick={smoothScrollHandler}
       >
         <a className="navLink" data-id="features" onClick={smoothScrollHandler}>
@@ -171,6 +175,4 @@ const NavBar = (props) => {
       </div>
     </div>
   );
-};
-
-export default NavBar;
+}

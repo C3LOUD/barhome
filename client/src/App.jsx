@@ -4,9 +4,9 @@ import { Route, Routes } from 'react-router-dom';
 import ErrorBoundary from './components/ErrorBoundary';
 import ProtectedRoute from './components/ProtectedRoute';
 import Loading from './components/ui/Loading';
+import NotFound from './pages/NotFound';
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 const HomePage = React.lazy(() => import('./pages/HomePage'));
-import NotFound from './pages/NotFound';
 
 const App = () => {
   return (

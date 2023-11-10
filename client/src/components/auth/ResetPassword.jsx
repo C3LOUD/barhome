@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
 
 import { resetPassword } from '../../utils/api-list';
 import {
@@ -9,7 +10,7 @@ import {
 import AuthInput from '../ui/AuthInput';
 import timer from '../../utils/timer';
 
-const ResetPassword = () => {
+export default function ResetPassword() {
   const [passwordInvalid, setPasswordValid] = useState(true);
   const [confirmPasswordInvalid, setConfirmPasswordValid] = useState(true);
 
@@ -20,6 +21,16 @@ const ResetPassword = () => {
 
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
+
+  const passwordValidHandler = useCallback((validationResult) => {
+    setPasswordValid(validationResult);
+  }, []);
+
+  const confirmPasswordValidHandler = useCallback((validationResult) => {
+    setConfirmPasswordValid(validationResult);
+  }, []);
+
+  const formInValid = passwordInvalid || confirmPasswordInvalid;
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -35,19 +46,9 @@ const ResetPassword = () => {
           await timer(3);
           navigate('/login', { replace: true });
         },
-      }
+      },
     );
   };
-
-  const passwordValidHandler = useCallback((validationResult) => {
-    setPasswordValid(validationResult);
-  });
-
-  const confirmPasswordValidHandler = useCallback((validationResult) => {
-    setConfirmPasswordValid(validationResult);
-  });
-
-  const formInValid = passwordInvalid || confirmPasswordInvalid;
 
   return (
     <div className="relative flex w-[20rem] flex-col gap-2 rounded-2xl bg-primary-main px-4 py-4 text-white-100">
@@ -83,17 +84,16 @@ const ResetPassword = () => {
         <button
           disabled={formInValid}
           type="submit"
-          className={`mt-4 w-fit rounded px-4 py-2 ${
+          className={twMerge(
+            'mt-4 w-fit rounded px-4 py-2',
             !formInValid
               ? 'cursor-pointer bg-secondary-main'
-              : 'cursor-not-allowed bg-gray-100'
-          }`}
+              : 'cursor-not-allowed bg-gray-100',
+          )}
         >
           Reset Password
         </button>
       </form>
     </div>
   );
-};
-
-export default ResetPassword;
+}

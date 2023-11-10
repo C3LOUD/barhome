@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
 
 import Logo from '../ui/Logo';
 import BtnSidebar from './BtnSidebar';
@@ -14,7 +15,7 @@ const allSidebarBtn = [
   { key: 4, tag: 'Posts', icon: 'create-outline', activateIcon: 'create' },
 ];
 
-const Sidebar = (props) => {
+export default function Sidebar({ hamburger }) {
   const [currentPage, setCurrentPage] = useState('');
   const [hovered, setHovered] = useState(false);
 
@@ -29,25 +30,24 @@ const Sidebar = (props) => {
     if (!e.target.dataset.id || e.target.dataset.id === currentPage) return;
 
     const hoveredBtn = allSidebarBtn.find(
-      (item) => item.tag === e.target.dataset.id
+      (item) => item.tag === e.target.dataset.id,
     );
 
     if (e.type === 'mouseover') {
       hoveredBtn.icon = hoveredBtn.icon.split('-')[0];
       setHovered(true);
-      return;
     } else {
       hoveredBtn.icon = hoveredBtn.icon + '-outline';
       setHovered(false);
-      return;
     }
   };
 
   return (
     <div
-      className={`flex w-[13rem] flex-col items-center justify-between overflow-scroll bg-accent-dark-main pt-12 pb-6 transition-all scrollbar-none md:absolute md:top-0 md:z-30 md:h-full ${
-        props.hamburger ? 'md:left-0' : 'md:-left-full'
-      }`}
+      className={twMerge(
+        'flex w-[13rem] flex-col items-center justify-between overflow-scroll bg-accent-dark-main pt-12 pb-6 transition-all scrollbar-none md:absolute md:top-0 md:z-30 md:h-full',
+        hamburger ? 'md:left-0' : 'md:-left-full',
+      )}
     >
       <div className="flex w-full flex-col items-center gap-[5.5rem] 2xs:gap-12">
         <Logo />
@@ -57,22 +57,20 @@ const Sidebar = (props) => {
           onMouseOver={sideMenuHoverHandler}
           onMouseOut={sideMenuHoverHandler}
         >
-          {allSidebarBtn.map((item) => {
-            return (
-              <BtnSidebar
-                tag={item.tag}
-                icon={
-                  currentPage === item.tag.toLowerCase()
-                    ? item.activateIcon
-                    : item.icon
-                }
-                style={
-                  currentPage === item.tag.toLowerCase() && 'bg-primary-main'
-                }
-                key={item.key}
-              />
-            );
-          })}
+          {allSidebarBtn.map((item) => (
+            <BtnSidebar
+              tag={item.tag}
+              icon={
+                currentPage === item.tag.toLowerCase()
+                  ? item.activateIcon
+                  : item.icon
+              }
+              style={
+                currentPage === item.tag.toLowerCase() && 'bg-primary-main'
+              }
+              key={item.key}
+            />
+          ))}
         </div>
       </div>
       <div className="flex w-full flex-col items-center gap-6 pt-6">
@@ -88,6 +86,4 @@ const Sidebar = (props) => {
       </div>
     </div>
   );
-};
-
-export default Sidebar;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
 
 import customer1 from '../../assets/customers/customer-1.jpg';
 import customer2 from '../../assets/customers/customer-2.jpg';
@@ -43,11 +44,12 @@ const Hero = React.forwardRef((props, ref) => {
         <Link
           to="/dashboard"
           onClick={isLoggedIn || smoothScrollHandler}
-          className={`md:paragraph-medium heading-h6 mr-6 inline-block w-fit cursor-pointer rounded px-8 py-4 font-secondary font-bold transition-all  md:px-6 md:py-3 sm:px-4 ${
+          className={twMerge(
+            'md:paragraph-medium heading-h6 mr-6 inline-block w-fit cursor-pointer rounded px-8 py-4 font-secondary font-bold transition-all md:px-6 md:py-3 sm:px-4',
             isLoggedIn
               ? 'bg-secondary-main hover:bg-secondary-tint-200'
-              : 'bg-primary-tint-800 text-primary-main hover:bg-white-300'
-          }`}
+              : 'bg-primary-tint-800 text-primary-main hover:bg-white-300',
+          )}
         >
           {isLoggedIn ? 'Dashboard' : 'Learn More'}
         </Link>
@@ -55,45 +57,46 @@ const Hero = React.forwardRef((props, ref) => {
           <div className="flex">
             <img
               src={customer1}
-              alt="Customer photo"
+              alt="Customer 1"
               className="-mr-4 h-10 w-10 rounded-full border-2 border-white-100"
             />
             <img
               src={customer2}
-              alt="Customer photo"
+              alt="Customer 2"
               className="-mr-4 h-10 w-10 rounded-full border-2 border-white-100"
             />
             <img
               src={customer3}
-              alt="Customer photo"
+              alt="Customer 3"
               className="-mr-4 h-10 w-10 rounded-full border-2 border-white-100"
             />
             <img
               src={customer4}
-              alt="Customer photo"
+              alt="Customer 4"
               className="-mr-4 h-10 w-10 rounded-full border-2 border-white-100"
             />
             <img
               src={customer5}
-              alt="Customer photo"
+              alt="Customer 5"
               className="-mr-4 h-10 w-10 rounded-full border-2 border-white-100"
             />
             <img
               src={customer6}
-              alt="Customer photo"
+              alt="Customer 6"
               className="-mr-4 h-10 w-10 rounded-full border-2 border-white-100 last:m-0"
             />
           </div>
           <p className="paragraph-medium font-secondary font-medium">
-            Join this
-            <span className="font-bold text-primary-main">25000+</span> family
-            right now!
+            {`Join this
+            ${(
+              <span className="font-bold text-primary-main">25000+</span>
+            )} family right now!`}
           </p>
         </div>
       </div>
       <img
         src={heroImage}
-        alt="hero section image"
+        alt="hero section"
         className="xs:mx-auto xs:w-2/3 2xs:w-full"
       />
     </div>

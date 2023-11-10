@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import tempAvatar from '../../assets/7007892.png';
 import {
@@ -8,10 +9,10 @@ import {
   passwordValidator,
 } from '../../utils/input-validator';
 import AvatarCropper from '../auth/AvatarCropper';
-import AuthInput from '../ui/AuthInput';
-import Icon from '../ui/Icon';
+import AuthInput from './AuthInput';
+import Icon from './Icon';
 
-const InputForm = (props) => {
+export default function InputForm({ admin, onSubmit }) {
   const [nameInvalid, setNameValid] = useState(true);
   const [emailInvalid, setEmailValid] = useState(true);
   const [currentPasswordInvalid, setCurrentPasswordValid] = useState(true);
@@ -26,45 +27,25 @@ const InputForm = (props) => {
   const currentPasswordRef = useRef();
   const confirmPasswordRef = useRef();
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    if (props.admin ? false : formInValid) return;
-    const name = nameRef.current.getValue();
-    const email = emailRef.current.getValue();
-    const password = passwordRef.current.getValue();
-    const check = tempAvatar === tempImageSrc;
-    const avatar = check ? null : tempImageSrc;
-    const currentPassword =
-      props.admin && currentPasswordRef.current.getValue();
-    const userData = {
-      name,
-      email,
-      password,
-      avatar,
-      currentPassword,
-    };
-    props.onSubmit(userData);
-  };
-
   const nameValidHandler = useCallback((validationResult) => {
     setNameValid(validationResult);
-  });
+  }, []);
 
   const emailValidHandler = useCallback((validationResult) => {
     setEmailValid(validationResult);
-  });
+  }, []);
 
   const currentPasswordValidHandler = useCallback((validationResult) => {
     setCurrentPasswordValid(validationResult);
-  });
+  }, []);
 
   const passwordValidHandler = useCallback((validationResult) => {
     setPasswordValid(validationResult);
-  });
+  }, []);
 
   const confirmPasswordValidHandler = useCallback((validationResult) => {
     setConfirmPasswordValid(validationResult);
-  });
+  }, []);
 
   const editHandler = () => {
     setAvatarEditing((prev) => !prev);
@@ -77,10 +58,29 @@ const InputForm = (props) => {
   const formInValid =
     nameInvalid || emailInvalid || passwordInvalid || confirmPasswordInvalid;
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    if (admin ? false : formInValid) return;
+    const name = nameRef.current.getValue();
+    const email = emailRef.current.getValue();
+    const password = passwordRef.current.getValue();
+    const check = tempAvatar === tempImageSrc;
+    const avatar = check ? null : tempImageSrc;
+    const currentPassword = admin && currentPasswordRef.current.getValue();
+    const userData = {
+      name,
+      email,
+      password,
+      avatar,
+      currentPassword,
+    };
+    onSubmit(userData);
+  };
+
   useEffect(() => {
-    if (!props.admin?.imgUrl) return;
-    setTempImageSrc(props.admin.imgUrl);
-  }, [props.admin]);
+    if (!admin?.imgUrl) return;
+    setTempImageSrc(admin.imgUrl);
+  }, [admin]);
 
   return (
     <>
@@ -114,8 +114,8 @@ const InputForm = (props) => {
           ref={nameRef}
           onValid={nameValidHandler}
           type="text"
-          initial={props.admin?.name}
-          mode={props.admin}
+          initial={admin?.name}
+          mode={admin}
         />
         <AuthInput
           id="email"
@@ -123,17 +123,17 @@ const InputForm = (props) => {
           ref={emailRef}
           onValid={emailValidHandler}
           type="email"
-          initial={props.admin?.email}
-          mode={props.admin}
+          initial={admin?.email}
+          mode={admin}
         />
-        {props.admin && (
+        {admin && (
           <AuthInput
             id="currentPassword"
             validator={passwordValidator}
             ref={currentPasswordRef}
             onValid={currentPasswordValidHandler}
             type="password"
-            mode={props.admin}
+            mode={admin}
           />
         )}
         <AuthInput
@@ -142,7 +142,7 @@ const InputForm = (props) => {
           ref={passwordRef}
           onValid={passwordValidHandler}
           type="password"
-          mode={props.admin}
+          mode={admin}
         />
         <AuthInput
           id="confirmPassword"
@@ -150,22 +150,21 @@ const InputForm = (props) => {
           ref={confirmPasswordRef}
           onValid={confirmPasswordValidHandler}
           type="password"
-          mode={props.admin}
+          mode={admin}
         />
         <button
-          disabled={props.admin ? false : formInValid}
+          disabled={admin ? false : formInValid}
           type="submit"
-          className={`paragraph-large mt-4 w-fit rounded px-4 py-2 font-secondary transition-all  dark:text-white-100 ${
-            !formInValid || props.admin
+          className={twMerge(
+            'paragraph-large mt-4 w-fit rounded px-4 py-2 font-secondary transition-all  dark:text-white-100',
+            !formInValid || admin
               ? 'cursor-pointer bg-secondary-main hover:bg-secondary-tint-200'
-              : 'cursor-not-allowed bg-gray-100'
-          }`}
+              : 'cursor-not-allowed bg-gray-100',
+          )}
         >
           Submit
         </button>
       </form>
     </>
   );
-};
-
-export default InputForm;
+}

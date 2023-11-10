@@ -1,13 +1,14 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { twMerge } from 'tailwind-merge';
 
 import AuthInput from '../ui/AuthInput';
 import { emailValidator, passwordValidator } from '../../utils/input-validator';
 import { login } from '../../utils/api-list';
 import { login as loginThunk } from '../../store/auth-slice';
 
-const Login = () => {
+export default function Login() {
   const [emailInvalid, setEmailValid] = useState(true);
   const [passwordInvalid, setPasswordValid] = useState(true);
 
@@ -18,6 +19,16 @@ const Login = () => {
   const passwordRef = useRef();
 
   const { mutate, isError, error } = login();
+
+  const emailValidHandler = useCallback((validationResult) => {
+    setEmailValid(validationResult);
+  }, []);
+
+  const passwordValidHandler = useCallback((validationResult) => {
+    setPasswordValid(validationResult);
+  }, []);
+
+  const formValid = emailInvalid || passwordInvalid;
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -37,55 +48,42 @@ const Login = () => {
     });
   };
 
-  const emailValidHandler = useCallback((validationResult) => {
-    setEmailValid(validationResult);
-  });
-
-  const passwordValidHandler = useCallback((validationResult) => {
-    setPasswordValid(validationResult);
-  });
-
-  const formValid = emailInvalid || passwordInvalid;
-
   return (
-    <>
-      <form onSubmit={submitHandler}>
-        <div className="flex w-[20rem] flex-col gap-2 rounded-2xl bg-primary-main px-4 py-4 text-white-100">
-          {isError && <p className="text-error">{error.message}</p>}
-          <p className="heading-h4">Login</p>
-          <AuthInput
-            id="email"
-            validator={emailValidator}
-            ref={emailRef}
-            onValid={emailValidHandler}
-            type="email"
-          />
-          <AuthInput
-            id="password"
-            validator={passwordValidator}
-            ref={passwordRef}
-            onValid={passwordValidHandler}
-            type="password"
-          />
-          <button
-            disabled={formValid}
-            type="submit"
-            className={`w-fit rounded px-4 py-2 ${
-              !formValid ? 'bg-secondary-main' : 'bg-gray-100'
-            }`}
-          >
-            Submit
-          </button>
-          <Link
-            className="paragraph-xsmall font-secondary font-normal text-gray-300 hover:text-gray-50"
-            to="/forget-password"
-          >
-            Forget password?
-          </Link>
-        </div>
-      </form>
-    </>
+    <form onSubmit={submitHandler}>
+      <div className="flex w-[20rem] flex-col gap-2 rounded-2xl bg-primary-main px-4 py-4 text-white-100">
+        {isError && <p className="text-error">{error.message}</p>}
+        <p className="heading-h4">Login</p>
+        <AuthInput
+          id="email"
+          validator={emailValidator}
+          ref={emailRef}
+          onValid={emailValidHandler}
+          type="email"
+        />
+        <AuthInput
+          id="password"
+          validator={passwordValidator}
+          ref={passwordRef}
+          onValid={passwordValidHandler}
+          type="password"
+        />
+        <button
+          disabled={formValid}
+          type="submit"
+          className={twMerge(
+            'w-fit rounded px-4 py-2',
+            !formValid ? 'bg-secondary-main' : 'bg-gray-100',
+          )}
+        >
+          Submit
+        </button>
+        <Link
+          className="paragraph-xsmall font-secondary font-normal text-gray-300 hover:text-gray-50"
+          to="/forget-password"
+        >
+          Forget password?
+        </Link>
+      </div>
+    </form>
   );
-};
-
-export default Login;
+}

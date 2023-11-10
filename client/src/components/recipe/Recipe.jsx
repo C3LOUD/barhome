@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
 
 import { fetchRecipe } from '../../utils/api-list';
 import CloseBtn from '../ui/CloseBtn';
@@ -12,7 +13,7 @@ import CounterRecipe from './CounterRecipe';
 import IngredientRecipe from './IngredientRecipe';
 import InstructionRecipe from './InstructionRecipe';
 
-const Recipe = (props) => {
+export default function Recipe({ onEdit }) {
   const [currentShow, setCurrentShow] = useState('Ingredients');
   const [counter, setCounter] = useState(1);
   const { id } = useParams();
@@ -60,26 +61,25 @@ const Recipe = (props) => {
             <img
               className="inline-block aspect-square"
               src={thumbnail}
-              alt={`${title} photo`}
+              alt={`${title}`}
             />
             <SavedBtn />
           </div>
           <div className="max-w-sm pr-6 2xs:max-w-full 2xs:px-4">
             <div className="flex w-full" onClick={switchHandler}>
-              {['Ingredients', 'Instructions'].map((label) => {
-                return (
-                  <div
-                    key={label}
-                    className={`heading-h5 w-full cursor-pointer overflow-hidden rounded-t-2xl py-2 text-center font-primary font-bold ${
-                      label === currentShow
-                        ? 'bg-accent-dark-main text-white-100'
-                        : 'text-accent-dark-main'
-                    }`}
-                  >
-                    <p className={`transition-all hover:scale-110`}>{label}</p>
-                  </div>
-                );
-              })}
+              {['Ingredients', 'Instructions'].map((label) => (
+                <div
+                  key={label}
+                  className={twMerge(
+                    'heading-h5 w-full cursor-pointer overflow-hidden rounded-t-2xl py-2 text-center font-primary font-bold',
+                    label === currentShow
+                      ? 'bg-accent-dark-main text-white-100'
+                      : 'text-accent-dark-main',
+                  )}
+                >
+                  <p className="transition-all hover:scale-110">{label}</p>
+                </div>
+              ))}
             </div>
             {currentShow === 'Instructions' ? (
               <InstructionRecipe instructions={instructions} />
@@ -105,7 +105,7 @@ const Recipe = (props) => {
       </div>
       <div
         className="group flex cursor-pointer flex-col items-center gap-2"
-        onClick={props.onEdit}
+        onClick={onEdit}
       >
         <a className="paragraph-small group-hover:paragraph-medium pt-4 font-secondary font-semibold text-primary-main transition-all">
           ADD A POST
@@ -117,6 +117,4 @@ const Recipe = (props) => {
       </div>
     </ModalCard>
   );
-};
-
-export default Recipe;
+}

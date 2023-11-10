@@ -7,7 +7,7 @@ import InputForm from '../ui/InputForm';
 import Loading from '../ui/Loading';
 import Modal from '../ui/Modal';
 
-const Admin = () => {
+export default function Admin() {
   const { data } = getUser();
   const queryClient = useQueryClient();
 
@@ -24,8 +24,8 @@ const Admin = () => {
   return (
     <>
       <Routes>
-        <Route path={':id'} element={<Modal />} />
-        <Route path={':id/*'} element={<Navigate to="/dashboard/admin" />} />
+        <Route path=":id" element={<Modal />} />
+        <Route path=":id/*" element={<Navigate to="/dashboard/admin" />} />
       </Routes>
       {isLoading && (
         <div className="absolute z-20 flex h-full w-full items-center justify-center bg-accent-dark-shade-700/80">
@@ -47,6 +47,4 @@ const Admin = () => {
       </div>
     </>
   );
-};
-
-export default Admin;
+}

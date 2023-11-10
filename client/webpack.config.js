@@ -1,5 +1,5 @@
 const path = require('path');
-const dotEnv = require('dotenv-webpack');
+const DotEnv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'production',
@@ -20,7 +20,7 @@ module.exports = {
     historyApiFallback: true,
   },
 
-  plugins: [new dotEnv()],
+  plugins: [new DotEnv()],
 
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
