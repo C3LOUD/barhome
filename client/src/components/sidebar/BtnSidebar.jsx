@@ -17,7 +17,7 @@ export default function BtnSidebar({ tag, style, icon }) {
         style,
       )}
     >
-      <Icon name={icon} style="text-2xl sm:text-5xl" />
+      <Icon name={icon} className="text-2xl sm:text-5xl" />
       {tag}
     </Link>
   );

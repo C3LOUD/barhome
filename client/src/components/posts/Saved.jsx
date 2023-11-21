@@ -32,7 +32,7 @@ export default function Saved() {
             </p>
             <Icon
               name="arrow-forward-sharp"
-              style="transition-all text-5xl text-white-100 group-hover:text-white-400"
+              className="text-5xl text-white-100 transition-all group-hover:text-white-400"
             />
           </Link>
         </div>

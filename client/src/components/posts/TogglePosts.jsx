@@ -7,7 +7,7 @@ import Icon from '../ui/Icon';
 export default function TogglePosts({ filter, onClick }) {
   return (
     <>
-      <Icon name="chevron-down-sharp" style="text-2xl" />
+      <Icon name="chevron-down-sharp" className="text-2xl" />
       <ul className="absolute top-5 left-0 flex w-full animate-dropdown flex-col gap-2 py-2 transition-all xs:z-10 xs:rounded xs:bg-accent-dark-shade-800/80 xs:py-2 dark:xs:bg-accent-dark-tint-300/80">
         <a
           className={twMerge(

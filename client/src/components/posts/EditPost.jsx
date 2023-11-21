@@ -71,7 +71,7 @@ export default function EditPost({ canvas, onEdit }) {
         <div className="absolute left-1/2 bottom-2 -translate-x-1/2">
           <Icon
             name="camera"
-            style="text-5xl text-primary-main bg-white-100/50 px-4 py-4 rounded-full hover:bg-white-100 cursor-pointer"
+            className="cursor-pointer rounded-full bg-white-100/50 px-4 py-4 text-5xl text-primary-main hover:bg-white-100"
             onClick={onEdit}
           />
         </div>

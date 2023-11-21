@@ -1,5 +1,6 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import Icon from '../ui/Icon';
 
@@ -8,17 +9,18 @@ export default function CounterRecipe({ counter, onDecrement, onIncrement }) {
     <div className="flex w-full justify-between py-2">
       <Icon
         name="remove"
-        style={`transition-all text-2xl text-error md hydrated ${
+        className={twMerge(
+          'md hydrated text-2xl text-error transition-all',
           counter === 1
             ? 'cursor-not-allowed'
-            : 'cursor-pointer active:scale-150'
-        }`}
+            : 'cursor-pointer active:scale-150',
+        )}
         onClick={onDecrement}
       />
       <p className="paragraph-large font-semibold">{counter}</p>
       <Icon
         name="add"
-        style="transition-all active:scale-150 text-2xl text-success cursor-pointer"
+        className="cursor-pointer text-2xl text-success transition-all active:scale-150"
         onClick={onIncrement}
       />
     </div>

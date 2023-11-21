@@ -13,7 +13,7 @@ export default function InstructionRecipe({ instructions }) {
 
         return (
           <div className="flex gap-2" key={i}>
-            <Icon name="pin" style="text-xl text-accent-dark-main" />
+            <Icon name="pin" className="text-xl text-accent-dark-main" />
             <p
               className="paragraph-medium font-secondary font-normal"
               key={instruction}

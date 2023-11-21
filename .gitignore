@@ -1,7 +1,2 @@
-# dependencies
-/Moodboard
-**/node_modules
-
-# production
-**/public
-**/nodemon.json
+node_modules
+.env

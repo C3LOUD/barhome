@@ -26,7 +26,7 @@ export default function Home({ onNav }) {
       if (!hero) return;
       observer.current.observe(hero);
     },
-    [heroRef],
+    [onNav],
   );
 
   return (

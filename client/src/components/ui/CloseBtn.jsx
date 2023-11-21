@@ -10,7 +10,7 @@ export default function CloseBtn() {
   return (
     <Icon
       name="close-sharp"
-      style="absolute top-2 right-2 z-50 text-5xl hover:text-black-100/50 text-black-100 cursor-pointer"
+      className="absolute top-2 right-2 z-50 cursor-pointer text-5xl text-black-100 hover:text-black-100/50"
       onClick={() =>
         navigate(location.pathname.split('/').slice(0, -1).join('/'))
       }

@@ -20,16 +20,16 @@ export default function NewPost() {
     setImageSrc(src);
   };
 
-  const changeStatus = (status) => {
-    setStatus(status);
+  const changeStatus = (s) => {
+    setStatus(s);
   };
 
   const backHandler = () => {
-    setStatus((prev) => --prev);
+    setStatus((p) => p - 1);
   };
 
   const forwardHandler = () => {
-    setStatus((prev) => ++prev);
+    setStatus((p) => p + 1);
   };
 
   return (

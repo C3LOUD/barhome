@@ -4,15 +4,24 @@
     "es2021": true
   },
   "extends": [
+    "airbnb",
     "eslint:recommended",
     "plugin:react/recommended",
-    "airbnb",
-    "airbnb/hooks"
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "plugins": ["react"],
-  "rules": {}
+  "rules": {
+    "object-curly-newline": "off",
+    "react/no-array-index-key": "off",
+    "indent": "off",
+    "no-nested-ternary": "off",
+    "implicit-arrow-linebreak": "off",
+    "operator-linebreak": "off"
+  }
 }

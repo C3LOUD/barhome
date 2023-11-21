@@ -14,7 +14,7 @@ export default function HomePage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <NavBar style={navStyle} />
+      <NavBar navStyle={navStyle} />
       <div className="relative flex flex-1 flex-col items-center justify-center bg-accent-dark-main">
         <Routes>
           <Route path="/" element={<Home onNav={navStyleHandler} />} />

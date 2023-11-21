@@ -28,11 +28,11 @@ export default function DarkModeSwitcher() {
     >
       <Icon
         name="moon-sharp"
-        style="text-secondary-main text-5xl cursor-pointer hover:text-secondary-tint-100 z-10 dark:text-secondary-tint-300 sm:text-[24px]"
+        className="z-10 cursor-pointer text-5xl text-secondary-main hover:text-secondary-tint-100 dark:text-secondary-tint-300 sm:text-[24px]"
       />
       <Icon
         name="sunny-sharp"
-        style="text-secondary-main text-5xl cursor-pointer hover:text-secondary-tint-100 z-10 dark:text-secondary-tint-300 sm:text-[24px]"
+        className="z-10 cursor-pointer text-5xl text-secondary-main hover:text-secondary-tint-100 dark:text-secondary-tint-300 sm:text-[24px]"
       />
     </div>
   );

@@ -24,7 +24,7 @@ export default function SearchInput() {
 
   return (
     <div className=" group relative flex w-[21rem] gap-2 rounded bg-white-400 px-2 py-2 font-secondary ring-2 ring-inset ring-accent-dark-main transition-all focus-within:w-full focus-within:rounded-t">
-      <Icon name="search-sharp" style="text-primary-main" />
+      <Icon name="search-sharp" className="text-primary-main" />
       <input
         type="text"
         className="paragraph-small w-full font-bold text-primary-main outline-none placeholder:text-primary-tint-600"
@@ -48,7 +48,7 @@ export default function SearchInput() {
                   className="flex items-center gap-2 border-b-[1px] border-accent-dark-tint-200/30 py-2 px-2 last:border-none hover:bg-primary-tint-700"
                   key={recipe._id}
                 >
-                  <Icon name="search-sharp" style="text-primary-main" />
+                  <Icon name="search-sharp" className="text-primary-main" />
                   <p className="paragraph-small font-bold text-primary-main">
                     {recipe.title}
                   </p>

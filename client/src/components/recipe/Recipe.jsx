@@ -113,7 +113,7 @@ export default function Recipe({ onEdit }) {
         </a>
         <Icon
           name="add"
-          style="transition-all text-primary-main text-2xl border-2 rounded-full border-primary-main px-2 py-2 group-hover:bg-primary-main group-hover:text-white-100"
+          className="rounded-full border-2 border-primary-main px-2 py-2 text-2xl text-primary-main transition-all group-hover:bg-primary-main group-hover:text-white-100"
         />
       </div>
     </ModalCard>

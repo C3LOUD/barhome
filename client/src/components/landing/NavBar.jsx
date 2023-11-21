@@ -11,7 +11,7 @@ import { getUser } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 import Logo from '../ui/Logo';
 
-export default function NavBar({ style }) {
+export default function NavBar({ navStyle }) {
   const [hamburger, setHamburger] = useState(false);
 
   const { isLoggedIn } = useSelector((state) => state.auth);
@@ -66,7 +66,7 @@ export default function NavBar({ style }) {
     <div
       className={twMerge(
         'flex h-16 shrink-0 items-center justify-between px-12 text-white-100 2xs:px-2',
-        style
+        navStyle
           ? 'fixed top-0 z-50 w-full bg-primary-main'
           : 'bg-accent-dark-main',
       )}
@@ -96,7 +96,7 @@ export default function NavBar({ style }) {
         >
           <Icon
             name="menu-sharp"
-            style="text-5xl hover:text-white-400 transition-all cursor-pointer"
+            className="cursor-pointer text-5xl transition-all hover:text-white-400"
             onClick={hamburgerHandler}
           />
         </div>
@@ -109,19 +109,30 @@ export default function NavBar({ style }) {
         )}
         onClick={smoothScrollHandler}
       >
-        <a className="navLink" data-id="features" onClick={smoothScrollHandler}>
+        <button
+          type="button"
+          className="navLink"
+          data-id="features"
+          onClick={smoothScrollHandler}
+        >
           Features
-        </a>
-        <a
+        </button>
+        <button
+          type="button"
           className="navLink"
           data-id="testimonials"
           onClick={smoothScrollHandler}
         >
           Testimonials
-        </a>
-        <a className="navLink" data-id="pricing" onClick={smoothScrollHandler}>
+        </button>
+        <button
+          type="button"
+          className="navLink"
+          data-id="pricing"
+          onClick={smoothScrollHandler}
+        >
           Pricing
-        </a>
+        </button>
         {!isLoggedIn ? (
           <NavLink
             className="navLink sm:w-full sm:bg-secondary-main sm:hover:bg-secondary-tint-200"
@@ -139,12 +150,13 @@ export default function NavBar({ style }) {
             <div className="relative">
               {`Welcome ${name || 'User'}`}
               <div className="absolute top-0 left-0 z-50 hidden w-full pt-14 text-center transition-all group-hover:block sm:group-hover:hidden">
-                <a
+                <button
+                  type="button"
                   className="before:tooltip-triangle relative w-full rounded bg-secondary-main px-4 py-2"
                   onClick={logoutHandler}
                 >
                   Logout
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -179,5 +191,5 @@ export default function NavBar({ style }) {
 }
 
 NavBar.propTypes = {
-  style: PropTypes.string.isRequired,
+  navStyle: PropTypes.bool.isRequired,
 };

@@ -30,16 +30,16 @@ export default function PostEditor() {
     setImageSrc(src);
   };
 
-  const changeStatus = (status) => {
-    setStatus(status);
+  const changeStatus = (s) => {
+    setStatus(s);
   };
 
   const backHandler = () => {
-    setStatus((prev) => --prev);
+    setStatus((p) => p - 1);
   };
 
   const forwardHandler = () => {
-    setStatus((prev) => ++prev);
+    setStatus((p) => p + 1);
   };
 
   const deleteHandler = (e) => {
@@ -55,12 +55,13 @@ export default function PostEditor() {
     );
   };
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <div className="absolute top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-accent-dark-shade-700/80">
         <Loading />
       </div>
     );
+  }
 
   return (
     <ModalCard>

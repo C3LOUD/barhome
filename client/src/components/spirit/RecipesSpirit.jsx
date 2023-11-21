@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import { fetchRecipeByIngredient } from '../../utils/api-list';
 import Icon from '../ui/Icon';
@@ -38,7 +38,7 @@ export default function RecipesSpirit({ spirit }) {
         </p>
         <Icon
           name="chevron-forward-sharp"
-          style="text-white-100 text-3xl dark:text-black-100"
+          className="text-3xl text-white-100 dark:text-black-100"
         />
       </Link>
       <div
@@ -54,14 +54,14 @@ export default function RecipesSpirit({ spirit }) {
       {clientX !== 0 && (
         <Icon
           name="chevron-back-sharp"
-          style="transition-all text-white-100 text-3xl absolute top-1/2 -translate-y-1/2 z-10 left-0 bg-primary-main/30 rounded-full px-2 py-2 hover:bg-primary-main cursor-pointer"
+          className="absolute top-1/2 left-0 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-primary-main/30 px-2 py-2 text-3xl text-white-100 transition-all hover:bg-primary-main"
           onClick={btnScrollHandler}
         />
       )}
       {clientX === 0 && (
         <Icon
           name="chevron-forward-sharp"
-          style="transition-all text-white-100 text-3xl absolute top-1/2 -translate-y-1/2 z-10 right-0 bg-primary-main/30 rounded-full px-2 py-2 hover:bg-primary-main cursor-pointer"
+          className="absolute top-1/2 right-0 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-primary-main/30 px-2 py-2 text-3xl text-white-100 transition-all hover:bg-primary-main"
           onClick={btnScrollHandler}
         />
       )}
@@ -69,7 +69,7 @@ export default function RecipesSpirit({ spirit }) {
         carousel.current?.scrollWidth && (
         <Icon
           name="chevron-forward-sharp"
-          style="transition-all text-white-100 text-3xl absolute top-1/2 -translate-y-1/2 z-10 right-0 bg-primary-main/30 rounded-full px-2 py-2 hover:bg-primary-main cursor-pointer"
+          className="absolute top-1/2 right-0 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-primary-main/30 px-2 py-2 text-3xl text-white-100 transition-all hover:bg-primary-main"
           onClick={btnScrollHandler}
         />
       )}

@@ -28,16 +28,16 @@ export default function Posts() {
   };
 
   const currentPostList = useMemo(() => {
-    if (searchParams.get('filter') === 'liked')
+    if (searchParams.get('filter') === 'liked') {
       return data?.posts.filter((post) =>
         liked?.some((likedPost) => likedPost === post._id),
       );
-
-    if (searchParams.get('filter') === 'myposts')
+    }
+    if (searchParams.get('filter') === 'myposts') {
       return data?.posts.filter((post) =>
         myposts?.some((myPost) => myPost === post._id),
       );
-
+    }
     return data?.posts;
   }, [data, searchParams]);
 
@@ -78,7 +78,7 @@ export default function Posts() {
                   filter={searchParams.get('filter')}
                 />
               ) : (
-                <Icon name="chevron-up-sharp" style="text-2xl" />
+                <Icon name="chevron-up-sharp" className="text-2xl" />
               )}
             </div>
           </div>

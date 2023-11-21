@@ -20,7 +20,7 @@ export default function BtnPost({ absPosition, onClick, text, type }) {
       )}
       <Icon
         name={type}
-        style="text-3xl text-accent-dark-main group-hover:text-white-100"
+        className="text-3xl text-accent-dark-main group-hover:text-white-100"
       />
       {text === 'Previous' && (
         <p className="text-white-100 opacity-0 transition-all group-hover:opacity-100">

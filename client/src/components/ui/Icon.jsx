@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function Icon({ onClick, name, style }) {
+export default function Icon({ onClick, name, className }) {
   return (
     <div className="flex items-center justify-center" onClick={onClick}>
-      <ion-icon name={name} class={style} />
+      <ion-icon name={name} class={className} />
     </div>
   );
 }
@@ -12,5 +12,5 @@ export default function Icon({ onClick, name, style }) {
 Icon.propTypes = {
   onClick: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
-  style: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
 };

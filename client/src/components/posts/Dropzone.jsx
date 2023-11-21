@@ -59,7 +59,7 @@ export default function Dropzone({ onSrc, onStatus }) {
         onDragLeave={dragAndDropHandler}
         onDrop={dragAndDropHandler}
       >
-        <Icon name="images-sharp" style="text-[6rem] text-black-100" />
+        <Icon name="images-sharp" className="text-[6rem] text-black-100" />
         <p className="heading-h3 font-primary font-bold text-black-100">
           Drop an Image Here
         </p>

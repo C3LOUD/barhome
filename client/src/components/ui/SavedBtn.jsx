@@ -53,9 +53,10 @@ export default function SavedBtn({ size }) {
       ) : (
         <Icon
           name="bookmark-outline"
-          style={`${
-            size === 'small' ? 'text-2xl' : 'text-5xl'
-          } text-primary-main`}
+          className={twMerge(
+            size === 'small' ? 'text-2xl' : 'text-5xl',
+            'text-primary-main',
+          )}
         />
       )}
     </div>

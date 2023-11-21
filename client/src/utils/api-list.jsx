@@ -7,15 +7,15 @@ export const fetchAllRecipes = (currentPage) =>
       `${process.env.SERVER}/recipe/?page=${currentPage}`,
       {
         headers: {
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
     if (!res.ok) {
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const fetchRecipe = (id) =>
@@ -23,14 +23,14 @@ export const fetchRecipe = (id) =>
     const token = localStorage.getItem('token');
     const res = await fetch(`/api/recipe/${id}`, {
       headers: {
-        Authorization: 'Bearer ' + token,
+        Authorization: `Bearer ${token}`,
       },
     });
     if (!res.ok) {
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const fetchRecipeByIngredient = (ingredient) =>
@@ -40,15 +40,15 @@ export const fetchRecipeByIngredient = (ingredient) =>
       `${process.env.SERVER}/recipe/ingredient/${ingredient}`,
       {
         headers: {
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
     if (!res.ok) {
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const fetchRandomRecipe = () =>
@@ -57,14 +57,14 @@ export const fetchRandomRecipe = () =>
     if (!token) return 'not autenticated.';
     const res = await fetch(`${process.env.SERVER}/recipe/random`, {
       headers: {
-        Authorization: 'Bearer ' + token,
+        Authorization: `Bearer ${token}`,
       },
     });
     if (!res.ok) {
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const searchKeywords = (keyword) =>
@@ -76,15 +76,15 @@ export const searchKeywords = (keyword) =>
       `${process.env.SERVER}/recipe/search?q=${keyword}`,
       {
         headers: {
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
     if (!res.ok) {
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const fetchSavedRecipes = () =>
@@ -93,14 +93,14 @@ export const fetchSavedRecipes = () =>
     if (!token) return 'not autenticated.';
     const res = await fetch(`${process.env.SERVER}/recipe/saved`, {
       headers: {
-        Authorization: 'Bearer ' + token,
+        Authorization: `Bearer ${token}`,
       },
     });
     if (!res.ok) {
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const savedRecipe = () =>
@@ -110,7 +110,7 @@ export const savedRecipe = () =>
     const res = await fetch(`${process.env.SERVER}/recipe/saved`, {
       method: 'PUT',
       headers: {
-        Authorization: 'Bearer ' + token,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(title),
@@ -119,7 +119,7 @@ export const savedRecipe = () =>
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const signup = () =>
@@ -135,7 +135,7 @@ export const signup = () =>
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const login = () =>
@@ -151,7 +151,7 @@ export const login = () =>
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const getUser = () =>
@@ -160,14 +160,14 @@ export const getUser = () =>
     if (!token) return 'not autenticated.';
     const res = await fetch(`${process.env.SERVER}/auth`, {
       headers: {
-        Authorization: 'Bearer ' + token,
+        Authorization: `Bearer ${token}`,
       },
     });
     if (!res.ok) {
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const updateUser = () =>
@@ -178,7 +178,7 @@ export const updateUser = () =>
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(userData),
     });
@@ -186,7 +186,7 @@ export const updateUser = () =>
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const forgetPassword = () =>
@@ -202,7 +202,7 @@ export const forgetPassword = () =>
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const resetPassword = () =>
@@ -218,7 +218,7 @@ export const resetPassword = () =>
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const fetchAllPosts = () =>
@@ -228,16 +228,16 @@ export const fetchAllPosts = () =>
       const token = localStorage.getItem('token');
       const res = await fetch(`${process.env.SERVER}/post/`, {
         headers: {
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
         },
       });
       if (!res.ok) {
         const error = await res.json();
         throw new Error(error.message);
       }
-      return await res.json();
+      return res.json();
     },
-    { refetchOnWindowFocus: true }
+    { refetchOnWindowFocus: true },
   );
 
 export const fetchPost = (postId) =>
@@ -247,14 +247,14 @@ export const fetchPost = (postId) =>
     if (!token) return 'not autenticated.';
     const res = await fetch(`${process.env.SERVER}/post/${postId}`, {
       headers: {
-        Authorization: 'Bearer ' + token,
+        Authorization: `Bearer ${token}`,
       },
     });
     if (!res.ok) {
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const createPost = () =>
@@ -264,7 +264,7 @@ export const createPost = () =>
     const res = await fetch(`${process.env.SERVER}/post/create`, {
       method: 'POST',
       headers: {
-        Authorization: 'Bearer ' + token,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
@@ -273,7 +273,7 @@ export const createPost = () =>
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const editPost = () =>
@@ -283,7 +283,7 @@ export const editPost = () =>
     const res = await fetch(`${process.env.SERVER}/post/`, {
       method: 'PUT',
       headers: {
-        Authorization: 'Bearer ' + token,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
@@ -292,7 +292,7 @@ export const editPost = () =>
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const deletePost = () =>
@@ -302,7 +302,7 @@ export const deletePost = () =>
     const res = await fetch(`${process.env.SERVER}/post/`, {
       method: 'DELETE',
       headers: {
-        Authorization: 'Bearer ' + token,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(id),
@@ -311,7 +311,7 @@ export const deletePost = () =>
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const likedPost = () =>
@@ -321,7 +321,7 @@ export const likedPost = () =>
     const res = await fetch(`${process.env.SERVER}/post/liked`, {
       method: 'PUT',
       headers: {
-        Authorization: 'Bearer ' + token,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(id),
@@ -330,7 +330,7 @@ export const likedPost = () =>
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const addComment = () =>
@@ -340,7 +340,7 @@ export const addComment = () =>
     const res = await fetch(`${process.env.SERVER}/post/comment`, {
       method: 'POST',
       headers: {
-        Authorization: 'Bearer ' + token,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(commentData),
@@ -349,7 +349,7 @@ export const addComment = () =>
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });
 
 export const removeComment = () =>
@@ -359,7 +359,7 @@ export const removeComment = () =>
     const res = await fetch(`${process.env.SERVER}/post/comment`, {
       method: 'DELETE',
       headers: {
-        Authorization: 'Bearer ' + token,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(commentData),
@@ -368,5 +368,5 @@ export const removeComment = () =>
       const error = await res.json();
       throw new Error(error.message);
     }
-    return await res.json();
+    return res.json();
   });

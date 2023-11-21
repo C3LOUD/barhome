@@ -21,7 +21,7 @@ export default function IngredientSpirit() {
         <Link to="/dashboard/spirits" className="group flex w-fit items-center">
           <Icon
             name="chevron-back-sharp"
-            style="text-white-100/50 text-2xl group-hover:text-white-100 dark:text-gray-400 dark:group-hover:text-primary-main"
+            className="text-2xl text-white-100/50 group-hover:text-white-100 dark:text-gray-400 dark:group-hover:text-primary-main"
           />
           <p className="paragraph-xsmall font-secondary font-semibold text-white-100/50 group-hover:text-white-100 dark:text-gray-400 dark:group-hover:text-primary-main">
             Spirits

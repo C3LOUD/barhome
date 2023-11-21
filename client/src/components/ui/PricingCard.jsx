@@ -40,20 +40,21 @@ export default function PricingCard({ pricing }) {
       </div>
       <ul className="paragraph-medium flex flex-col gap-3 px-16 py-16 text-black-100 md:px-8 xs:px-6">
         <li className="flex gap-2">
-          <Icon name="checkmark-sharp" style="text-2xl" /> 1000+ Pro Recipes
+          <Icon name="checkmark-sharp" className="text-2xl" /> 1000+ Pro Recipes
         </li>
         <li className="flex gap-2">
-          <Icon name="checkmark-sharp" style="text-2xl" /> Ingredients
+          <Icon name="checkmark-sharp" className="text-2xl" /> Ingredients
           Caculation
         </li>
         <li className="flex gap-2">
-          <Icon name="checkmark-sharp" style="text-2xl" /> Detail Instruction
+          <Icon name="checkmark-sharp" className="text-2xl" /> Detail
+          Instruction
         </li>
         <li className="flex gap-2">
-          <Icon name="checkmark-sharp" style="text-2xl" /> Social Post
+          <Icon name="checkmark-sharp" className="text-2xl" /> Social Post
         </li>
         <li className="flex gap-2">
-          <Icon name="checkmark-sharp" style="text-2xl" /> Personal Recipe
+          <Icon name="checkmark-sharp" className="text-2xl" /> Personal Recipe
           management
         </li>
         <li
@@ -64,7 +65,7 @@ export default function PricingCard({ pricing }) {
         >
           <Icon
             name={pricing.popular ? 'checkmark-sharp' : 'close-sharp'}
-            style="text-2xl"
+            className="text-2xl"
           />
           {' Support for 1 Year'}
         </li>
@@ -76,7 +77,7 @@ export default function PricingCard({ pricing }) {
         >
           <Icon
             name={pricing.popular ? 'checkmark-sharp' : 'close-sharp'}
-            style="text-2xl"
+            className="text-2xl"
           />
           {' Updates for 1 Year'}
         </li>

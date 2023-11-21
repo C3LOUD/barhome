@@ -117,7 +117,7 @@ export default function CardPost({ posts }) {
         </Link>
         <Icon
           name={checkLiked ? 'heart' : 'heart-outline'}
-          style="text-2xl cursor-pointer"
+          className="cursor-pointer text-2xl"
           onClick={likedHandler}
         />
       </div>
@@ -154,7 +154,7 @@ export default function CardPost({ posts }) {
         />
         <Icon
           name="send-sharp"
-          style="text-2xl text-black-100 cursor-pointer active:scale-90 transition-all"
+          className="cursor-pointer text-2xl text-black-100 transition-all active:scale-90"
           onClick={addCommentHandler}
         />
       </div>

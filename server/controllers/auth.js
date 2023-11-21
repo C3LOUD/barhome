@@ -1,11 +1,11 @@
-const crypto = require('crypto');
+const crypto = require("crypto");
 
-const { validationResult } = require('express-validator');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const sgMail = require('@sendgrid/mail');
+const { validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const sgMail = require("@sendgrid/mail");
 
-const User = require('../models/user');
+const User = require("../models/user");
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -32,7 +32,7 @@ exports.signup = async (req, res, next) => {
       avatarUrl,
     });
     await user.save();
-    res.status(201).json({ message: 'User created!' });
+    res.status(201).json({ message: "User created!" });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
@@ -47,20 +47,20 @@ exports.login = async (req, res, next) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      const error = new Error('A user with this email could not be found.');
+      const error = new Error("A user with this email could not be found.");
       error.statusCode = 401;
       throw error;
     }
     const isEqual = await bcrypt.compare(password, user.password);
     if (!isEqual) {
-      const error = new Error('Wrong password.');
+      const error = new Error("Wrong password.");
       error.statusCode = 401;
       throw error;
     }
     const token = jwt.sign(
       { email: user.email, userId: user._id.toString() },
-      process.env.JWT_SECRECT,
-      { expiresIn: '1h' }
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
     );
     const expirationTime = new Date().getTime() + 3600000;
 
@@ -110,7 +110,7 @@ exports.updateUser = async (req, res, next) => {
         user.password
       );
       if (!isEqual) {
-        const error = new Error('Wrong password.');
+        const error = new Error("Wrong password.");
         error.statusCode = 401;
         throw error;
       }
@@ -130,7 +130,7 @@ exports.updateUser = async (req, res, next) => {
     ) {
       const isExist = await User.findOne({ email: req.body.email }).exec();
       if (isExist) {
-        const error = new Error('E-Mail address already exists!');
+        const error = new Error("E-Mail address already exists!");
         error.statusCode = 422;
         throw error;
       }
@@ -139,7 +139,7 @@ exports.updateUser = async (req, res, next) => {
 
     await user.save();
 
-    res.status(200).json({ message: 'update user success', body: user });
+    res.status(200).json({ message: "update user success", body: user });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
@@ -157,7 +157,7 @@ exports.forgetPassword = async (req, res, next) => {
       throw error;
     }
 
-    const token = crypto.randomBytes(32).toString('hex');
+    const token = crypto.randomBytes(32).toString("hex");
     const user = await User.findOne({ email: req.body.email }).exec();
     user.resetToken = token;
     user.resetTokenExpiration = Date.now() + 3600000;
@@ -165,9 +165,9 @@ exports.forgetPassword = async (req, res, next) => {
 
     const message = {
       to: req.body.email,
-      from: 'hujgiowhmozobcfqco@tmmbt.net',
-      subject: 'Password Reset Link',
-      text: 'Click link to reset your password',
+      from: "hujgiowhmozobcfqco@tmmbt.net",
+      subject: "Password Reset Link",
+      text: "Click link to reset your password",
       html: `
       <p>You requested a password reset</p>
       <p>Link will be valid for 60 minutes</p>
@@ -175,7 +175,7 @@ exports.forgetPassword = async (req, res, next) => {
     `,
     };
     await sgMail.send(message);
-    res.status(200).json({ message: 'reset password link has been sent.' });
+    res.status(200).json({ message: "reset password link has been sent." });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
@@ -188,12 +188,12 @@ exports.setNewPassword = async (req, res, next) => {
   try {
     const user = await User.findOne({ resetToken: req.body.token }).exec();
     if (!user) {
-      const error = new Error('Reset Link Expired');
+      const error = new Error("Reset Link Expired");
       error.statusCode = 422;
       throw error;
     }
     if (user.resetTokenExpiration - Date.now() <= 0) {
-      const error = new Error('Reset Link Expired');
+      const error = new Error("Reset Link Expired");
       error.statusCode = 422;
       throw error;
     }
@@ -203,7 +203,7 @@ exports.setNewPassword = async (req, res, next) => {
     user.resetTokenExpiration = undefined;
     await user.save();
 
-    res.status(200).json({ message: 'Reset Link is valid.' });
+    res.status(200).json({ message: "Reset Link is valid." });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;

@@ -32,7 +32,7 @@ export default (img, ctx) => {
     offSetX,
     offSetY,
     canvasX,
-    canvasY
+    canvasY,
   );
 
   //* dimmiing modal

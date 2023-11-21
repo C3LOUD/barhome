@@ -105,7 +105,7 @@ export default function InputForm({ admin, onSubmit }) {
           />
           <Icon
             name="camera"
-            style="absolute bottom-2 left-1/2 -translate-x-2/4 text-2xl text-primary-main group-hover:bg-white-100 transition-all bg-white-100/50 rounded-full px-1 py-1"
+            className="absolute bottom-2 left-1/2 -translate-x-2/4 rounded-full bg-white-100/50 px-1 py-1 text-2xl text-primary-main transition-all group-hover:bg-white-100"
           />
         </div>
 

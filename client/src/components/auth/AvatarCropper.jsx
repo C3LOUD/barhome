@@ -34,7 +34,7 @@ export default function AvatarCropper({ onCanvas, onEdit }) {
     >
       <Icon
         name="close"
-        style="absolute top-2 right-2 text-4xl hover:scale-110 transition-all text-black-100"
+        className="absolute top-2 right-2 text-4xl text-black-100 transition-all hover:scale-110"
         onClick={onEdit}
       />
       {status === 1 && (
@@ -44,7 +44,7 @@ export default function AvatarCropper({ onCanvas, onEdit }) {
         <>
           <Icon
             name="arrow-back"
-            style="absolute top-2 left-2 text-4xl hover:scale-110 transition-all text-black-100"
+            className="absolute top-2 left-2 text-4xl text-black-100 transition-all hover:scale-110"
             onClick={() => setStatus(1)}
           />
           <ImageCropper src={imageSrc} onCanvas={tempCropHandler} />

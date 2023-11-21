@@ -32,7 +32,7 @@ export default function Main({ onHamburger }) {
         <div className="flex w-full gap-4">
           <Icon
             name="menu-sharp"
-            style="transition-all text-5xl text-white-100 hover:text-white-400 dark:text-black-100 dark:hover:text-gray-400 hidden md:block"
+            className="hidden text-5xl text-white-100 transition-all hover:text-white-400 dark:text-black-100 dark:hover:text-gray-400 md:block"
             onClick={onHamburger}
           />
           <SearchInput />

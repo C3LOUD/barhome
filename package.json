@@ -6,7 +6,7 @@
   "scripts": {
     "backend": "nodemon server/app.js",
     "frontend": "npm run start --prefix client",
-    "dev": "npx concurrently \"npm run backend\" \"npm run start --prefix client\""
+    "dev": "npx concurrently \"npm run backend\" \"npm run frontend\""
   },
   "keywords": [],
   "author": "chenyu",
@@ -21,6 +21,7 @@
     "body-parser": "^1.20.1",
     "cloudinary": "^1.32.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-validator": "^6.14.2",
     "helmet": "^6.0.0",
