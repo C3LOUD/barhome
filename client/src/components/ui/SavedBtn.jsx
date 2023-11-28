@@ -4,14 +4,14 @@ import { useSelector } from 'react-redux';
 import { twMerge } from 'tailwind-merge';
 import PropTypes from 'prop-types';
 
-import { savedRecipe } from '../../utils/api-list';
+import { useSavedRecipe } from '../../utils/api-list';
 import Icon from './Icon';
 import SavedIcon from './SavedIcon';
 
 export default function SavedBtn({ size }) {
   const [checkSaved, setCheckSaved] = useState(false);
   const savedRef = useRef();
-  const { mutate } = savedRecipe();
+  const { mutate } = useSavedRecipe();
   const queryClient = useQueryClient();
 
   const { saved } = useSelector((state) => state.admin);
@@ -40,10 +40,11 @@ export default function SavedBtn({ size }) {
   }, [saved]);
 
   return (
-    <div
+    <button
+      type="button"
       className={twMerge(
         'absolute rounded-full bg-white-100/50 shadow-md hover:bg-white-100',
-        size === 'small' ? 'top-1 left-1 px-1 py-1' : 'top-2 left-2 px-2 py-2',
+        size === 'small' ? 'left-1 top-1 px-1 py-1' : 'left-2 top-2 px-2 py-2',
       )}
       onClick={savedHandler}
       ref={savedRef}
@@ -59,7 +60,7 @@ export default function SavedBtn({ size }) {
           )}
         />
       )}
-    </div>
+    </button>
   );
 }
 

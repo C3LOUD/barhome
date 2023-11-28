@@ -22,11 +22,11 @@ export default function InputForm({ admin, onSubmit }) {
   const [avatarEditing, setAvatarEditing] = useState(false);
   const [tempImageSrc, setTempImageSrc] = useState(tempAvatar);
 
-  const nameRef = useRef();
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const currentPasswordRef = useRef();
-  const confirmPasswordRef = useRef();
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const currentPasswordRef = useRef(null);
+  const confirmPasswordRef = useRef(null);
 
   const nameValidHandler = useCallback((validationResult) => {
     setNameValid(validationResult);
@@ -86,15 +86,17 @@ export default function InputForm({ admin, onSubmit }) {
   return (
     <>
       {avatarEditing && (
-        <div
-          className="absolute top-0 left-0 z-10 flex h-full w-full cursor-pointer items-center justify-center bg-accent-dark-shade-800/80"
+        <button
+          type="button"
+          className="absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center bg-accent-dark-shade-800/80"
           onClick={editHandler}
         >
           <AvatarCropper onEdit={editHandler} onCanvas={canvasHandler} />
-        </div>
+        </button>
       )}
       <form onSubmit={submitHandler}>
-        <div
+        <button
+          type="button"
           className="group relative mx-auto mb-6 h-40 w-40 cursor-pointer overflow-hidden rounded-full dark:shadow-md"
           onClick={editHandler}
         >
@@ -107,7 +109,7 @@ export default function InputForm({ admin, onSubmit }) {
             name="camera"
             className="absolute bottom-2 left-1/2 -translate-x-2/4 rounded-full bg-white-100/50 px-1 py-1 text-2xl text-primary-main transition-all group-hover:bg-white-100"
           />
-        </div>
+        </button>
 
         <AuthInput
           id="name"
@@ -147,7 +149,12 @@ export default function InputForm({ admin, onSubmit }) {
         />
         <AuthInput
           id="confirmPassword"
-          validator={confirmPasswordValidator(passwordRef.current?.getValue())}
+          validator={(inputPassword) => {
+            confirmPasswordValidator(
+              inputPassword,
+              passwordRef.current?.getValue(),
+            );
+          }}
           ref={confirmPasswordRef}
           onValid={confirmPasswordValidHandler}
           type="password"

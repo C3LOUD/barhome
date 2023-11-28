@@ -6,7 +6,7 @@ import { twMerge } from 'tailwind-merge';
 import PropTypes from 'prop-types';
 
 import tempAvatar from '../../assets/7007892.png';
-import { createPost } from '../../utils/api-list';
+import { useCreatePost } from '../../utils/api-list';
 import Loading from '../ui/Loading';
 
 export default function CreatePost({ canvas }) {
@@ -17,7 +17,7 @@ export default function CreatePost({ canvas }) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const { mutate, isLoading } = createPost();
+  const { mutate, isLoading } = useCreatePost();
 
   const titleRef = useRef();
 
@@ -52,7 +52,7 @@ export default function CreatePost({ canvas }) {
 
   if (isLoading) {
     return (
-      <div className="absolute top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-accent-dark-shade-700/80">
+      <div className="absolute left-0 top-0 z-20 flex h-full w-full items-center justify-center bg-accent-dark-shade-700/80">
         <Loading />
       </div>
     );
@@ -76,7 +76,7 @@ export default function CreatePost({ canvas }) {
           <textarea
             name="content"
             placeholder="input some text"
-            className="paragraph-small inline-block h-full w-full flex-1 resize-none border-t-2 bg-transparent py-2 px-2 font-secondary font-bold text-black-100 placeholder:text-gray-200 focus:outline-none"
+            className="paragraph-small inline-block h-full w-full flex-1 resize-none border-t-2 bg-transparent px-2 py-2 font-secondary font-bold text-black-100 placeholder:text-gray-200 focus:outline-none"
             onChange={inputContentHandler}
           />
           <span

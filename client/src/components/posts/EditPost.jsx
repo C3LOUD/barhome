@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 import PropTypes from 'prop-types';
 
 import tempAvatar from '../../assets/7007892.png';
-import { editPost, fetchPost } from '../../utils/api-list';
+import { useEditPost, useFetchPost } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 import Loading from '../ui/Loading';
 
@@ -17,11 +17,11 @@ export default function EditPost({ canvas, onEdit }) {
     [inputContent],
   );
 
-  const { data } = fetchPost(id);
+  const { data } = useFetchPost(id);
 
   const navigate = useNavigate();
 
-  const { mutate, isLoading } = editPost();
+  const { mutate, isLoading } = useEditPost();
 
   const titleRef = useRef();
   const contentRef = useRef();
@@ -54,7 +54,7 @@ export default function EditPost({ canvas, onEdit }) {
 
   if (isLoading) {
     return (
-      <div className="absolute top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-accent-dark-shade-700/80">
+      <div className="absolute left-0 top-0 z-20 flex h-full w-full items-center justify-center bg-accent-dark-shade-700/80">
         <Loading />
       </div>
     );
@@ -68,7 +68,7 @@ export default function EditPost({ canvas, onEdit }) {
           alt="cropped"
           className="h-full w-full"
         />
-        <div className="absolute left-1/2 bottom-2 -translate-x-1/2">
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2">
           <Icon
             name="camera"
             className="cursor-pointer rounded-full bg-white-100/50 px-4 py-4 text-5xl text-primary-main hover:bg-white-100"
@@ -91,7 +91,7 @@ export default function EditPost({ canvas, onEdit }) {
           <textarea
             name="content"
             placeholder="input some text"
-            className="paragraph-small inline-block h-full w-full flex-1 resize-none border-t-2 bg-transparent py-2 px-2 font-secondary font-bold text-black-100 placeholder:text-gray-200 focus:outline-none"
+            className="paragraph-small inline-block h-full w-full flex-1 resize-none border-t-2 bg-transparent px-2 py-2 font-secondary font-bold text-black-100 placeholder:text-gray-200 focus:outline-none"
             onChange={inputContentHandler}
             ref={contentRef}
           />

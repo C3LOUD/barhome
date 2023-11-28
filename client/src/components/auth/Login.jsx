@@ -5,7 +5,7 @@ import { twMerge } from 'tailwind-merge';
 
 import AuthInput from '../ui/AuthInput';
 import { emailValidator, passwordValidator } from '../../utils/input-validator';
-import { login } from '../../utils/api-list';
+import { useLogin } from '../../utils/api-list';
 import { login as loginThunk } from '../../store/auth-slice';
 
 export default function Login() {
@@ -18,7 +18,7 @@ export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const { mutate, isError, error } = login();
+  const { mutate, isError, error } = useLogin();
 
   const emailValidHandler = useCallback((validationResult) => {
     setEmailValid(validationResult);

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes, useLocation, useSearchParams } from 'react-router-dom';
 
-import { fetchAllPosts } from '../../utils/api-list';
+import { useFetchAllPosts } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 import Modal from '../ui/Modal';
 import CardPost from './CardPost';
@@ -10,7 +10,7 @@ import TogglePosts from './TogglePosts';
 
 export default function Posts() {
   const [showToggle, setShowToggle] = useState(false);
-  const { data, isSuccess, refetch } = fetchAllPosts();
+  const { data, isSuccess, refetch } = useFetchAllPosts();
 
   const { liked, posts: myposts } = useSelector((state) => state.admin);
 
@@ -57,7 +57,7 @@ export default function Posts() {
         }}
       >
         <div className="flex w-full flex-1 flex-col items-center gap-12 overflow-y-scroll pb-6 scrollbar-none 2xs:gap-6">
-          <div className="absolute top-0 left-0 xs:static xs:flex xs:gap-6 xs:self-start">
+          <div className="absolute left-0 top-0 xs:static xs:flex xs:gap-6 xs:self-start">
             <p className="display-small font-primary font-bold text-white-100 dark:text-black-100">
               Post
             </p>

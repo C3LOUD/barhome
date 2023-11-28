@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { searchKeywords } from '../../utils/api-list';
+import { useSearchKeywords } from '../../utils/api-list';
 import Icon from './Icon';
 
 export default function SearchInput() {
@@ -10,7 +10,7 @@ export default function SearchInput() {
 
   const location = useLocation();
 
-  const { data, isSuccess, isLoading } = searchKeywords(input.trim());
+  const { data, isSuccess, isLoading } = useSearchKeywords(input.trim());
 
   const inputHandler = (e) => {
     setInput(e.target.value);
@@ -21,6 +21,8 @@ export default function SearchInput() {
     setPrevPathname(location.pathname.split('/')[2]);
     setInput('');
   }, [location.pathname]);
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div className=" group relative flex w-[21rem] gap-2 rounded bg-white-400 px-2 py-2 font-secondary ring-2 ring-inset ring-accent-dark-main transition-all focus-within:w-full focus-within:rounded-t">
@@ -33,9 +35,9 @@ export default function SearchInput() {
         value={input}
       />
       {input.trim() && (
-        <ul className="absolute top-10 left-0 z-10 hidden w-full flex-col rounded-b border-2 border-accent-dark-main bg-white-400 group-focus-within:flex">
+        <ul className="absolute left-0 top-10 z-10 hidden w-full flex-col rounded-b border-2 border-accent-dark-main bg-white-400 group-focus-within:flex">
           {isSuccess && data.recipes.length === 0 && (
-            <p className="paragraph-small py-2 px-2 font-bold text-error">
+            <p className="paragraph-small px-2 py-2 font-bold text-error">
               {data.message}
             </p>
           )}
@@ -45,7 +47,7 @@ export default function SearchInput() {
               return (
                 <Link
                   to={`${location.pathname}/${recipe.title}?isEditing=false`}
-                  className="flex items-center gap-2 border-b-[1px] border-accent-dark-tint-200/30 py-2 px-2 last:border-none hover:bg-primary-tint-700"
+                  className="flex items-center gap-2 border-b-[1px] border-accent-dark-tint-200/30 px-2 py-2 last:border-none hover:bg-primary-tint-700"
                   key={recipe._id}
                 >
                   <Icon name="search-sharp" className="text-primary-main" />

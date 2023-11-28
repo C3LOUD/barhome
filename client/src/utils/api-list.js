@@ -1,6 +1,6 @@
 import { useQuery, useMutation } from '@tanstack/react-query';
 
-export const fetchAllRecipes = (currentPage) =>
+export const useFetchAllRecipes = (currentPage) =>
   useQuery(['recipes', currentPage], async () => {
     const token = localStorage.getItem('token');
     const res = await fetch(
@@ -18,7 +18,7 @@ export const fetchAllRecipes = (currentPage) =>
     return res.json();
   });
 
-export const fetchRecipe = (id) =>
+export const useFetchRecipe = (id) =>
   useQuery(['recipe', id], async () => {
     const token = localStorage.getItem('token');
     const res = await fetch(`/api/recipe/${id}`, {
@@ -33,7 +33,7 @@ export const fetchRecipe = (id) =>
     return res.json();
   });
 
-export const fetchRecipeByIngredient = (ingredient) =>
+export const useFetchRecipeByIngredient = (ingredient) =>
   useQuery(['recipe', ingredient], async () => {
     const token = localStorage.getItem('token');
     const res = await fetch(
@@ -51,7 +51,7 @@ export const fetchRecipeByIngredient = (ingredient) =>
     return res.json();
   });
 
-export const fetchRandomRecipe = () =>
+export const useFetchRandomRecipe = () =>
   useQuery(['random'], async () => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
@@ -67,7 +67,7 @@ export const fetchRandomRecipe = () =>
     return res.json();
   });
 
-export const searchKeywords = (keyword) =>
+export const useSearchKeywords = (keyword) =>
   useQuery(['search', keyword], async () => {
     if (!keyword) return 'empty';
     const token = localStorage.getItem('token');
@@ -87,7 +87,7 @@ export const searchKeywords = (keyword) =>
     return res.json();
   });
 
-export const fetchSavedRecipes = () =>
+export const useFetchSavedRecipes = () =>
   useQuery(['saved'], async () => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
@@ -103,7 +103,7 @@ export const fetchSavedRecipes = () =>
     return res.json();
   });
 
-export const savedRecipe = () =>
+export const useSavedRecipe = () =>
   useMutation(['saved'], async (title) => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
@@ -122,7 +122,7 @@ export const savedRecipe = () =>
     return res.json();
   });
 
-export const signup = () =>
+export const useSignUp = () =>
   useMutation(['signup'], async (userData) => {
     const res = await fetch(`${process.env.SERVER}/auth/signup`, {
       method: 'POST',
@@ -138,7 +138,7 @@ export const signup = () =>
     return res.json();
   });
 
-export const login = () =>
+export const useLogin = () =>
   useMutation(['login'], async (userData) => {
     const res = await fetch(`${process.env.SERVER}/auth/login`, {
       method: 'POST',
@@ -154,7 +154,7 @@ export const login = () =>
     return res.json();
   });
 
-export const getUser = () =>
+export const useGetUser = () =>
   useQuery(['user'], async () => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
@@ -170,7 +170,7 @@ export const getUser = () =>
     return res.json();
   });
 
-export const updateUser = () =>
+export const useUpdateUser = () =>
   useMutation(['updateUser'], async (userData) => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
@@ -189,7 +189,7 @@ export const updateUser = () =>
     return res.json();
   });
 
-export const forgetPassword = () =>
+export const useForgetPassword = () =>
   useMutation(['forgetPassword'], async (email) => {
     const res = await fetch(`${process.env.SERVER}/auth/forget`, {
       method: 'POST',
@@ -205,7 +205,7 @@ export const forgetPassword = () =>
     return res.json();
   });
 
-export const resetPassword = () =>
+export const useResetPassword = () =>
   useMutation(['resetPassword'], async (newPassword) => {
     const res = await fetch(`${process.env.SERVER}/auth/reset`, {
       method: 'POST',
@@ -221,7 +221,7 @@ export const resetPassword = () =>
     return res.json();
   });
 
-export const fetchAllPosts = () =>
+export const useFetchAllPosts = () =>
   useQuery(
     ['posts'],
     async () => {
@@ -240,7 +240,7 @@ export const fetchAllPosts = () =>
     { refetchOnWindowFocus: true },
   );
 
-export const fetchPost = (postId) =>
+export const useFetchPost = (postId) =>
   useQuery(['search', postId], async () => {
     if (!postId) return 'empty';
     const token = localStorage.getItem('token');
@@ -257,7 +257,7 @@ export const fetchPost = (postId) =>
     return res.json();
   });
 
-export const createPost = () =>
+export const useCreatePost = () =>
   useMutation(['createPost'], async (formData) => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
@@ -276,7 +276,7 @@ export const createPost = () =>
     return res.json();
   });
 
-export const editPost = () =>
+export const useEditPost = () =>
   useMutation(['editPost'], async (formData) => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
@@ -295,8 +295,8 @@ export const editPost = () =>
     return res.json();
   });
 
-export const deletePost = () =>
-  useMutation(['editPost'], async (id) => {
+export const useDeletePost = () =>
+  useMutation(['deletePost'], async (id) => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
     const res = await fetch(`${process.env.SERVER}/post/`, {
@@ -314,7 +314,7 @@ export const deletePost = () =>
     return res.json();
   });
 
-export const likedPost = () =>
+export const useLikedPost = () =>
   useMutation(['liked'], async (id) => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
@@ -333,7 +333,7 @@ export const likedPost = () =>
     return res.json();
   });
 
-export const addComment = () =>
+export const useAddComment = () =>
   useMutation(['addComment'], async (commentData) => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';
@@ -352,7 +352,7 @@ export const addComment = () =>
     return res.json();
   });
 
-export const removeComment = () =>
+export const useRemoveComment = () =>
   useMutation(['removeComment'], async (commentData) => {
     const token = localStorage.getItem('token');
     if (!token) return 'not autenticated.';

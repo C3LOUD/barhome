@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import tempAvatar from '../../assets/7007892.png';
-import { removeComment } from '../../utils/api-list';
+import { useRemoveComment } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 
 export default function Comment({ comment, post }) {
-  const { mutate } = removeComment();
+  const { mutate } = useRemoveComment();
   const queryClient = useQueryClient();
 
   const date = new Intl.DateTimeFormat(navigator.language, {

@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 import tempAvatar from '../../assets/7007892.png';
 import { adminActions } from '../../store/admin-slice';
-import { addComment, likedPost } from '../../utils/api-list';
+import { useAddComment, useLikedPost } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 import Comment from './Comment';
 
@@ -27,9 +27,9 @@ export default function CardPost({ posts }) {
     _id,
   } = posts;
 
-  const { mutate: likedPostMutate } = likedPost();
+  const { mutate: likedPostMutate } = useLikedPost();
   const { mutate: addCommentMutate, isLoading: addCommentIsLoading } =
-    addComment();
+    useAddComment();
 
   const { liked, posts: myPosts } = useSelector((state) => state.admin);
   const dispatch = useDispatch();

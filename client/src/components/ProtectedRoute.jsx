@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { adminActions } from '../store/admin-slice';
 import { login } from '../store/auth-slice';
-import { getUser } from '../utils/api-list';
+import { useGetUser } from '../utils/api-list';
 
 export default function ProtectedRoute({ children }) {
   const [initialize, setInitialize] = useState(false);
@@ -13,7 +13,7 @@ export default function ProtectedRoute({ children }) {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  const { data } = getUser();
+  const { data } = useGetUser();
 
   useEffect(() => {
     if (!data) return;
@@ -40,5 +40,9 @@ export default function ProtectedRoute({ children }) {
 }
 
 ProtectedRoute.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
+};
+
+ProtectedRoute.defaultProps = {
+  children: undefined,
 };

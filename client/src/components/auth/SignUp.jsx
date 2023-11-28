@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { signup } from '../../utils/api-list';
+import { useSignUp } from '../../utils/api-list';
 import InputForm from '../ui/InputForm';
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const { mutate, error, isError } = signup();
+  const { mutate, error, isError } = useSignUp();
 
   const submitHandler = async (userData) => {
     mutate(userData, {

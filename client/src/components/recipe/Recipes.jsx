@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import drinkWithFriends from '../../assets/drink-with-friends.png';
-import { fetchAllRecipes, fetchRandomRecipe } from '../../utils/api-list';
+import { useFetchAllRecipes, useFetchRandomRecipe } from '../../utils/api-list';
 import Loading from '../ui/Loading';
 import MainGrid from '../ui/MainGrid';
 import Modal from '../ui/Modal';
@@ -13,8 +13,8 @@ export default function Recipes() {
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
-  const { isLoading, isError, error, data } = fetchAllRecipes(currentPage);
-  const { data: randomData, refetch } = fetchRandomRecipe();
+  const { isLoading, isError, error, data } = useFetchAllRecipes(currentPage);
+  const { data: randomData, refetch } = useFetchRandomRecipe();
 
   const navigate = useNavigate();
 
@@ -56,7 +56,7 @@ export default function Recipes() {
   return (
     <>
       <Routes>
-        <Route path={':id'} element={<Modal />} />
+        <Route path=":id" element={<Modal />} />
       </Routes>
       <div className="flex items-center gap-6 px-6 py-12 xl:py-8 xs:py-6">
         <img
@@ -72,12 +72,13 @@ export default function Recipes() {
             <p className="heading-h3 xl:heading-h4 2xs:heading-h6 font-primary font-bold text-white-100 dark:text-black-100">
               Let us pick one for you
             </p>
-            <a
+            <button
+              type="button"
               className="heading-h6 xl:paragraph-large 2xs:paragraph-medium w-fit cursor-pointer rounded bg-primary-main px-4 py-2 font-bold text-white-400 transition-all hover:bg-primary-tint-200"
               onClick={randomHandler}
             >
               Random
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -85,7 +86,12 @@ export default function Recipes() {
         {allRecipes.map((recipe, i) => {
           if (allRecipes.length === i + 4) {
             return (
-              <RecipeCard ref={reloadElementRef} recipe={recipe} key={i} />
+              <RecipeCard
+                ref={reloadElementRef}
+                recipe={recipe}
+                key={i}
+                index={i}
+              />
             );
           }
           return <RecipeCard recipe={recipe} key={i} />;

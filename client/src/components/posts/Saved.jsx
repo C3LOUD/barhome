@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 
-import { fetchSavedRecipes } from '../../utils/api-list';
+import { useFetchSavedRecipes } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 import MainGrid from '../ui/MainGrid';
 import Modal from '../ui/Modal';
 import RecipeCard from '../ui/RecipeCard';
 
 export default function Saved() {
-  const { data, isSuccess } = fetchSavedRecipes();
+  const { data, isSuccess } = useFetchSavedRecipes();
 
   return (
     <>
@@ -39,8 +39,8 @@ export default function Saved() {
       )}
       {isSuccess && (
         <MainGrid>
-          {data.recipes.map((recipe) => (
-            <RecipeCard recipe={recipe} key={recipe._id} />
+          {data.recipes.map((recipe, i) => (
+            <RecipeCard recipe={recipe} key={recipe._id} index={i} />
           ))}
         </MainGrid>
       )}

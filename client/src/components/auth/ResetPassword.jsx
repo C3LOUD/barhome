@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
 
-import { resetPassword } from '../../utils/api-list';
+import { useResetPassword } from '../../utils/api-list';
 import {
   confirmPasswordValidator,
   passwordValidator,
@@ -17,7 +17,7 @@ export default function ResetPassword() {
   const { token } = useParams();
   const navigate = useNavigate();
 
-  const { mutate, isSuccess, isError, error } = resetPassword();
+  const { mutate, isSuccess, isError, error } = useResetPassword();
 
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();

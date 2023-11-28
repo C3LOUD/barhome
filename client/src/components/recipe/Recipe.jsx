@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
 import PropTypes from 'prop-types';
 
-import { fetchRecipe } from '../../utils/api-list';
+import { useFetchRecipe } from '../../utils/api-list';
 import CloseBtn from '../ui/CloseBtn';
 import Icon from '../ui/Icon';
 import Loading from '../ui/Loading';
@@ -19,7 +19,7 @@ export default function Recipe({ onEdit }) {
   const [counter, setCounter] = useState(1);
   const { id } = useParams();
 
-  const { isLoading, isError, error, data } = fetchRecipe(id);
+  const { isLoading, isError, error, data } = useFetchRecipe(id);
   if (!data) return <Loading />;
 
   const {

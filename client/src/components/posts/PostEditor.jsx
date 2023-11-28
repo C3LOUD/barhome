@@ -2,7 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { deletePost } from '../../utils/api-list';
+import { useDeletePost } from '../../utils/api-list';
 import CloseBtn from '../ui/CloseBtn';
 import Loading from '../ui/Loading';
 import ModalCard from '../ui/ModalCard';
@@ -20,7 +20,7 @@ export default function PostEditor() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const { mutate, isLoading } = deletePost();
+  const { mutate, isLoading } = useDeletePost();
 
   const canvasHandler = (canvas) => {
     setTempImageSrc(canvas);
@@ -57,7 +57,7 @@ export default function PostEditor() {
 
   if (isLoading) {
     return (
-      <div className="absolute top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-accent-dark-shade-700/80">
+      <div className="absolute left-0 top-0 z-20 flex h-full w-full items-center justify-center bg-accent-dark-shade-700/80">
         <Loading />
       </div>
     );

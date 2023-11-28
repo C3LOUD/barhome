@@ -1,13 +1,13 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
-import PropTypes from 'prop-types';
 
 import tempAvatar from '../../assets/7007892.png';
 import { adminActions } from '../../store/admin-slice';
 import { authActions, login } from '../../store/auth-slice';
-import { getUser } from '../../utils/api-list';
+import { useGetUser } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 import Logo from '../ui/Logo';
 
@@ -20,7 +20,7 @@ export default function NavBar({ navStyle }) {
   const location = useLocation();
 
   const dispatch = useDispatch();
-  const { data, refetch } = getUser();
+  const { data, refetch } = useGetUser();
 
   const logoutHandler = (e) => {
     e.preventDefault();
@@ -104,10 +104,9 @@ export default function NavBar({ navStyle }) {
 
       <div
         className={twMerge(
-          'flex origin-top-right items-center gap-4 transition-all md:gap-2 sm:absolute sm:top-10 sm:right-12 sm:z-30 sm:flex-col sm:bg-accent-dark-shade-500 sm:py-4 sm:px-4 2xs:right-2',
+          'flex origin-top-right items-center gap-4 transition-all md:gap-2 sm:absolute sm:right-12 sm:top-10 sm:z-30 sm:flex-col sm:bg-accent-dark-shade-500 sm:px-4 sm:py-4 2xs:right-2',
           hamburger ? 'sm:scale-100' : 'sm:scale-0',
         )}
-        onClick={smoothScrollHandler}
       >
         <button
           type="button"
@@ -149,7 +148,7 @@ export default function NavBar({ navStyle }) {
             />
             <div className="relative">
               {`Welcome ${name || 'User'}`}
-              <div className="absolute top-0 left-0 z-50 hidden w-full pt-14 text-center transition-all group-hover:block sm:group-hover:hidden">
+              <div className="absolute left-0 top-0 z-50 hidden w-full pt-14 text-center transition-all group-hover:block sm:group-hover:hidden">
                 <button
                   type="button"
                   className="before:tooltip-triangle relative w-full rounded bg-secondary-main px-4 py-2"
@@ -191,5 +190,9 @@ export default function NavBar({ navStyle }) {
 }
 
 NavBar.propTypes = {
-  navStyle: PropTypes.bool.isRequired,
+  navStyle: PropTypes.bool,
+};
+
+NavBar.defaultProps = {
+  navStyle: false,
 };

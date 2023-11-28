@@ -2,16 +2,16 @@ import { useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { getUser, updateUser } from '../../utils/api-list';
+import { useGetUser, useUpdateUser } from '../../utils/api-list';
 import InputForm from '../ui/InputForm';
 import Loading from '../ui/Loading';
 import Modal from '../ui/Modal';
 
 export default function Admin() {
-  const { data } = getUser();
+  const { data } = useGetUser();
   const queryClient = useQueryClient();
 
-  const { mutate, isLoading, isError, error } = updateUser();
+  const { mutate, isLoading, isError, error } = useUpdateUser();
 
   const submitHandler = async (userData) => {
     mutate(userData, {

@@ -75,4 +75,6 @@ AuthInput.defaultProps = {
   mode: undefined,
 };
 
+AuthInput.displayName = 'AuthInput';
+
 export default AuthInput;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Route, Routes, useParams } from 'react-router-dom';
 
-import { fetchRecipeByIngredient } from '../../utils/api-list';
+import { useFetchRecipeByIngredient } from '../../utils/api-list';
 import Icon from '../ui/Icon';
 import MainGrid from '../ui/MainGrid';
 import Modal from '../ui/Modal';
@@ -10,14 +10,14 @@ import RecipeCard from '../ui/RecipeCard';
 export default function IngredientSpirit() {
   const { ingredient } = useParams();
 
-  const { data, isSuccess } = fetchRecipeByIngredient(ingredient);
+  const { data, isSuccess } = useFetchRecipeByIngredient(ingredient);
 
   return (
     <>
       <Routes>
         <Route path=":id" element={<Modal />} />
       </Routes>
-      <div className="pt-10 pb-12 xs:pt-6 xs:pb-8">
+      <div className="pb-12 pt-10 xs:pb-8 xs:pt-6">
         <Link to="/dashboard/spirits" className="group flex w-fit items-center">
           <Icon
             name="chevron-back-sharp"
@@ -34,7 +34,7 @@ export default function IngredientSpirit() {
       <MainGrid>
         {isSuccess &&
           data.recipes.map((recipe, i) => (
-            <RecipeCard recipe={recipe} key={i} />
+            <RecipeCard recipe={recipe} key={i} index={i} />
           ))}
       </MainGrid>
     </>

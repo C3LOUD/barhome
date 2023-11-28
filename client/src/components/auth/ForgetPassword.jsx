@@ -3,13 +3,13 @@ import { twMerge } from 'tailwind-merge';
 
 import AuthInput from '../ui/AuthInput';
 import { emailValidator } from '../../utils/input-validator';
-import { forgetPassword } from '../../utils/api-list';
+import { useForgetPassword } from '../../utils/api-list';
 
 export default function ForgetPassword() {
   const [emailInvalid, setEmailValid] = useState(true);
   const emailRef = useRef();
 
-  const { mutate, isSuccess, isError, error } = forgetPassword();
+  const { mutate, isSuccess, isError, error } = useForgetPassword();
 
   const submitHandler = async (e) => {
     e.preventDefault();
