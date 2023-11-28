@@ -5,53 +5,45 @@
   "main": "./src/index.jsx",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server .",
-    "build": "Webpack ."
+    "test": "react-scripts test",
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "keywords": [],
   "author": "chenyu",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.19.3",
-    "@babel/plugin-transform-runtime": "^7.19.1",
-    "@babel/preset-env": "^7.19.3",
-    "@babel/preset-react": "^7.18.6",
-    "@babel/runtime": "^7.19.0",
-    "@tanstack/react-query-devtools": "^4.14.5",
-    "babel-eslint": "^10.1.0",
-    "babel-loader": "^8.2.5",
-    "css-loader": "^6.7.1",
-    "eslint": "^8.53.0",
+    "autoprefixer": "^10.4.16",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-jsx-a11y": "^6.8.0",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "file-loader": "^6.2.0",
     "postcss": "^8.4.17",
-    "postcss-loader": "^7.0.1",
-    "postcss-preset-env": "^7.8.2",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",
-    "style-loader": "^3.3.1",
     "tailwind-scrollbar": "^2.0.1",
-    "tailwindcss": "^3.1.8",
-    "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.11.1"
+    "tailwindcss": "^3.1.8"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
-    "@tanstack/react-query": "^4.14.1",
-    "dotenv": "^16.0.3",
-    "dotenv-webpack": "^8.0.1",
+    "@tanstack/react-query": "^4.36.1",
+    "@tanstack/react-query-devtools": "^4.36.1",
     "localforage": "^1.10.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.1",
+    "react-scripts": "^5.0.1",
     "tailwind-merge": "^2.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
