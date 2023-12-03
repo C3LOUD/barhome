@@ -6,13 +6,16 @@
   "scripts": {
     "backend": "nodemon server/app.js",
     "frontend": "npm run start --prefix client",
+    "commit": "cz",
     "dev": "npx concurrently \"npm run backend\" \"npm run frontend\""
   },
   "keywords": [],
   "author": "chenyu",
   "license": "ISC",
   "devDependencies": {
+    "commitizen": "^4.3.0",
     "concurrently": "^7.5.0",
+    "cz-conventional-changelog": "^3.3.0",
     "nodemon": "^2.0.20"
   },
   "dependencies": {
@@ -29,5 +32,10 @@
     "mongoose": "^6.7.0",
     "multer": "^1.4.5-lts.1",
     "node-fetch": "^3.2.10"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

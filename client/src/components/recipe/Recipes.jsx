@@ -45,13 +45,17 @@ export default function Recipes() {
     navigate(`/dashboard/recipes/${randomData.title}?isEditing=false`);
   };
 
-  isLoading && (
-    <div className="bg-warning text-center text-white-100">
-      <Loading />
-    </div>
-  );
+  if (isLoading) {
+    return (
+      <div className="bg-warning text-center text-white-100">
+        <Loading />
+      </div>
+    );
+  }
 
-  isError && <div className="bg-error text-center text-white-100">{error}</div>;
+  if (isError) {
+    return <div className="bg-error text-center text-white-100">{error}</div>;
+  }
 
   return (
     <>
