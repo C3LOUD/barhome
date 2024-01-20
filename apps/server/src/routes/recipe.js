@@ -3,7 +3,6 @@ const router = express.Router();
 
 const isAuth = require('../middleware/is-auth');
 const {
-  addNewRecipe,
   getAllRecipes,
   getRecipe,
   findRecipeByIngredient,
@@ -26,7 +25,5 @@ router.get('/:id', isAuth, getRecipe);
 router.get('/ingredient/:ingredient', isAuth, findRecipeByIngredient);
 
 router.get('/', isAuth, getAllRecipes);
-
-router.post('/origin', isAuth, addNewRecipe);
 
 module.exports = router;

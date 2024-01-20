@@ -6,7 +6,7 @@ export const useFetchAllRecipes = (currentPage) =>
     queryFn: async () => {
       const token = localStorage.getItem('token');
       const res = await fetch(
-        `${process.env.SERVER}/recipe/?page=${currentPage}`,
+        `${process.env.NX_SERVER}/recipe/?page=${currentPage}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -45,7 +45,7 @@ export const useFetchRecipeByIngredient = (ingredient) =>
     queryFn: async () => {
       const token = localStorage.getItem('token');
       const res = await fetch(
-        `${process.env.SERVER}/recipe/ingredient/${ingredient}`,
+        `${process.env.NX_SERVER}/recipe/ingredient/${ingredient}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -65,7 +65,7 @@ export const useFetchRandomRecipe = () =>
     queryKey: ['recipe', 'random'],
     queryFn: async () => {
       const token = localStorage.getItem('token');
-      const res = await fetch(`${process.env.SERVER}/recipe/random`, {
+      const res = await fetch(`${process.env.NX_SERVER}/recipe/random`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -86,7 +86,7 @@ export const useSearchKeywords = (keyword) =>
       const token = localStorage.getItem('token');
       if (!token) return 'not autenticated.';
       const res = await fetch(
-        `${process.env.SERVER}/recipe/search?q=${keyword}`,
+        `${process.env.NX_SERVER}/recipe/search?q=${keyword}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -107,7 +107,7 @@ export const useFetchSavedRecipes = () =>
     queryFn: async () => {
       const token = localStorage.getItem('token');
       if (!token) return 'not autenticated.';
-      const res = await fetch(`${process.env.SERVER}/recipe/saved`, {
+      const res = await fetch(`${process.env.NX_SERVER}/recipe/saved`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -125,7 +125,7 @@ export const useSavedRecipe = () =>
     mutationFn: async (title) => {
       const token = localStorage.getItem('token');
       if (!token) return 'not autenticated.';
-      const res = await fetch(`${process.env.SERVER}/recipe/saved`, {
+      const res = await fetch(`${process.env.NX_SERVER}/recipe/saved`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -144,7 +144,7 @@ export const useSavedRecipe = () =>
 export const useSignUp = () =>
   useMutation({
     mutationFn: async (userData) => {
-      const res = await fetch(`${process.env.SERVER}/auth/signup`, {
+      const res = await fetch(`${process.env.NX_SERVER}/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -162,7 +162,7 @@ export const useSignUp = () =>
 export const useLogin = () =>
   useMutation({
     mutationFn: async (userData) => {
-      const res = await fetch(`${process.env.SERVER}/auth/login`, {
+      const res = await fetch(`${process.env.NX_SERVER}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -183,7 +183,7 @@ export const useGetUser = () =>
     queryFn: async () => {
       const token = localStorage.getItem('token');
       if (!token) return 'not autenticated.';
-      const res = await fetch(`${process.env.SERVER}/auth`, {
+      const res = await fetch(`${process.env.NX_SERVER}/auth`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -201,7 +201,7 @@ export const useUpdateUser = () =>
     mutationFn: async (userData) => {
       const token = localStorage.getItem('token');
       if (!token) return 'not autenticated.';
-      const res = await fetch(`${process.env.SERVER}/auth/update`, {
+      const res = await fetch(`${process.env.NX_SERVER}/auth/update`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -220,7 +220,7 @@ export const useUpdateUser = () =>
 export const useForgetPassword = () =>
   useMutation({
     mutationFn: async (email) => {
-      const res = await fetch(`${process.env.SERVER}/auth/forget`, {
+      const res = await fetch(`${process.env.NX_SERVER}/auth/forget`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -238,7 +238,7 @@ export const useForgetPassword = () =>
 export const useResetPassword = () =>
   useMutation({
     mutationFn: async (newPassword) => {
-      const res = await fetch(`${process.env.SERVER}/auth/reset`, {
+      const res = await fetch(`${process.env.NX_SERVER}/auth/reset`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -258,7 +258,7 @@ export const useFetchAllPosts = () =>
     queryKey: ['posts'],
     queryFn: async () => {
       const token = localStorage.getItem('token');
-      const res = await fetch(`${process.env.SERVER}/post/`, {
+      const res = await fetch(`${process.env.NX_SERVER}/post/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -278,7 +278,7 @@ export const useFetchPost = (postId) =>
       if (!postId) return 'empty';
       const token = localStorage.getItem('token');
       if (!token) return 'not autenticated.';
-      const res = await fetch(`${process.env.SERVER}/post/${postId}`, {
+      const res = await fetch(`${process.env.NX_SERVER}/post/${postId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -296,7 +296,7 @@ export const useCreatePost = () =>
     mutationFn: async (formData) => {
       const token = localStorage.getItem('token');
       if (!token) return 'not autenticated.';
-      const res = await fetch(`${process.env.SERVER}/post/create`, {
+      const res = await fetch(`${process.env.NX_SERVER}/post/create`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -317,7 +317,7 @@ export const useEditPost = () =>
     mutationFn: async (formData) => {
       const token = localStorage.getItem('token');
       if (!token) return 'not autenticated.';
-      const res = await fetch(`${process.env.SERVER}/post/`, {
+      const res = await fetch(`${process.env.NX_SERVER}/post/`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -338,7 +338,7 @@ export const useDeletePost = () =>
     mutationFn: async (id) => {
       const token = localStorage.getItem('token');
       if (!token) return 'not autenticated.';
-      const res = await fetch(`${process.env.SERVER}/post/`, {
+      const res = await fetch(`${process.env.NX_SERVER}/post/`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -359,7 +359,7 @@ export const useLikedPost = () =>
     mutationFn: async (id) => {
       const token = localStorage.getItem('token');
       if (!token) return 'not autenticated.';
-      const res = await fetch(`${process.env.SERVER}/post/liked`, {
+      const res = await fetch(`${process.env.NX_SERVER}/post/liked`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -380,7 +380,7 @@ export const useAddComment = () =>
     mutationFn: async (commentData) => {
       const token = localStorage.getItem('token');
       if (!token) return 'not autenticated.';
-      const res = await fetch(`${process.env.SERVER}/post/comment`, {
+      const res = await fetch(`${process.env.NX_SERVER}/post/comment`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -401,7 +401,7 @@ export const useRemoveComment = () =>
     mutationFn: async (commentData) => {
       const token = localStorage.getItem('token');
       if (!token) return 'not autenticated.';
-      const res = await fetch(`${process.env.SERVER}/post/comment`, {
+      const res = await fetch(`${process.env.NX_SERVER}/post/comment`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,

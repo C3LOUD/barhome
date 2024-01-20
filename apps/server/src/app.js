@@ -21,10 +21,11 @@ app.use('/recipe', recipeRoutes);
 app.use('/auth', authRoutes);
 app.use('/post', postRoutes);
 
-app.use((error, req, res) => {
+app.use((error, req, res, next) => {
   const status = error.statusCode || 500;
   const message = error.message;
   res.status(status).json({ message });
+  next();
 });
 
 mongoose

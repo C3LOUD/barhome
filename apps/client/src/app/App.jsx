@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { Route, Routes } from 'react-router-dom';
-
-import ErrorBoundary from './components/ErrorBoundary';
 import ProtectedRoute from './components/ProtectedRoute';
 import Loading from './components/ui/Loading';
 import NotFound from './pages/NotFound';
@@ -12,7 +11,7 @@ const HomePage = React.lazy(() => import('./pages/HomePage'));
 export default function App() {
   return (
     <Suspense fallback={<Loading />}>
-      <ErrorBoundary>
+      <ErrorBoundary fallback={<div>Error</div>}>
         <Routes>
           <Route path="/*" element={<HomePage />} />
           <Route element={<ProtectedRoute />}>

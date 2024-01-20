@@ -1,21 +1,6 @@
 const Recipe = require('../models/recipe');
 const User = require('../models/user');
 
-exports.addNewRecipe = async (req, res, next) => {
-  try {
-    const recipe = new Recipe(req.body);
-    await recipe.save();
-    res.status(200).json({
-      message: 'success',
-    });
-  } catch (err) {
-    if (!err.statusCode) {
-      err.statusCode = 500;
-    }
-    next(err);
-  }
-};
-
 exports.getAllRecipes = async (req, res, next) => {
   try {
     const currentPage = req.query.page || 1;
@@ -88,7 +73,7 @@ exports.searchRecipe = async (req, res, next) => {
       {
         title: { $regex: req.query.q, $options: 'i' },
       },
-      'title'
+      'title',
     ).exec();
     if (recipes.length === 0) {
       return res.status(200).json({
