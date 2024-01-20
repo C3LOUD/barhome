@@ -13,9 +13,9 @@ export default function HomePage() {
   const navStyleHandler = (style) => setNavStyle(style);
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-[100dvh] flex-col">
       <NavBar navStyle={navStyle} />
-      <div className="relative flex flex-1 flex-col items-center justify-center bg-accent-dark-main">
+      <div className="bg-accent-dark-main relative flex flex-1 flex-col items-center justify-center">
         <Routes>
           <Route path="/" element={<Home onNav={navStyleHandler} />} />
           <Route path="login" element={<Login />} />

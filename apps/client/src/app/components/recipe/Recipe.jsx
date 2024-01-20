@@ -1,8 +1,7 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
-import PropTypes from 'prop-types';
-
 import { useFetchRecipe } from '../../utils/api-list';
 import CloseBtn from '../ui/CloseBtn';
 import Icon from '../ui/Icon';
@@ -20,7 +19,8 @@ export default function Recipe({ onEdit }) {
   const { id } = useParams();
 
   const { isLoading, isError, error, data } = useFetchRecipe(id);
-  if (!data) return <Loading />;
+  if (isLoading) return <Loading />;
+  if (isError) throw new Error(error);
 
   const {
     title,
@@ -51,14 +51,14 @@ export default function Recipe({ onEdit }) {
     <ModalCard>
       <CloseBtn />
       <div className="flex w-full flex-col items-center" data-id={title}>
-        <p className="display-small pb-2 font-primary font-bold">{title}</p>
-        <div className="flex w-fit gap-2 overflow-x-scroll px-6 pb-8 scrollbar-none 2xs:w-full">
+        <p className="display-small font-primary pb-2 font-bold">{title}</p>
+        <div className="scrollbar-none 2xs:w-full flex w-fit gap-2 overflow-x-auto px-6 pb-8">
           {[alcoholic, category, ...tags].map((tag, i) => (
             <Tag key={i}>{tag}</Tag>
           ))}
         </div>
-        <div className="grid w-full grid-cols-2 gap-6 2xs:grid-cols-1">
-          <div className="relative 2xs:mx-auto 2xs:w-2/3">
+        <div className="2xs:grid-cols-1 grid w-full grid-cols-2 gap-6">
+          <div className="2xs:mx-auto 2xs:w-2/3 relative">
             <img
               className="inline-block aspect-square"
               src={thumbnail}
@@ -66,13 +66,13 @@ export default function Recipe({ onEdit }) {
             />
             <SavedBtn />
           </div>
-          <div className="max-w-sm pr-6 2xs:max-w-full 2xs:px-4">
+          <div className="2xs:max-w-full 2xs:px-4 max-w-sm">
             <div className="flex w-full" onClick={switchHandler}>
               {['Ingredients', 'Instructions'].map((label) => (
                 <div
                   key={label}
                   className={twMerge(
-                    'heading-h5 w-full cursor-pointer overflow-hidden rounded-t-2xl py-2 text-center font-primary font-bold',
+                    'heading-h5 font-primary w-full cursor-pointer overflow-hidden rounded-t-2xl py-2 text-center font-bold',
                     label === currentShow
                       ? 'bg-accent-dark-main text-white-100'
                       : 'text-accent-dark-main',
@@ -108,12 +108,12 @@ export default function Recipe({ onEdit }) {
         className="group flex cursor-pointer flex-col items-center gap-2"
         onClick={onEdit}
       >
-        <a className="paragraph-small group-hover:paragraph-medium pt-4 font-secondary font-semibold text-primary-main transition-all">
+        <a className="paragraph-small group-hover:paragraph-medium font-secondary text-primary-main pt-4 font-semibold transition-all">
           ADD A POST
         </a>
         <Icon
           name="add"
-          className="rounded-full border-2 border-primary-main px-2 py-2 text-2xl text-primary-main transition-all group-hover:bg-primary-main group-hover:text-white-100"
+          className="border-primary-main text-primary-main group-hover:bg-primary-main group-hover:text-white-100 rounded-full border-2 px-2 py-2 text-2xl transition-all"
         />
       </div>
     </ModalCard>

@@ -20,6 +20,5 @@ root.render(
         </QueryClientProvider>
       </Provider>
     </BrowserRouter>
-    ,
   </StrictMode>,
 );

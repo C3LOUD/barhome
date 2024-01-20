@@ -26,7 +26,7 @@ export const useFetchRecipe = (id) =>
     queryKey: ['recipe', id],
     queryFn: async () => {
       const token = localStorage.getItem('token');
-      const res = await fetch(`/api/recipe/${id}`, {
+      const res = await fetch(`${process.env.NX_SERVER}/recipe/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

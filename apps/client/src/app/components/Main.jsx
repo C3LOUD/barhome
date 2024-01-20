@@ -25,24 +25,24 @@ export default function Main({ onHamburger }) {
 
   return (
     <div
-      className="relative flex flex-1 flex-col overflow-hidden bg-gradient-to-r from-accent-dark-shade-700 to-accent-dark-shade-400 px-16 pt-8 dark:from-accent-dark-tint-500 dark:to-accent-dark-tint-700 lg:px-12 sm:px-8"
+      className="from-accent-dark-shade-700 to-accent-dark-shade-400 dark:from-accent-dark-tint-500 dark:to-accent-dark-tint-700 relative flex flex-1 flex-col overflow-hidden bg-gradient-to-r px-16 pt-8 sm:px-8 lg:px-12"
       ref={mainElement}
     >
-      <div className="flex w-full justify-between gap-24 md:gap-12 2xs:mb-4">
+      <div className="2xs:mb-4 flex w-full justify-between gap-24 md:gap-12">
         <div className="flex w-full gap-4">
           <Icon
             name="menu-sharp"
-            className="hidden text-5xl text-white-100 transition-all hover:text-white-400 dark:text-black-100 dark:hover:text-gray-400 md:block"
+            className="text-white-100 hover:text-white-400 dark:text-black-100 hidden text-5xl transition-all md:block dark:hover:text-gray-400"
             onClick={onHamburger}
           />
           <SearchInput />
         </div>
-        <div className="flex gap-6 xs:hidden">
+        <div className="xs:hidden flex gap-6">
           <DarkModeSwitcher />
           <LogoutBtn />
         </div>
       </div>
-      <div className="flex w-[69rem] flex-1 flex-col overflow-scroll scrollbar-none 2xl:w-full 2xs:block">
+      <div className="scrollbar-none 2xs:block flex w-[69rem] flex-1 flex-col overflow-y-auto 2xl:w-full">
         <InitialModalContext.Provider value={mainNode}>
           <Routes>
             <Route

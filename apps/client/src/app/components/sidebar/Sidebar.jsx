@@ -18,13 +18,11 @@ const allSidebarBtn = [
 
 export default function Sidebar({ hamburger }) {
   const [currentPage, setCurrentPage] = useState('');
-  const [hovered, setHovered] = useState(false);
 
   const location = useLocation();
 
   useEffect(() => {
     setCurrentPage(location.pathname.split('/')[2]);
-    setHovered(false);
   }, [location.pathname]);
 
   const sideMenuHoverHandler = (e) => {
@@ -36,25 +34,23 @@ export default function Sidebar({ hamburger }) {
 
     if (e.type === 'mouseover') {
       hoveredBtn.icon = hoveredBtn.icon.split('-')[0];
-      setHovered(true);
     } else {
       hoveredBtn.icon = hoveredBtn.icon + '-outline';
-      setHovered(false);
     }
   };
 
   return (
     <div
       className={twMerge(
-        'flex w-[13rem] flex-col items-center justify-between overflow-scroll bg-accent-dark-main pt-12 pb-6 transition-all scrollbar-none md:absolute md:top-0 md:z-30 md:h-full',
+        'bg-accent-dark-main scrollbar-none flex w-[13rem] flex-col items-center justify-between overflow-y-auto pb-6 pt-12 transition-all md:absolute md:top-0 md:z-30 md:h-full',
         hamburger ? 'md:left-0' : 'md:-left-full',
       )}
     >
-      <div className="flex w-full flex-col items-center gap-[5.5rem] 2xs:gap-12">
+      <div className="2xs:gap-12 flex w-full flex-col items-center gap-[5.5rem]">
         <Logo />
         <UserSidebar />
         <div
-          className="flex w-full flex-col gap-6 2xs:gap-4"
+          className="2xs:gap-4 flex w-full flex-col gap-6"
           onMouseOver={sideMenuHoverHandler}
           onMouseOut={sideMenuHoverHandler}
         >
@@ -75,7 +71,7 @@ export default function Sidebar({ hamburger }) {
         </div>
       </div>
       <div className="flex w-full flex-col items-center gap-6 pt-6">
-        <div className="hidden flex-col gap-4 xs:flex">
+        <div className="xs:flex hidden flex-col gap-4">
           <DarkModeSwitcher />
           <LogoutBtn />
         </div>

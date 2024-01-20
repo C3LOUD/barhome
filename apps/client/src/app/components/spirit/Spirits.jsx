@@ -22,15 +22,15 @@ export default function Spirits() {
       <Routes>
         <Route path=":id" element={<Modal />} />
       </Routes>
-      <div className="py-12 xs:py-8">
-        <p className="display-small pb-4 font-primary font-bold text-white-100 dark:text-black-100 ">
+      <div className="xs:py-8 py-12">
+        <p className="display-small font-primary text-white-100 dark:text-black-100 pb-4 font-bold ">
           Spirits
         </p>
-        <div className="flex gap-8 xs:mb-4 xs:grid xs:w-fit xs:grid-cols-5 xs:gap-y-2 2xs:gap-x-2">
+        <div className="xs:mb-4 xs:grid xs:w-fit xs:grid-cols-5 xs:gap-y-2 2xs:gap-x-2 flex gap-8">
           {spiritsList.map((spirit) => (
             <Link
               key={spirit}
-              className="heading-h6 font-primary text-white-100 underline hover:text-white-400 dark:text-black-100 dark:hover:text-gray-400 xs:last:col-span-2"
+              className="heading-h6 font-primary text-white-100 hover:text-white-400 dark:text-black-100 xs:last:col-span-2 underline dark:hover:text-gray-400"
               to={`/dashboard/ingredient/${spirit}`}
             >
               {spirit}
@@ -38,7 +38,7 @@ export default function Spirits() {
           ))}
         </div>
       </div>
-      <div className="flex min-h-[20rem] flex-1 flex-col gap-16 overflow-x-hidden overflow-y-scroll scrollbar-none xl:gap-12 xs:gap-8">
+      <div className="scrollbar-none xs:gap-8 flex min-h-[20rem] flex-1 flex-col gap-16 overflow-y-auto xl:gap-12">
         {spiritsList.map((spirit) => (
           <RecipesSpirit key={spirit} spirit={spirit} />
         ))}

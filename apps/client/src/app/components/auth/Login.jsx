@@ -50,7 +50,7 @@ export default function Login() {
 
   return (
     <form onSubmit={submitHandler}>
-      <div className="flex w-[20rem] flex-col gap-2 rounded-2xl bg-primary-main px-4 py-4 text-white-100">
+      <div className="bg-primary-main text-white-100 flex w-[20rem] flex-col gap-2 rounded-2xl px-4 py-4">
         {isError && <p className="text-error">{error.message}</p>}
         <p className="heading-h4">Login</p>
         <AuthInput

@@ -17,8 +17,8 @@ export default function Dashboard() {
   }, [location]);
 
   return (
-    <div className="bg-accent-dark-shade-600 flex h-screen w-screen justify-center py-6 lg:px-4 lg:py-4 2xl:px-6">
-      <div className="relative flex h-full max-w-[90rem] overflow-hidden rounded-3xl 2xl:w-full">
+    <div className="bg-accent-dark-shade-600 h-[100dvh] w-[100dvw] py-6 lg:px-4 lg:py-4 2xl:px-6">
+      <div className="relative mx-auto flex h-full max-w-[90rem] overflow-hidden rounded-3xl 2xl:w-full">
         <Sidebar hamburger={hamburger} />
         <div
           className={twMerge(
