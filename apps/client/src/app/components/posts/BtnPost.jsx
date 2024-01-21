@@ -1,15 +1,13 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
-import PropTypes from 'prop-types';
-
-import Icon from '../ui/Icon';
 
 export default function BtnPost({ absPosition, onClick, text, type }) {
   return (
     <div
       className={twMerge(
         absPosition,
-        'group absolute flex cursor-pointer items-center gap-2 rounded-full px-2 transition-all hover:bg-primary-main',
+        'hover:bg-primary-main group absolute flex cursor-pointer items-center gap-2 rounded-full px-2 transition-all',
       )}
       onClick={onClick}
     >
@@ -18,10 +16,9 @@ export default function BtnPost({ absPosition, onClick, text, type }) {
           {text}
         </p>
       )}
-      <Icon
-        name={type}
-        className="text-3xl text-accent-dark-main group-hover:text-white-100"
-      />
+      <span className="text-accent-dark-main group-hover:text-white-100 flex text-3xl">
+        <ion-icon name={type} />
+      </span>
       {text === 'Previous' && (
         <p className="text-white-100 opacity-0 transition-all group-hover:opacity-100">
           {text}

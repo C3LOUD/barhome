@@ -1,7 +1,6 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import PropTypes from 'prop-types';
-
 import NotFound from '../pages/NotFound';
 import InitialModalContext from '../store/initial-Modal-context';
 import Admin from './auth/Admin';
@@ -11,7 +10,6 @@ import Recipes from './recipe/Recipes';
 import IngredientSpirit from './spirit/IngredientSpirit';
 import Spirits from './spirit/Spirits';
 import DarkModeSwitcher from './ui/DarkModeSwitcher';
-import Icon from './ui/Icon';
 import LogoutBtn from './ui/LogoutBtn';
 import SearchInput from './ui/SearchInput';
 
@@ -30,11 +28,13 @@ export default function Main({ onHamburger }) {
     >
       <div className="2xs:mb-4 flex w-full justify-between gap-24 md:gap-12">
         <div className="flex w-full gap-4">
-          <Icon
-            name="menu-sharp"
-            className="text-white-100 hover:text-white-400 dark:text-black-100 hidden text-5xl transition-all md:block dark:hover:text-gray-400"
+          <button
+            type="button"
             onClick={onHamburger}
-          />
+            className="text-white-100 hover:text-white-400 dark:text-black-100 hidden text-5xl transition-all md:flex dark:hover:text-gray-400"
+          >
+            <ion-icon name="menu-sharp" />
+          </button>
           <SearchInput />
         </div>
         <div className="xs:hidden flex gap-6">

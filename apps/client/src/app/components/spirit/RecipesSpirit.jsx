@@ -3,7 +3,6 @@ import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useFetchRecipeByIngredient } from '../../utils/api-list';
-import Icon from '../ui/Icon';
 import RecipeCard from '../ui/RecipeCard';
 
 export default function RecipesSpirit({ spirit }) {
@@ -36,10 +35,9 @@ export default function RecipesSpirit({ spirit }) {
         <p className="heading-h3 font-primary text-white-100 dark:text-black-100 font-bold">
           {spirit}
         </p>
-        <Icon
-          name="chevron-forward-sharp"
-          className="text-white-100 dark:text-black-100 text-3xl"
-        />
+        <span className="text-white-100 dark:text-black-100 flex text-3xl">
+          <ion-icon name="chevron-forward-sharp" />
+        </span>
       </Link>
       <div
         className="grid-row-1 scrollbar-none grid grid-flow-col gap-8 overflow-x-auto py-2"
@@ -52,26 +50,29 @@ export default function RecipesSpirit({ spirit }) {
           ))}
       </div>
       {clientX !== 0 && (
-        <Icon
-          name="chevron-back-sharp"
-          className="bg-primary-main/30 text-white-100 hover:bg-primary-main absolute left-0 top-1/2 z-10 -translate-y-1/2 cursor-pointer rounded-full px-2 py-2 text-3xl transition-all"
+        <button
+          className="bg-primary-main/30 text-white-100 hover:bg-primary-main absolute left-0 top-1/2 z-10 flex -translate-y-1/2 cursor-pointer rounded-full px-2 py-2 text-3xl transition-all"
           onClick={btnScrollHandler}
-        />
+        >
+          <ion-icon name="chevron-back-sharp" />
+        </button>
       )}
       {clientX === 0 && (
-        <Icon
-          name="chevron-forward-sharp"
-          className="bg-primary-main/30 text-white-100 hover:bg-primary-main absolute right-0 top-1/2 z-10 -translate-y-1/2 cursor-pointer rounded-full px-2 py-2 text-3xl transition-all"
+        <button
+          className="bg-primary-main/30 text-white-100 hover:bg-primary-main absolute right-0 top-1/2 z-10 flex -translate-y-1/2 cursor-pointer rounded-full px-2 py-2 text-3xl transition-all"
           onClick={btnScrollHandler}
-        />
+        >
+          <ion-icon name="chevron-forward-sharp" />
+        </button>
       )}
       {clientX + carousel.current?.offsetWidth !==
         carousel.current?.scrollWidth && (
-        <Icon
-          name="chevron-forward-sharp"
-          className="bg-primary-main/30 text-white-100 hover:bg-primary-main absolute right-0 top-1/2 z-10 -translate-y-1/2 cursor-pointer rounded-full px-2 py-2 text-3xl transition-all"
+        <button
+          className="bg-primary-main/30 text-white-100 hover:bg-primary-main absolute right-0 top-1/2 z-10 flex -translate-y-1/2 cursor-pointer rounded-full px-2 py-2 text-3xl transition-all"
           onClick={btnScrollHandler}
-        />
+        >
+          <ion-icon name="chevron-forward-sharp" />
+        </button>
       )}
     </div>
   );

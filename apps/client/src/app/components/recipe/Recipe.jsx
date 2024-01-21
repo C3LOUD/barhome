@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
 import { useFetchRecipe } from '../../utils/api-list';
 import CloseBtn from '../ui/CloseBtn';
-import Icon from '../ui/Icon';
 import Loading from '../ui/Loading';
 import ModalCard from '../ui/ModalCard';
 import SavedBtn from '../ui/SavedBtn';
@@ -104,18 +103,17 @@ export default function Recipe({ onEdit }) {
           </div>
         </div>
       </div>
-      <div
+      <button
         className="group flex cursor-pointer flex-col items-center gap-2"
         onClick={onEdit}
       >
-        <a className="paragraph-small group-hover:paragraph-medium font-secondary text-primary-main pt-4 font-semibold transition-all">
+        <span className="paragraph-small group-hover:paragraph-medium font-secondary text-primary-main pt-4 font-semibold transition-all">
           ADD A POST
-        </a>
-        <Icon
-          name="add"
-          className="border-primary-main text-primary-main group-hover:bg-primary-main group-hover:text-white-100 rounded-full border-2 px-2 py-2 text-2xl transition-all"
-        />
-      </div>
+        </span>
+        <span className="border-primary-main text-primary-main group-hover:bg-primary-main group-hover:text-white-100 flex rounded-full border-2 px-2 py-2 text-2xl transition-all">
+          <ion-icon name="add" />
+        </span>
+      </button>
     </ModalCard>
   );
 }

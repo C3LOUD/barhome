@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import PropTypes from 'prop-types';
 
 import tempAvatar from '../../../assets/7007892.png';
 import {
@@ -11,7 +11,6 @@ import {
 } from '../../utils/input-validator';
 import AvatarCropper from '../auth/AvatarCropper';
 import AuthInput from './AuthInput';
-import Icon from './Icon';
 
 export default function InputForm({ admin, onSubmit }) {
   const [nameInvalid, setNameValid] = useState(true);
@@ -88,7 +87,7 @@ export default function InputForm({ admin, onSubmit }) {
       {avatarEditing && (
         <button
           type="button"
-          className="absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center bg-accent-dark-shade-800/80"
+          className="bg-accent-dark-shade-800/80 absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center"
           onClick={editHandler}
         >
           <AvatarCropper onEdit={editHandler} onCanvas={canvasHandler} />
@@ -105,10 +104,9 @@ export default function InputForm({ admin, onSubmit }) {
             alt="user avatar"
             className="transition-all group-hover:scale-110"
           />
-          <Icon
-            name="camera"
-            className="absolute bottom-2 left-1/2 -translate-x-2/4 rounded-full bg-white-100/50 px-1 py-1 text-2xl text-primary-main transition-all group-hover:bg-white-100"
-          />
+          <span className="bg-white-100/50 text-primary-main group-hover:bg-white-100 absolute bottom-2 left-1/2 flex -translate-x-2/4 rounded-full px-1 py-1 text-2xl transition-all">
+            <ion-icon name="camera" />
+          </span>
         </button>
 
         <AuthInput
@@ -164,9 +162,9 @@ export default function InputForm({ admin, onSubmit }) {
           disabled={admin ? false : formInValid}
           type="submit"
           className={twMerge(
-            'paragraph-large mt-4 w-fit rounded px-4 py-2 font-secondary transition-all  dark:text-white-100',
+            'paragraph-large font-secondary dark:text-white-100 mt-4 w-fit rounded px-4 py-2  transition-all',
             !formInValid || admin
-              ? 'cursor-pointer bg-secondary-main hover:bg-secondary-tint-200'
+              ? 'bg-secondary-main hover:bg-secondary-tint-200 cursor-pointer'
               : 'cursor-not-allowed bg-gray-100',
           )}
         >

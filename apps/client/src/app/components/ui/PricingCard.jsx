@@ -1,34 +1,32 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
-import PropTypes from 'prop-types';
-
-import Icon from './Icon';
 
 export default function PricingCard({ pricing }) {
   return (
     <div
       className={twMerge(
-        'relative h-fit overflow-hidden rounded-2xl bg-white-100 shadow-2xl transition-all hover:-translate-y-1 xs:max-w-[25rem] 2xs:max-w-full',
-        pricing.popular && 'h-[110%] xs:-order-1 xs:h-full',
+        'bg-white-100 xs:max-w-[25rem] 2xs:max-w-full relative h-fit overflow-hidden rounded-2xl shadow-2xl transition-all hover:-translate-y-1',
+        pricing.popular && 'xs:-order-1 xs:h-full h-[110%]',
       )}
     >
       {pricing.popular && (
-        <p className="paragraph-small absolute top-8 -right-12 z-10 rotate-45 bg-error px-12 py-1 text-white-100">
+        <p className="paragraph-small bg-error text-white-100 absolute -right-12 top-8 z-10 rotate-45 px-12 py-1">
           Most Popular
         </p>
       )}
       <div
         className={twMerge(
-          'relative flex h-24 items-center justify-center pt-12 pb-20 sm:px-4',
+          'relative flex h-24 items-center justify-center pb-20 pt-12 sm:px-4',
           pricing.style,
         )}
       >
-        <p className="heading-h2 text-white inline-block font-bold text-white-100">
+        <p className="heading-h2 text-white-100 inline-block font-bold text-white">
           {pricing.title}
         </p>
         <p
           className={twMerge(
-            'heading-h6 absolute -bottom-10 left-1/2 flex h-20 w-20 -translate-x-1/2 items-center justify-center rounded-full border-2 border-accent-dark-tint-800 font-bold text-white-100',
+            'heading-h6 border-accent-dark-tint-800 text-white-100 absolute -bottom-10 left-1/2 flex h-20 w-20 -translate-x-1/2 items-center justify-center rounded-full border-2 font-bold',
             pricing.secondaryStyle,
           )}
         >
@@ -38,58 +36,53 @@ export default function PricingCard({ pricing }) {
           </span>
         </p>
       </div>
-      <ul className="paragraph-medium flex flex-col gap-3 px-16 py-16 text-black-100 md:px-8 xs:px-6">
-        <li className="flex gap-2">
-          <Icon name="checkmark-sharp" className="text-2xl" /> 1000+ Pro Recipes
+      <ul className="paragraph-medium text-black-100 xs:px-6 flex flex-col gap-3 px-16 py-16 md:px-8">
+        <li className="flex gap-2 text-2xl">
+          <ion-icon name="checkmark-sharp" /> 1000+ Pro Recipes
         </li>
-        <li className="flex gap-2">
-          <Icon name="checkmark-sharp" className="text-2xl" /> Ingredients
-          Caculation
+        <li className="flex gap-2 text-2xl">
+          <ion-icon name="checkmark-sharp" /> Ingredients Caculation
         </li>
-        <li className="flex gap-2">
-          <Icon name="checkmark-sharp" className="text-2xl" /> Detail
-          Instruction
+        <li className="flex gap-2 text-2xl">
+          <ion-icon name="checkmark-sharp" /> Detail Instruction
         </li>
-        <li className="flex gap-2">
-          <Icon name="checkmark-sharp" className="text-2xl" /> Social Post
+        <li className="flex gap-2 text-2xl">
+          <ion-icon name="checkmark-sharp" /> Social Post
         </li>
-        <li className="flex gap-2">
-          <Icon name="checkmark-sharp" className="text-2xl" /> Personal Recipe
-          management
+        <li className="flex gap-2 text-2xl">
+          <ion-icon name="checkmark-sharp" /> Personal Recipe management
         </li>
         <li
           className={twMerge(
-            'flex gap-2',
+            'flex gap-2 text-2xl',
             pricing.popular ? 'text-black-100' : 'text-gray-200',
           )}
         >
-          <Icon
+          <ion-icon
             name={pricing.popular ? 'checkmark-sharp' : 'close-sharp'}
-            className="text-2xl"
           />
           {' Support for 1 Year'}
         </li>
         <li
           className={twMerge(
-            'flex gap-2',
+            'flex gap-2 text-2xl',
             pricing.popular ? 'text-black-100' : 'text-gray-200',
           )}
         >
-          <Icon
+          <ion-icon
             name={pricing.popular ? 'checkmark-sharp' : 'close-sharp'}
-            className="text-2xl"
           />
           {' Updates for 1 Year'}
         </li>
       </ul>
-      <a
+      <span
         className={twMerge(
-          'mx-auto mb-8 block w-fit cursor-pointer rounded px-4  py-2 text-center text-white-100',
+          'text-white-100 mx-auto mb-8 block w-fit cursor-pointer rounded  px-4 py-2 text-center',
           pricing.btnStyle,
         )}
       >
         Order Now
-      </a>
+      </span>
     </div>
   );
 }

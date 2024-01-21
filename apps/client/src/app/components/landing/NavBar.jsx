@@ -3,12 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
-
 import tempAvatar from '../../../assets/7007892.png';
 import { adminActions } from '../../store/admin-slice';
 import { authActions, login } from '../../store/auth-slice';
 import { useGetUser } from '../../utils/api-list';
-import Icon from '../ui/Icon';
 import Logo from '../ui/Logo';
 
 export default function NavBar({ navStyle }) {
@@ -65,9 +63,9 @@ export default function NavBar({ navStyle }) {
   return (
     <div
       className={twMerge(
-        'flex h-16 shrink-0 items-center justify-between px-12 text-white-100 2xs:px-2',
+        'text-white-100 2xs:px-2 flex h-16 shrink-0 items-center justify-between px-12',
         navStyle
-          ? 'fixed top-0 z-50 w-full bg-primary-main'
+          ? 'bg-primary-main fixed top-0 z-50 w-full'
           : 'bg-accent-dark-main',
       )}
     >
@@ -94,17 +92,19 @@ export default function NavBar({ navStyle }) {
             hamburger && 'bg-accent-dark-shade-500',
           )}
         >
-          <Icon
-            name="menu-sharp"
-            className="cursor-pointer text-5xl transition-all hover:text-white-400"
+          <button
+            type="button"
             onClick={hamburgerHandler}
-          />
+            className="hover:text-white-400 flex cursor-pointer text-5xl transition-all"
+          >
+            <ion-icon name="menu-sharp" />
+          </button>
         </div>
       </div>
 
       <div
         className={twMerge(
-          'flex origin-top-right items-center gap-4 transition-all md:gap-2 sm:absolute sm:right-12 sm:top-10 sm:z-30 sm:flex-col sm:bg-accent-dark-shade-500 sm:px-4 sm:py-4 2xs:right-2',
+          'sm:bg-accent-dark-shade-500 2xs:right-2 flex origin-top-right items-center gap-4 transition-all sm:absolute sm:right-12 sm:top-10 sm:z-30 sm:flex-col sm:px-4 sm:py-4 md:gap-2',
           hamburger ? 'sm:scale-100' : 'sm:scale-0',
         )}
       >
@@ -134,7 +134,7 @@ export default function NavBar({ navStyle }) {
         </button>
         {!isLoggedIn ? (
           <NavLink
-            className="navLink sm:w-full sm:bg-secondary-main sm:hover:bg-secondary-tint-200"
+            className="navLink sm:bg-secondary-main sm:hover:bg-secondary-tint-200 sm:w-full"
             to="/signup"
           >
             Sign up
@@ -151,7 +151,7 @@ export default function NavBar({ navStyle }) {
               <div className="absolute left-0 top-0 z-50 hidden w-full pt-14 text-center transition-all group-hover:block sm:group-hover:hidden">
                 <button
                   type="button"
-                  className="before:tooltip-triangle relative w-full rounded bg-secondary-main px-4 py-2"
+                  className="before:tooltip-triangle bg-secondary-main relative w-full rounded px-4 py-2"
                   onClick={logoutHandler}
                 >
                   Logout
@@ -164,7 +164,7 @@ export default function NavBar({ navStyle }) {
         {isLoggedIn ? (
           <>
             <NavLink
-              className="navLink hidden w-full bg-secondary-main hover:bg-secondary-tint-200 sm:block"
+              className="navLink bg-secondary-main hover:bg-secondary-tint-200 hidden w-full sm:block"
               onClick={logoutHandler}
             >
               Logout

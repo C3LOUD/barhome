@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Icon from '../ui/Icon';
-
 export default function InstructionRecipe({ instructions }) {
   const instructionArr = instructions.split('.');
 
@@ -12,7 +10,9 @@ export default function InstructionRecipe({ instructions }) {
         if (instruction) {
           return (
             <div className="flex gap-2" key={i}>
-              <Icon name="pin" className="text-accent-dark-main text-xl" />
+              <span className="text-accent-dark-main flex text-xl">
+                <ion-icon name="pin" />
+              </span>
               <p
                 className="paragraph-medium font-secondary font-normal"
                 key={instruction}

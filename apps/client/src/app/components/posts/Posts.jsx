@@ -1,9 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes, useLocation, useSearchParams } from 'react-router-dom';
-
 import { useFetchAllPosts } from '../../utils/api-list';
-import Icon from '../ui/Icon';
 import Modal from '../ui/Modal';
 import CardPost from './CardPost';
 import TogglePosts from './TogglePosts';
@@ -51,26 +49,26 @@ export default function Posts() {
         <Route path={':id'} element={<Modal />} />
       </Routes>
       <div
-        className="relative mt-12 flex h-full w-full overflow-hidden xs:mt-6 2xs:mt-2"
+        className="xs:mt-6 2xs:mt-2 relative mt-12 flex h-full w-full overflow-hidden"
         onClick={() => {
           setShowToggle((prev) => false);
         }}
       >
-        <div className="flex w-full flex-1 flex-col items-center gap-12 overflow-y-scroll pb-6 scrollbar-none 2xs:gap-6">
-          <div className="absolute left-0 top-0 xs:static xs:flex xs:gap-6 xs:self-start">
-            <p className="display-small font-primary font-bold text-white-100 dark:text-black-100">
+        <div className="scrollbar-none 2xs:gap-6 flex w-full flex-1 flex-col items-center gap-12 overflow-y-scroll pb-6">
+          <div className="xs:static xs:flex xs:gap-6 xs:self-start absolute left-0 top-0">
+            <p className="display-small font-primary text-white-100 dark:text-black-100 font-bold">
               Post
             </p>
             <div
-              className="relative mt-6 flex w-[7.5rem] cursor-pointer text-white-100 dark:text-black-100 xs:w-fit"
+              className="text-white-100 dark:text-black-100 xs:w-fit relative mt-6 flex w-[7.5rem] cursor-pointer"
               onClick={toggleHandler}
             >
-              <p className="paragraph-small flex-1 font-secondary font-semibold xs:px-2">
+              <p className="paragraph-small font-secondary xs:px-2 flex-1 font-semibold">
                 {searchParams.get('filter') === 'myposts'
                   ? 'My Posts'
                   : searchParams.get('filter') === 'liked'
-                  ? 'Liked Posts'
-                  : 'All Posts'}
+                    ? 'Liked Posts'
+                    : 'All Posts'}
               </p>
               {showToggle ? (
                 <TogglePosts
@@ -78,12 +76,14 @@ export default function Posts() {
                   filter={searchParams.get('filter')}
                 />
               ) : (
-                <Icon name="chevron-up-sharp" className="text-2xl" />
+                <span className="flex text-2xl">
+                  <ion-icon name="chevron-up-sharp" />
+                </span>
               )}
             </div>
           </div>
           {currentPostList?.length === 0 && (
-            <p className="heading-h2 my-12 font-primary font-bold text-white-100">
+            <p className="heading-h2 font-primary text-white-100 my-12 font-bold">
               No Posts
             </p>
           )}

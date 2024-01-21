@@ -1,14 +1,12 @@
 import { useQueryClient } from '@tanstack/react-query';
+import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
-import PropTypes from 'prop-types';
-
 import tempAvatar from '../../../assets/7007892.png';
 import { adminActions } from '../../store/admin-slice';
 import { useAddComment, useLikedPost } from '../../utils/api-list';
-import Icon from '../ui/Icon';
 import Comment from './Comment';
 
 export default function CardPost({ posts }) {
@@ -71,7 +69,7 @@ export default function CardPost({ posts }) {
   }, [liked]);
 
   return (
-    <div className="w-[28.5rem] shrink-0 overflow-hidden rounded bg-white-100 dark:shadow-md 2xs:w-full">
+    <div className="bg-white-100 2xs:w-full w-[28.5rem] shrink-0 overflow-hidden rounded dark:shadow-md">
       <div className="flex justify-between px-4 pt-4">
         <div className="flex h-full items-center gap-2">
           <img
@@ -79,47 +77,49 @@ export default function CardPost({ posts }) {
             alt="creator avatar"
             className="inline-block h-6 rounded-full"
           />
-          <p className="paragraph-small font-secondary font-semibold text-black-100">
+          <p className="paragraph-small font-secondary text-black-100 font-semibold">
             {creator.name}
           </p>
         </div>
         {myPosts.some((post) => post === _id) && (
           <Link
-            className="flex items-center text-primary-main"
+            className="text-primary-main flex items-center"
             to={`/dashboard/posts/${_id}?mode=post`}
           >
-            <Icon name="pencil-sharp" />
+            <ion-icon name="pencil-sharp" />
             <p className="paragraph-small font-secondary font-semibold">Edit</p>
           </Link>
         )}
       </div>
-      <div className="flex min-h-[8rem] flex-col justify-between px-4 py-2 2xs:min-h-[6rem]">
+      <div className="2xs:min-h-[6rem] flex min-h-[8rem] flex-col justify-between px-4 py-2">
         <div>
           {content.split(/\n/g).map((contentEl, i) => (
             <p
               key={i}
-              className="paragraph-medium font-secondary font-medium text-black-100"
+              className="paragraph-medium font-secondary text-black-100 font-medium"
             >
               {contentEl}
             </p>
           ))}
         </div>
-        <p className="paragraph-xsmall self-end font-secondary text-gray-400">
+        <p className="paragraph-xsmall font-secondary self-end text-gray-400">
           {date}
         </p>
       </div>
-      <div className="flex justify-between px-4 pb-2 text-primary-main">
+      <div className="text-primary-main flex justify-between px-4 pb-2">
         <Link
           className="heading-h6 font-primary font-bold"
           to={`/dashboard/posts/${cocktail.title}?isEditing=false`}
         >
           {title}
         </Link>
-        <Icon
-          name={checkLiked ? 'heart' : 'heart-outline'}
-          className="cursor-pointer text-2xl"
+        <button
+          type="button"
+          className="flex cursor-pointer text-2xl"
           onClick={likedHandler}
-        />
+        >
+          <ion-icon name={checkLiked ? 'heart' : 'heart-outline'} />
+        </button>
       </div>
       <img
         className="transition-all active:scale-[101%]"
@@ -141,22 +141,24 @@ export default function CardPost({ posts }) {
       )}
       <div
         className={twMerge(
-          'flex justify-between gap-4 bg-white-400 px-4 py-4',
+          'bg-white-400 flex justify-between gap-4 px-4 py-4',
           addCommentIsLoading ? 'bg-gray-300' : 'bg-white-400',
         )}
       >
         <input
-          className="flex-1 bg-transparent font-secondary font-semibold text-black-100 placeholder:text-gray-300 focus:outline-none"
+          className="font-secondary text-black-100 flex-1 bg-transparent font-semibold placeholder:text-gray-300 focus:outline-none"
           placeholder="Leave a comment"
           maxLength="72"
           ref={commentRef}
           onKeyDown={addCommentHandler}
         />
-        <Icon
-          name="send-sharp"
-          className="cursor-pointer text-2xl text-black-100 transition-all active:scale-90"
+        <button
+          type="button"
           onClick={addCommentHandler}
-        />
+          className="text-black-100 flex cursor-pointer text-2xl transition-all active:scale-90"
+        >
+          <ion-icon name="send-sharp" />
+        </button>
       </div>
     </div>
   );

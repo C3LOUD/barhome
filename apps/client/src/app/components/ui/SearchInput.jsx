@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { useSearchKeywords } from '../../utils/api-list';
-import Icon from './Icon';
 
 export default function SearchInput() {
   const [input, setInput] = useState('');
@@ -25,19 +24,21 @@ export default function SearchInput() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className=" group relative flex w-[21rem] gap-2 rounded bg-white-400 px-2 py-2 font-secondary ring-2 ring-inset ring-accent-dark-main transition-all focus-within:w-full focus-within:rounded-t">
-      <Icon name="search-sharp" className="text-primary-main" />
+    <div className=" bg-white-400 font-secondary ring-accent-dark-main group relative flex w-[21rem] gap-2 rounded px-2 py-2 ring-2 ring-inset transition-all focus-within:w-full focus-within:rounded-t">
+      <span className="text-primary-main flex">
+        <ion-icon name="search-sharp" />
+      </span>
       <input
         type="text"
-        className="paragraph-small w-full font-bold text-primary-main outline-none placeholder:text-primary-tint-600"
+        className="paragraph-small text-primary-main placeholder:text-primary-tint-600 w-full font-bold outline-none"
         placeholder="Search..."
         onChange={inputHandler}
         value={input}
       />
       {input.trim() && (
-        <ul className="absolute left-0 top-10 z-10 hidden w-full flex-col rounded-b border-2 border-accent-dark-main bg-white-400 group-focus-within:flex">
+        <ul className="border-accent-dark-main bg-white-400 absolute left-0 top-10 z-10 hidden w-full flex-col rounded-b border-2 group-focus-within:flex">
           {isSuccess && data.recipes.length === 0 && (
-            <p className="paragraph-small px-2 py-2 font-bold text-error">
+            <p className="paragraph-small text-error px-2 py-2 font-bold">
               {data.message}
             </p>
           )}
@@ -47,11 +48,13 @@ export default function SearchInput() {
               return (
                 <Link
                   to={`${location.pathname}/${recipe.title}?isEditing=false`}
-                  className="flex items-center gap-2 border-b-[1px] border-accent-dark-tint-200/30 px-2 py-2 last:border-none hover:bg-primary-tint-700"
+                  className="border-accent-dark-tint-200/30 hover:bg-primary-tint-700 flex items-center gap-2 border-b-[1px] px-2 py-2 last:border-none"
                   key={recipe._id}
                 >
-                  <Icon name="search-sharp" className="text-primary-main" />
-                  <p className="paragraph-small font-bold text-primary-main">
+                  <span className="text-primary-main flex">
+                    <ion-icon name="search-sharp" />
+                  </span>
+                  <p className="paragraph-small text-primary-main font-bold">
                     {recipe.title}
                   </p>
                 </Link>

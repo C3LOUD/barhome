@@ -2,27 +2,29 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
-import Icon from '../ui/Icon';
-
 export default function CounterRecipe({ counter, onDecrement, onIncrement }) {
   return (
     <div className="flex w-full justify-between py-2">
-      <Icon
-        name="remove"
+      <button
+        type="button"
         className={twMerge(
-          'md hydrated text-2xl text-error transition-all',
+          'md hydrated text-error flex text-2xl transition-all',
           counter === 1
             ? 'cursor-not-allowed'
             : 'cursor-pointer active:scale-150',
         )}
         onClick={onDecrement}
-      />
+      >
+        <ion-icon name="remove" />
+      </button>
       <p className="paragraph-large font-semibold">{counter}</p>
-      <Icon
-        name="add"
-        className="cursor-pointer text-2xl text-success transition-all active:scale-150"
+      <button
+        type="button"
+        className="text-success flex cursor-pointer text-2xl transition-all active:scale-150"
         onClick={onIncrement}
-      />
+      >
+        <ion-icon name="add" />
+      </button>
     </div>
   );
 }

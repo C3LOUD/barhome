@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
-import Icon from '../ui/Icon';
+import React, { useState } from 'react';
 import Dropzone from '../posts/Dropzone';
 import ImageCropper from '../posts/ImageCropper';
 
@@ -29,28 +27,32 @@ export default function AvatarCropper({ onCanvas, onEdit }) {
 
   return (
     <div
-      className="relative flex h-[47rem] w-[60rem] cursor-default flex-col items-center rounded bg-white-100 px-6 py-6"
+      className="bg-white-100 relative flex h-[47rem] w-[60rem] cursor-default flex-col items-center rounded px-6 py-6"
       onClick={(e) => e.stopPropagation()}
     >
-      <Icon
-        name="close"
-        className="absolute top-2 right-2 text-4xl text-black-100 transition-all hover:scale-110"
+      <button
+        type="button"
         onClick={onEdit}
-      />
+        className="text-black-100 absolute right-2 top-2 flex text-4xl transition-all hover:scale-110"
+      >
+        <ion-icon name="close" />
+      </button>
       {status === 1 && (
         <Dropzone onSrc={getImageHandler} onStatus={changeStatus} />
       )}
       {status === 2 && (
         <>
-          <Icon
-            name="arrow-back"
-            className="absolute top-2 left-2 text-4xl text-black-100 transition-all hover:scale-110"
+          <button
+            type="button"
             onClick={() => setStatus(1)}
-          />
+            className="text-black-100 absolute left-2 top-2 flex text-4xl transition-all hover:scale-110"
+          >
+            <ion-icon name="arrow-back" />
+          </button>
           <ImageCropper src={imageSrc} onCanvas={tempCropHandler} />
           <a
             onClick={cropHandler}
-            className="mt-4 cursor-pointer rounded bg-primary-main px-4 py-2 text-white-100 hover:bg-primary-tint-200"
+            className="bg-primary-main text-white-100 hover:bg-primary-tint-200 mt-4 cursor-pointer rounded px-4 py-2"
           >
             Crop
           </a>

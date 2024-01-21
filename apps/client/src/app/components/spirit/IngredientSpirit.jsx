@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, Route, Routes, useParams } from 'react-router-dom';
 
 import { useFetchRecipeByIngredient } from '../../utils/api-list';
-import Icon from '../ui/Icon';
 import MainGrid from '../ui/MainGrid';
 import Modal from '../ui/Modal';
 import RecipeCard from '../ui/RecipeCard';
@@ -17,17 +16,16 @@ export default function IngredientSpirit() {
       <Routes>
         <Route path=":id" element={<Modal />} />
       </Routes>
-      <div className="pb-12 pt-10 xs:pb-8 xs:pt-6">
+      <div className="xs:pb-8 xs:pt-6 pb-12 pt-10">
         <Link to="/dashboard/spirits" className="group flex w-fit items-center">
-          <Icon
-            name="chevron-back-sharp"
-            className="text-2xl text-white-100/50 group-hover:text-white-100 dark:text-gray-400 dark:group-hover:text-primary-main"
-          />
-          <p className="paragraph-xsmall font-secondary font-semibold text-white-100/50 group-hover:text-white-100 dark:text-gray-400 dark:group-hover:text-primary-main">
+          <button className="text-white-100/50 group-hover:text-white-100 dark:group-hover:text-primary-main flex text-2xl dark:text-gray-400">
+            <ion-icon name="chevron-back-sharp" />
+          </button>
+          <p className="paragraph-xsmall font-secondary text-white-100/50 group-hover:text-white-100 dark:group-hover:text-primary-main font-semibold dark:text-gray-400">
             Spirits
           </p>
         </Link>
-        <p className="display-small font-primary font-bold text-white-100 dark:text-black-100">
+        <p className="display-small font-primary text-white-100 dark:text-black-100 font-bold">
           {ingredient}
         </p>
       </div>

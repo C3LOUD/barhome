@@ -1,8 +1,6 @@
+import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import PropTypes from 'prop-types';
-
-import Icon from '../ui/Icon';
 import fileValidator from '../../utils/file-validator';
 
 export default function Dropzone({ onSrc, onStatus }) {
@@ -59,8 +57,10 @@ export default function Dropzone({ onSrc, onStatus }) {
         onDragLeave={dragAndDropHandler}
         onDrop={dragAndDropHandler}
       >
-        <Icon name="images-sharp" className="text-[6rem] text-black-100" />
-        <p className="heading-h3 font-primary font-bold text-black-100">
+        <span className="text-black-100 flex text-[6rem]">
+          <ion-icon name="images-sharp" />
+        </span>
+        <p className="heading-h3 font-primary text-black-100 font-bold">
           Drop an Image Here
         </p>
         <div>
@@ -73,7 +73,7 @@ export default function Dropzone({ onSrc, onStatus }) {
             onChange={loadFileHandler}
           />
           <a
-            className="paragraph-medium self-center rounded bg-primary-main px-4 py-2 font-primary font-semibold text-white-100 hover:cursor-pointer hover:bg-primary-tint-200"
+            className="paragraph-medium bg-primary-main font-primary text-white-100 hover:bg-primary-tint-200 self-center rounded px-4 py-2 font-semibold hover:cursor-pointer"
             onClick={fileUploadHandler}
           >
             Select an Image
@@ -81,7 +81,7 @@ export default function Dropzone({ onSrc, onStatus }) {
         </div>
         <p
           className={twMerge(
-            'paragraph-small mt-6 inline-block font-secondary font-bold',
+            'paragraph-small font-secondary mt-6 inline-block font-bold',
             dataInappropriate ? 'text-error' : 'text-accent-dark-main',
           )}
         >
