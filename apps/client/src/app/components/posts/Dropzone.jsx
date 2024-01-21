@@ -72,12 +72,12 @@ export default function Dropzone({ onSrc, onStatus }) {
             ref={fileUpload}
             onChange={loadFileHandler}
           />
-          <a
+          <button
             className="paragraph-medium bg-primary-main font-primary text-white-100 hover:bg-primary-tint-200 self-center rounded px-4 py-2 font-semibold hover:cursor-pointer"
             onClick={fileUploadHandler}
           >
             Select an Image
-          </a>
+          </button>
         </div>
         <p
           className={twMerge(

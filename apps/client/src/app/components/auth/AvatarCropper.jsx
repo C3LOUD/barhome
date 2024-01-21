@@ -50,12 +50,13 @@ export default function AvatarCropper({ onCanvas, onEdit }) {
             <ion-icon name="arrow-back" />
           </button>
           <ImageCropper src={imageSrc} onCanvas={tempCropHandler} />
-          <a
+          <button
+            type="button"
             onClick={cropHandler}
             className="bg-primary-main text-white-100 hover:bg-primary-tint-200 mt-4 cursor-pointer rounded px-4 py-2"
           >
             Crop
-          </a>
+          </button>
         </>
       )}
     </div>

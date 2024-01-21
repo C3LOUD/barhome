@@ -19,7 +19,7 @@ export default function Modal() {
   const ctx = useContext(InitialModalContext);
   const jsx = (
     <div
-      className="absolute top-0 left-0 z-10 flex h-full w-full cursor-pointer items-center justify-center overflow-hidden bg-accent-dark-shade-800/80 py-8 xl:px-8 2xs:py-4 2xs:px-4"
+      className="bg-accent-dark-shade-800/80 2xs:py-4 2xs:px-4 absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center overflow-hidden py-8 xl:px-8"
       onClick={() =>
         navigate(location.pathname.split('/').slice(0, -1).join('/'))
       }
@@ -34,5 +34,5 @@ export default function Modal() {
     </div>
   );
 
-  return <>{ctx ? createPortal(jsx, ctx) : null}</>;
+  return ctx ? createPortal(jsx, ctx) : null;
 }

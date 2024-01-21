@@ -44,21 +44,22 @@ export default function SearchInput() {
           )}
           {isSuccess &&
             data.recipes.map((recipe, i) => {
-              if (i > 10) return;
-              return (
-                <Link
-                  to={`${location.pathname}/${recipe.title}?isEditing=false`}
-                  className="border-accent-dark-tint-200/30 hover:bg-primary-tint-700 flex items-center gap-2 border-b-[1px] px-2 py-2 last:border-none"
-                  key={recipe._id}
-                >
-                  <span className="text-primary-main flex">
-                    <ion-icon name="search-sharp" />
-                  </span>
-                  <p className="paragraph-small text-primary-main font-bold">
-                    {recipe.title}
-                  </p>
-                </Link>
-              );
+              if (i > 10) {
+                return (
+                  <Link
+                    to={`${location.pathname}/${recipe.title}?isEditing=false`}
+                    className="border-accent-dark-tint-200/30 hover:bg-primary-tint-700 flex items-center gap-2 border-b-[1px] px-2 py-2 last:border-none"
+                    key={recipe._id}
+                  >
+                    <span className="text-primary-main flex">
+                      <ion-icon name="search-sharp" />
+                    </span>
+                    <p className="paragraph-small text-primary-main font-bold">
+                      {recipe.title}
+                    </p>
+                  </Link>
+                );
+              }
             })}
         </ul>
       )}

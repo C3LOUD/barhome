@@ -57,7 +57,7 @@ export default function PostEditor() {
 
   if (isLoading) {
     return (
-      <div className="absolute left-0 top-0 z-20 flex h-full w-full items-center justify-center bg-accent-dark-shade-700/80">
+      <div className="bg-accent-dark-shade-700/80 absolute left-0 top-0 z-20 flex h-full w-full items-center justify-center">
         <Loading />
       </div>
     );
@@ -65,7 +65,7 @@ export default function PostEditor() {
 
   return (
     <ModalCard>
-      <p className="display-small pb-6 font-primary font-bold text-black-100">
+      <p className="display-small font-primary text-black-100 pb-6 font-bold">
         Edit Post
       </p>
       {status !== 1 && imageSrc && (
@@ -92,12 +92,12 @@ export default function PostEditor() {
         <>
           <CloseBtn />
           <EditPost canvas={tempImageSrc} onEdit={() => setStatus(1)} />
-          <a
-            className="mt-6 cursor-pointer rounded bg-error/30 px-4 py-2 text-white-100 shadow-md transition-all hover:bg-error"
+          <button
+            className="bg-error/30 text-white-100 hover:bg-error mt-6 cursor-pointer rounded px-4 py-2 shadow-md transition-all"
             onClick={deleteHandler}
           >
             Delete Post
-          </a>
+          </button>
         </>
       )}
     </ModalCard>

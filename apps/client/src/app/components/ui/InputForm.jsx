@@ -15,7 +15,7 @@ import AuthInput from './AuthInput';
 export default function InputForm({ admin, onSubmit }) {
   const [nameInvalid, setNameValid] = useState(true);
   const [emailInvalid, setEmailValid] = useState(true);
-  const [currentPasswordInvalid, setCurrentPasswordValid] = useState(true);
+  const [, setCurrentPasswordValid] = useState(true);
   const [passwordInvalid, setPasswordValid] = useState(true);
   const [confirmPasswordInvalid, setConfirmPasswordValid] = useState(true);
   const [avatarEditing, setAvatarEditing] = useState(false);

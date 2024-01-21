@@ -14,11 +14,12 @@ export default function LogoutBtn() {
   };
 
   return (
-    <a
-      className="heading-h6 xl:paragraph-large w-fit cursor-pointer rounded bg-secondary-main py-2 px-4 font-bold text-white-100 shadow-md hover:bg-secondary-tint-100"
+    <button
+      type="button"
+      className="heading-h6 xl:paragraph-large bg-secondary-main text-white-100 hover:bg-secondary-tint-100 w-fit cursor-pointer rounded px-4 py-2 font-bold shadow-md"
       onClick={logoutHandler}
     >
       Logout
-    </a>
+    </button>
   );
 }

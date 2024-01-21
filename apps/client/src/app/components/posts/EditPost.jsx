@@ -121,7 +121,7 @@ export default function EditPost({ canvas, onEdit }) {
             className="heading-h6 bg-white-400 font-primary text-black-100 rounded px-4 py-2 font-bold placeholder:text-gray-200 focus:outline-none"
           />
         </div>
-        <a
+        <button
           className={twMerge(
             'paragraph-xsmall text-white-100 2xs:w-full 2xs:text-center w-fit rounded px-4 py-2 font-bold',
             contentLength > 280
@@ -131,7 +131,7 @@ export default function EditPost({ canvas, onEdit }) {
           onClick={submitHandler}
         >
           SUBMIT
-        </a>
+        </button>
       </div>
     </div>
   );
